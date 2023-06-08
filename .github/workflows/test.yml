@@ -57,5 +57,5 @@ jobs:
         run: npm run test
         # Environments variables.
         env:
-          DATABASE_TEST: ${{ secret.TEST_DB }}
+          DATABASE_TEST: ${{ secrets.TEST_DB }}
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
