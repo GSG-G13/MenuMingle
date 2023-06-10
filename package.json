@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
   "scripts": {
     "test": "jest",
     "build": "tsc",
