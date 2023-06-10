@@ -1,0 +1,3 @@
+npm i typescript@5.1.3
+tsc --init
+"dev": "npx nodemon server/index.ts"
