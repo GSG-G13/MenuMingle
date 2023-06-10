@@ -18,6 +18,8 @@
   
   "plugins": ["@typescript-eslint", "promise"],
   "rules": {
+    "no-console": "warn",
+    "no-await-in-loop": "error",
       "prettier/prettier": [
         "error",
         {

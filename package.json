@@ -4,11 +4,12 @@
   "description": "MenuMingle is the graduation project of team 6 from the GazaSkyGeeks Code Academy bootcamp.",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "build": "tsc",
-    "start": "node ./dist/",
-    "lint": "eslint . --ext .ts",
-    "lint-fix": "eslint . --ext .ts --fix",
+    "init": "npm i && npm run prepare && cd client && npm i",
+    "test": "cross-env NODE_ENV=test jest --forceExit --detectOpenHandles --runInBand",
+    "build": "npx tsc",
+    "start": "node ./dist/index.js",
+    "lint": "cross-env eslint . --ext .ts",
+    "lint-fix": "cross-env eslint . --ext .ts --fix",
     "dev": "npx nodemon server/index.ts",
     "prepare": "husky install"
   },
@@ -21,6 +22,7 @@
     "@types/express": "^4.17.17",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.6",
+    "cross-env": "^7.0.3",
     "express": "^4.18.2",
     "jest": "^29.5.0",
     "typescript-eslint": "^0.0.1-alpha.0"
