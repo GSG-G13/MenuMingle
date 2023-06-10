@@ -3,7 +3,6 @@ const PORT = 3000;
 const x: number = 5;
 
 
-
 function processValue(value: number) {
   // Code logic using the value
   console.log(value);
