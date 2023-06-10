@@ -1,0 +1,40 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "plugin:prettier/recommended",
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "prettier"
+      ],
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "overrides": [
+    ],
+    "plugins": ["@typescript-eslint"],
+
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+      "rules": {
+      "@typescript-eslint/no-inferrable-types": "off",
+      "@typescript-eslint/no-explicit-any": "error",
+        "prettier/prettier": [
+          "error",
+          {
+            "tabWidth": 2,
+            "printWidth": 80,
+            "useTabs": false,
+            "semi": true,
+            "singleQuote": true,
+            "trailingComma": "all",
+            "arrowParens": "avoid",
+            "endOfLine": "lf"
+          }
+        ],
+        "generator-star-spacing": "off"
+      }
+}
