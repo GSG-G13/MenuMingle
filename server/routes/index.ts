@@ -7,4 +7,4 @@ router.get('/', (req: Request, res: Response): void => {
     status: 200,
     msg: 'ok',
   });
-})
+});
