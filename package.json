@@ -11,7 +11,7 @@
     "lint": "eslint . --ext .ts",
     "lint-fix": "eslint . --ext .ts --fix",
     "prepare": "husky install",
-    "pre-commit": "npm run lint-fix"
+    "pre-commit": "eslint . --ext .ts --fix"
   },
   "resolutions": {
     "@typescript-eslint/typescript-estree": "^5.59.2",
