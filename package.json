@@ -5,7 +5,7 @@
   "main": "server.js",
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint"
+      "pre-commit": "npm run lint-fix"
     }
   },
   "scripts": {
@@ -15,8 +15,7 @@
     "dev": "npx nodemon ./server/server.ts ",
     "lint": "eslint . --ext .ts",
     "lint-fix": "eslint . --ext .ts --fix",
-    "prepare": "husky install",
-    "pre-commit": "eslint . --ext .ts --fix"
+    "prepare": "husky install"
   },
   "resolutions": {
     "@typescript-eslint/typescript-estree": "^5.59.2",
