@@ -9,9 +9,9 @@
     "start": "node ./dist",
     "dev": "npx nodemon ./server/server.ts ",
     "lint": "eslint . --ext .ts",
-    "lint-and-fix": "eslint . --ext .ts --fix",
+    "lint-fix": "eslint . --ext .ts --fix",
     "prepare": "husky install",
-    "pre-commit": "npm run lint-and-fix"
+    "pre-commit": "npm run lint-fix"
   },
   "resolutions": {
     "@typescript-eslint/typescript-estree": "^5.59.2",
