@@ -16,6 +16,7 @@
   "rules": {
     "react/jsx-filename-extension": ["error", { "extensions": [".tsx"] }],
     "react/react-in-jsx-scope": "off",
+    "import/no-unresolved": "off", // !
     "prettier/prettier": [
       "error",
       {
@@ -26,7 +27,7 @@
         "singleQuote": true,
         "trailingComma": "all",
         "arrowParens": "avoid",
-        "endOfLine": "lf"
+        "endOfLine": "auto"
       }
     ],
     "generator-star-spacing": "off"
