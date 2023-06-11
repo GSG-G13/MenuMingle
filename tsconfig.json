@@ -21,7 +21,6 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": false,
-    "noEmit": true,
     "jsx": "react-jsx",
     
     "typeRoots": [
@@ -35,7 +34,7 @@
     "server",
   ],
   "exclude": [
-  "__tests__/**.ts"
+  "__tests__/**.js"
   ],
 
 }
