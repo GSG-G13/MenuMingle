@@ -6,7 +6,7 @@ const seedDatabase = async () => {
   try {
     const createdDishes = await Dishes.bulkCreate(dishSeedData);
 
-    const createdCategories = await Categories.bulkCreate(categorySeedData); // i kept them inside a variable cause we might need them later
+    const createdCategories = await Categories.bulkCreate(categorySeedData);
 
     console.log('Seed data created successfully!');
   } catch (error) {
