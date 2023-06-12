@@ -5,7 +5,7 @@ import {
   CreationOptional,
   ForeignKey,
 } from 'sequelize';
-import { CategoriesAttributes } from './CategoriesAttributes';
+import { CategoriesAttributes } from './categoriesAttributes';
 
 export interface DishesAttributes
   extends Model<

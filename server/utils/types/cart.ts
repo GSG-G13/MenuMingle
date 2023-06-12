@@ -3,7 +3,10 @@ import {
   InferAttributes,
   InferCreationAttributes,
   CreationOptional,
+  ForeignKey,
 } from 'sequelize';
+import { DishesAttributes } from './dishesAttributes';
+import { orderAttributes } from './order';
 
 export interface CartAttributes
   extends Model<
@@ -11,7 +14,7 @@ export interface CartAttributes
     InferCreationAttributes<CartAttributes>
   > {
   id: CreationOptional<number>;
-  dishId: number;
-  orderId: number;
+  dishId: ForeignKey<DishesAttributes['id']>;
+  orderId: ForeignKey<orderAttributes['id']>;
   note?: string;
 }

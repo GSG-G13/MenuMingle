@@ -7,15 +7,31 @@ const Order = sequelize.define<orderAttributes>('orders', {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true,
+    allowNull: false,
   },
   dishId: {
     type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: 'dishes',
+      key: 'id',
+    },
   },
   customerId: {
     type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: 'customers',
+      key: 'id',
+    },
   },
   cartId: {
     type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: 'cart',
+      key: 'id',
+    },
   },
   createdAt: {
     type: DataTypes.DATE,

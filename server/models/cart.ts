@@ -10,12 +10,23 @@ const Cart = sequelize.define<CartAttributes>('cart', {
   },
   dishId: {
     type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: 'dishes',
+      key: 'id',
+    },
   },
   orderId: {
     type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: 'order',
+      key: 'id',
+    },
   },
   note: {
     type: DataTypes.STRING,
+    allowNull: true,
   },
 });
 
