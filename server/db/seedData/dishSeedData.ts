@@ -1,4 +1,3 @@
-
 export const dishSeedData = [
   {
     name: 'Mango Juice',
@@ -41,4 +40,3 @@ export const dishSeedData = [
     categoryId: 5,
   },
 ];
-

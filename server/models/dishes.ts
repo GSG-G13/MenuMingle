@@ -42,7 +42,7 @@ const Dishes = sequelize.define<DishesAttributes>('dish', {
   },
   updatedAt: {
     type: DataTypes.DATE,
-    allowNull: true, 
+    allowNull: true,
   },
 });
 

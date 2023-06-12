@@ -3,6 +3,7 @@
     "browser": true,
     "es2021": true
   },
+  
   "extends": [
     "plugin:prettier/recommended",
     "eslint:recommended",
@@ -14,10 +15,23 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
+  
   "plugins": ["@typescript-eslint", "promise"],
   "rules": {
     "no-await-in-loop": "error",
-    "prettier/prettier": "off",
-    "generator-star-spacing": "off"
-  }
+      "prettier/prettier": [
+        "error",
+        {
+          "tabWidth": 2,
+          "printWidth": 80,
+          "useTabs": false,
+          "semi": true,
+          "singleQuote": true,
+          "trailingComma": "all",
+          "arrowParens": "avoid",
+          "endOfLine": "lf"
+        }
+      ],
+      "generator-star-spacing": "off"
+    }
 }

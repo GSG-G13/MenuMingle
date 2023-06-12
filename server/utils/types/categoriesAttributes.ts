@@ -5,7 +5,6 @@ import {
   CreationOptional,
 } from 'sequelize';
 
-
 export interface CategoriesAttributes
   extends Model<
     InferAttributes<CategoriesAttributes>,

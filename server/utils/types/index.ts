@@ -1,2 +1,3 @@
-export * from './CategoriesAttributes'
-export * from './dishesAttributes'
+export * from './CategoriesAttributes';
+
+export * from './dishesAttributes';
