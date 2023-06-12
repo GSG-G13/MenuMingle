@@ -2,7 +2,7 @@
 import { dishSeedData, categorySeedData } from './seedData';
 import { Dishes, Categories } from '../models';
 
-async function seedDatabase() {
+const seedDatabase = async () => {
   try {
     const createdDishes = await Dishes.bulkCreate(dishSeedData);
 
@@ -12,6 +12,6 @@ async function seedDatabase() {
   } catch (error) {
     console.error('Error creating seed data:', error);
   }
-}
+};
 
 seedDatabase();

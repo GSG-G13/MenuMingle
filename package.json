@@ -5,12 +5,12 @@
   "main": "index.js",
   "scripts": {
     "init": "npm i && npm run prepare && cd client && npm i",
-    "test": "NODE_ENV=testing cross-env NODE_ENV=test jest --forceExit --detectOpenHandles --runInBand",
+    "test": "cross-env NODE_ENV=testing NODE_ENV=test jest --forceExit --detectOpenHandles --runInBand",
     "build": "npx tsc",
-    "start": "NODE_ENV=production node ./dist/index.js",
+    "start": "cross-env NODE_ENV=production node ./dist/index.js",
     "lint": "cross-env eslint . --ext .ts",
     "lint-fix": "cross-env eslint . --ext .ts --fix",
-    "dev": "NODE_ENV=development npx nodemon server/index.ts",
+    "dev": "cross-env NODE_ENV=development npx nodemon server/index.ts",
     "prepare": "husky install"
   },
   "keywords": [],
