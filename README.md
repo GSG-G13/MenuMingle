@@ -19,16 +19,23 @@ our app allows clients to track restaurant orders. It provides an intuitive inte
 - Admin dashboard for managing orders and menus.
 - supports English and Arabic language.
 # User Story
-- We should include a complimentary tool in our software package for printing QR codes specifically designed for restaurants. The process begins with the user opening their camera program or QR scanner app to scan the QR code attached to each table. Upon scanning the QR code, the menu page will be displayed, featuring the name, ingredients, and price of each menu item. Each item should include a quantity counter, allowing the user to add or remove items as desired.
+- As a user, I am going to do the following:
 
-- Once the user clicks the order button, a confirmation popup will appear, showing the details of each selected item and its corresponding quantity. The user can then confirm the transaction. After submitting the orders, the cashier will receive the requests and approve them. Additionally, the system can include a feature for rejecting orders if needed.
+I will open my camera program or QR scanner app to scan the QR code attached to each table. This will display the menu page, showing the name, ingredients, and price of each menu item. I can adjust the quantity of each item as desired and add them to my cart.
 
-- Upon approval, the requests will be forwarded to the kitchen page. In the kitchen, staff members can change the state of each request from "pending" to "being prepared" and finally "done." If the kitchen marks an order as "done," it will be returned to the cashier page. The cashier will then send a request to the customer, prompting them to come and pay for their order.
+After selecting the desired items and adding them to my cart, I can review the contents of my cart. The cart will display the details of each selected item and its corresponding quantity. I can make changes to the quantities or remove items from my cart if needed.
 
-- Once the user submits the order, they will be directed to the waiting room. The order status will change dynamically based on updates from the cashier and kitchen. If the user wishes to do so, they can click on the "Review the Service" button to provide feedback on their experience.
+Once I am satisfied with the items in my cart, I can proceed to the checkout process. At this point, I will be prompted to provide my payment information. The payment gateway will securely process my payment details, ensuring the confidentiality and integrity of my information.
 
-- Furthermore, the owner will have the ability to add new items to the menu, edit existing menu items, and delete items from the menu. They will also have access to view the feedback collected from users, providing valuable insights about the restaurant's performance.
+After successfully completing the payment process, I will receive a confirmation of the transaction. The order will be sent to the kitchen for preparation, and the order status will be updated accordingly.
 
+- As a member of the restaurant staff, my capabilities will depend on my role within the establishment. Here are the tasks I can perform based on different roles:
+
+   - If I am the owner:
+        I have the authority to manage the menu by adding new dishes, modifying existing ones, and removing items as needed. This can be done through the dashboard provided to me.
+
+  - If I am a cook:
+       I am responsible for receiving orders from the system and preparing the dishes accordingly. Once a dish is prepared, I can update its status to "done" in the system, indicating that it is ready for serving.
 ### Wishlist features <img src=./img/wishlist.png style='height:30px'>
 - Payment integration.
 - Reporting and analytics.
@@ -71,12 +78,13 @@ Contributions are welcome! If you find any issues or have suggestions for improv
 
 # coders 💻
 #### team:
-- Farah Alhalim
-- Momen Algaga
-- Momen Qudaih
+- @Farah202324
+- @momenmarwan
+- @momenqudaih
+
 
 #### team leader
-- Mustafa Salem 
+- @moustf
 ##### If you have any questions or need further assistance, please feel free to contact us.
 
 # Acknowledgements

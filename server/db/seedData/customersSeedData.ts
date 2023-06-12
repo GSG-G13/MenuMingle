@@ -1,4 +1,4 @@
-const customersSeedData = [
+export const customersSeedData = [
   {
     name: 'User 1',
     phoneNumber: '111-111-1111',
@@ -40,5 +40,3 @@ const customersSeedData = [
     phoneNumber: '000-000-0000',
   },
 ];
-
-export default customersSeedData;

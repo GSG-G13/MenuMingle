@@ -12,6 +12,10 @@ const Roles = sequelize.define<RolesAttributes>('roles', {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  description: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
 });
 
 export default Roles;

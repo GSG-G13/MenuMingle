@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../db/config/connection';
-import customersAttributes from '../utils/types/cutomersAttributes';
+import customersAttributes from '../utils/types/customersAttributes';
 
 const Customer = sequelize.define<customersAttributes>('customers', {
   id: {

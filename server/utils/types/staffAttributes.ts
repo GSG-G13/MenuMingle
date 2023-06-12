@@ -12,7 +12,7 @@ interface staffAttribute
     InferAttributes<staffAttribute>,
     InferCreationAttributes<staffAttribute>
   > {
-  id: number;
+  id: CreationOptional<number>;
   username: string;
   email: string;
   password: string;

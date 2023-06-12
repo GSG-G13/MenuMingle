@@ -1,12 +1,10 @@
-const rolesSeed = [
+export const rolesSeed = [
   {
-    name: 'admin',
+    role: 'admin',
     description: 'Administrator',
   },
   {
-    name: 'user',
+    role: 'user',
     description: 'User',
   },
 ];
-
-export default rolesSeed;
