@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import Joi from 'joi';
-import Jwt from 'jsonwebtoken';
-import CustomError from '../utils/helper/customError';
+import { ValidationError } from 'joi';
+import { JsonWebTokenError } from 'jsonwebtoken';
+import { CustomError } from '../utils';
 import { NextFunction, Request, Response } from 'express';
 
 const serverError = (
@@ -10,7 +10,7 @@ const serverError = (
   res: Response,
   next: NextFunction,
 ) => {
-  if (err instanceof Joi.ValidationError) {
+  if (err instanceof ValidationError) {
     return res.status(400).json({
       status: 401,
       data: {
@@ -19,7 +19,7 @@ const serverError = (
     });
   }
 
-  if (err instanceof Jwt.JsonWebTokenError) {
+  if (err instanceof JsonWebTokenError) {
     return res.status(401).json({
       status: 401,
       data: {
