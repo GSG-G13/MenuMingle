@@ -8,7 +8,10 @@ const Customer = sequelize.define<customersAttributes>('customers', {
     primaryKey: true,
     autoIncrement: true,
   },
-  name: DataTypes.TEXT,
+  name: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
   phoneNumber: {
     type: DataTypes.STRING,
     allowNull: false,
