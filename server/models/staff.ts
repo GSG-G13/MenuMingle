@@ -1,6 +1,5 @@
 import { DataTypes } from 'sequelize';
 import staffAttribute from '../utils/types/stuffAttributes';
-import Role from './reles';
 import sequelize from '../db/config/connection';
 
 const Staff = sequelize.define<staffAttribute>('staffs', {
@@ -12,7 +11,7 @@ const Staff = sequelize.define<staffAttribute>('staffs', {
   roleId: {
     type: DataTypes.INTEGER,
     references: {
-      model: 'Role',
+      model: 'roles',
       key: 'id',
     },
   },
