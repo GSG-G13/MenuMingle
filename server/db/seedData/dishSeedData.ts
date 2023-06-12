@@ -1,7 +1,5 @@
-import { Dishes } from '../../models';
-import { Categories } from '../../models';
 
-const dishSeedData = [
+export const dishSeedData = [
   {
     name: 'Mango Juice',
     price: 12,
@@ -44,34 +42,3 @@ const dishSeedData = [
   },
 ];
 
-const categorySeedData = [
-  {
-    name: 'Drinks',
-  },
-  {
-    name: 'Appetizers',
-  },
-  {
-    name: 'Main Course',
-  },
-  {
-    name: 'Desserts',
-  },
-  {
-    name: 'Salads',
-  },
-];
-
-async function seedDatabase() {
-  try {
-    const createdDishes = await Dishes.bulkCreate(dishSeedData);
-
-    const createdCategories = await Categories.bulkCreate(categorySeedData);
-
-    console.log('Seed data created successfully!');
-  } catch (error) {
-    console.error('Error creating seed data:', error);
-  }
-}
-
-seedDatabase();
