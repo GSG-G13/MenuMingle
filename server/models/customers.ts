@@ -1,17 +1,17 @@
 import { DataTypes } from 'sequelize';
-import { RolesAttributes } from '../utils/types/roles';
 import sequelize from '../db/config/connection';
 
-const Roles = sequelize.define<RolesAttributes>('roles', {
+const Customer = sequelize.define('customers', {
   id: {
     type: DataTypes.INTEGER,
-    autoIncrement: true,
     primaryKey: true,
+    autoIncrement: true,
   },
-  role: {
+  name: DataTypes.TEXT,
+  phoneNumber: {
     type: DataTypes.STRING,
     allowNull: false,
   },
 });
 
-export default Roles;
+export default Customer;
