@@ -5,10 +5,10 @@ import {
   CreationOptional,
   ForeignKey,
 } from 'sequelize';
-import { DishesAttributes } from './dishesAttributes';
-import { orderAttributes } from './order';
+import DishesAttributes from './dishesAttributes';
+import orderAttributes from './order';
 
-export interface CartAttributes
+interface CartAttributes
   extends Model<
     InferAttributes<CartAttributes>,
     InferCreationAttributes<CartAttributes>
@@ -18,3 +18,5 @@ export interface CartAttributes
   orderId: ForeignKey<orderAttributes['id']>;
   note?: string;
 }
+
+export default CartAttributes;

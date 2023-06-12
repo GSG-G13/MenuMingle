@@ -5,7 +5,7 @@ import {
   CreationOptional,
 } from 'sequelize';
 
-export interface RolesAttributes
+interface RolesAttributes
   extends Model<
     InferAttributes<RolesAttributes>,
     InferCreationAttributes<RolesAttributes>
@@ -13,3 +13,5 @@ export interface RolesAttributes
   id: CreationOptional<number>;
   role: string;
 }
+
+export default RolesAttributes;

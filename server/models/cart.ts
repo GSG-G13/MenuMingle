@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-import { CartAttributes } from '../utils/types/cart';
+import { CartAttributes } from '../utils/types';
 import sequelize from '../db/config/connection';
 
 const Cart = sequelize.define<CartAttributes>('cart', {
