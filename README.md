@@ -58,13 +58,13 @@ You can check out a live demo of the application <a href='#'>here</a>.
 # Figma Design <img src=./img/figma.png style='height:20px'>
 #### customer :
 
-<img src=./img/SplashScreen.png style='height:100px'> <img src=./img/menu.png style='height:100px'> <img src=./img/emptycart.png style='height:100px'> <img src=./img/cart.png style='height:100px'> <img src=./img/pending.png style='height:100px'>
-<img src=./img/done.png style='height:100px'> <img src=./img/done2.png style='height:100px'>
+<img src=./img/SplashScreen.png style='height:150px'> <img src=./img/menu.png style='height:150px'> <img src=./img/emptycart.png style='height:150px'> <img src=./img/cart.png style='height:150px'> <img src=./img/pending.png style='height:150px'>
+<img src=./img/done.png style='height:150px'> <img src=./img/done2.png style='height:150px'>
 
 #### staff :
-<img src=./img/signup1.png style='height:100px'>  <img src=./img/login.png style='height:100px'>
+<img src=./img/signup1.png style='height:150px'>  <img src=./img/login.png style='height:150px'>
 
-<img src=./img/dashboard.png style='height:100px'> <img src=./img/Kitchen.png style='height:100px'>
+<img src=./img/dashboard.png style='height:150px'> <img src=./img/kitchen.png style='height:150px'>
 
 # Contributing
 Contributions are welcome! If you find any issues or have suggestions for improvements, feel free to open an issue or submit a pull request.
