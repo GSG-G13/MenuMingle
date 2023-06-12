@@ -12,8 +12,8 @@ const Staff = sequelize.define<staffAttribute>('staffs', {
   roleId: {
     type: DataTypes.INTEGER,
     references: {
-      model: Role,
-      key: id,
+      model: 'Role',
+      key: 'id',
     },
   },
   password: DataTypes.STRING,
