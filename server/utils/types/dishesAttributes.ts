@@ -5,9 +5,9 @@ import {
   CreationOptional,
   ForeignKey,
 } from 'sequelize';
-import { CategoriesAttributes } from './CategoriesAttributes';
+import CategoriesAttributes from './categoriesAttributes';
 
-export interface DishesAttributes
+interface DishesAttributes
   extends Model<
     InferAttributes<DishesAttributes>,
     InferCreationAttributes<DishesAttributes>
@@ -22,3 +22,5 @@ export interface DishesAttributes
   createdAt?: CreationOptional<Date>; // I still need explanation about why would i need it.
   updatedAt?: CreationOptional<Date>;
 }
+
+export default DishesAttributes;

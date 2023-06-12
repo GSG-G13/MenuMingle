@@ -5,7 +5,7 @@ import {
   CreationOptional,
 } from 'sequelize';
 
-export interface CategoriesAttributes
+interface CategoriesAttributes
   extends Model<
     InferAttributes<CategoriesAttributes>,
     InferCreationAttributes<CategoriesAttributes>
@@ -15,3 +15,5 @@ export interface CategoriesAttributes
   createdAt?: CreationOptional<Date>;
   updatedAt?: CreationOptional<Date>;
 }
+
+export default CategoriesAttributes;
