@@ -10,7 +10,6 @@ const seedDatabase = async () => {
     const createdCategories = await Categories.bulkCreate(categorySeedData); // i kept them inside a variable cause we might need them later
     const createStaff = await Customer.bulkCreate(staffsSeedData);
     const createCustomers = await Customer.bulkCreate(customersSeedData);
-
   } catch (error) {
     console.error('Error creating seed data:', error);
   }
