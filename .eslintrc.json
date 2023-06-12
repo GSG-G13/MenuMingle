@@ -29,7 +29,7 @@
           "singleQuote": true,
           "trailingComma": "all",
           "arrowParens": "avoid",
-          "endOfLine": "auto" //re-change this when bulling my branch
+          "endOfLine": "lf" 
         }
       ],
       "generator-star-spacing": "off"
