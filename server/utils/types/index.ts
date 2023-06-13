@@ -5,3 +5,4 @@ export { default as CartAttributes } from './cart';
 export { default as OrderAttributes } from './order';
 export { default as customersAttributes } from './customersAttributes';
 export { default as staffAttribute } from './stuffAttributes';
+export { default as TokenPayload } from './tokenPayload';
