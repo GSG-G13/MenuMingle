@@ -1,2 +1,10 @@
 import sequelize from './config/connection';
-sequelize.sync({ alter: true });
+import config from 'env_config_path';
+
+const { nodeEnv } = config;
+
+const buildModels = async () => sequelize.sync({ alter: true });
+
+if (nodeEnv !== 'test') {
+  buildModels();
+}
