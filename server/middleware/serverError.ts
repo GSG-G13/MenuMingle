@@ -1,20 +1,18 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { ValidationError } from 'joi';
-import { JsonWebTokenError } from 'jsonwebtoken';
 import { CustomError } from '../utils';
 import { NextFunction, Request, Response } from 'express';
+import { StatusCodes } from '../utils/enum/';
 
 const serverError = (
   err: CustomError,
-  req: Request,
+  _req: Request,
   res: Response,
-  next: NextFunction,
+  _next: NextFunction,
 ) => {
   const { status, message } = err;
 
-  return res.status(status).json({
+  return res.status(status || StatusCodes.ServerError).json({
     error: true,
-    msg: message,
+    msg: message || 'server Error',
   });
 };
 
