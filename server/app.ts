@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import compression from 'compression';
 
 import { router } from './routes/index';
+import { userRouter } from './routes/staff';
 
 const app: Express = express();
 
@@ -17,5 +18,6 @@ app.use([
 ]);
 
 app.use('/api/v1', router);
+app.use('/api/v1/', userRouter);
 
 export default app;
