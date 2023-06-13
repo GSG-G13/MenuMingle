@@ -2,24 +2,29 @@
 our app allows clients to track restaurant orders. It provides an intuitive interface for placing orders, tracking their status, and managing the restaurant's menu.
 ## Table of Contents
 - [Introduction](#Menu)
-- [Features](#features)
 - [ UserStory ](#User)
+- [ User Journey](#User)
 - [Database Schema](#Database)
 - [Technologies Used](#Technologies)
 - [Demo](#Demo)
 - [Figma Design](#Figma)
 - [Contributing](#contributing)
 - [Acknowledgements](#Acknowledgements)
-# Features 
-- User registration and authentication for the staff.
-- Menu management for the restaurant.
-- Order placement by customers.
-- Real-time order tracking.
-- Notification system for order updates.
-- Admin dashboard for managing orders and menus.
-- supports English and Arabic language.
-# User Story
+# User Stories 
 - As a user, I am going to do the following:
+   - User registration and authentication for the staff.
+   - Menu management for the restaurant.
+   - Order placement by customers.
+   - Real-time order tracking.
+   - Notification system for order updates.
+- As a member of the restaurant staff, my capabilities will depend on my role within the establishment. Here are the tasks I can perform based on different roles:
+   - Admin dashboard for managing orders and menus.
+   
+### Wishlist features 
+- Payment integration.
+- Reporting and analytics.
+
+# User Journey
 
 I will open my camera program or QR scanner app to scan the QR code attached to each table. This will display the menu page, showing the name, ingredients, and price of each menu item. I can adjust the quantity of each item as desired and add them to my cart.
 
@@ -29,16 +34,14 @@ Once I am satisfied with the items in my cart, I can proceed to the checkout pro
 
 After successfully completing the payment process, I will receive a confirmation of the transaction. The order will be sent to the kitchen for preparation, and the order status will be updated accordingly.
 
-- As a member of the restaurant staff, my capabilities will depend on my role within the establishment. Here are the tasks I can perform based on different roles:
-
    - If I am the owner:
         I have the authority to manage the menu by adding new dishes, modifying existing ones, and removing items as needed. This can be done through the dashboard provided to me.
 
   - If I am a cook:
        I am responsible for receiving orders from the system and preparing the dishes accordingly. Once a dish is prepared, I can update its status to "done" in the system, indicating that it is ready for serving.
-### Wishlist features 
-- Payment integration.
-- Reporting and analytics.
+
+
+
 
 # Database Schema 
  <img src='./img/schema.png' >
