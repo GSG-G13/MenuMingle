@@ -12,7 +12,7 @@ const serverError = (
 ) => {
   if (err instanceof ValidationError) {
     return res.status(400).json({
-      status: 401,
+      status: 400,
       data: {
         message: 'invalid inputs data!',
       },
