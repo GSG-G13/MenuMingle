@@ -6,7 +6,7 @@ const { jwtSecret } = config.app;
 
 const tokenSigner = (payload: TokenPayload) => {
   return new Promise((resolve, reject) => {
-    sign(payload, jwtSecret as Secret, (err, token) => {
+    sign(payload, jwtSecret as Secret, { expiresIn: '1d' }, (err, token) => {
       if (err) {
         reject(err);
       }
@@ -15,4 +15,4 @@ const tokenSigner = (payload: TokenPayload) => {
   });
 };
 
-module.exports = tokenSigner;
+export { tokenSigner };

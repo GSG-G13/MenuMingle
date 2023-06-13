@@ -1,7 +1,6 @@
 interface TokenPayload {
   id: number;
-  name: string;
-  role: 'admin' | 'client' | 'worker';
+  username: string;
 }
 
 export default TokenPayload;
