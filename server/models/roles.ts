@@ -3,7 +3,7 @@ import { RolesAttributes } from '../utils/types';
 import sequelize from '../db/config/connection';
 
 const Role = sequelize.define<RolesAttributes>(
-  'roles',
+  'Role',
   {
     id: {
       type: DataTypes.INTEGER,
@@ -13,10 +13,6 @@ const Role = sequelize.define<RolesAttributes>(
     role: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    description: {
-      type: DataTypes.STRING,
-      allowNull: true,
     },
   },
   { timestamps: true, tableName: 'roles' },

@@ -3,7 +3,7 @@ import { DishesAttributes } from '../utils/types';
 import sequelize from '../db/config/connection';
 
 const Dish = sequelize.define<DishesAttributes>(
-  'dishes',
+  'Dish',
   {
     id: {
       type: DataTypes.INTEGER,
@@ -33,6 +33,7 @@ const Dish = sequelize.define<DishesAttributes>(
   },
   {
     timestamps: true,
+    tableName: 'dishes',
   },
 );
 

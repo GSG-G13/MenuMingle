@@ -3,7 +3,7 @@ import { CategoriesAttributes } from '../utils/types';
 import sequelize from '../db/config/connection';
 
 const Category = sequelize.define<CategoriesAttributes>(
-  'categories',
+  'Category',
   {
     id: {
       type: DataTypes.INTEGER,
@@ -17,6 +17,7 @@ const Category = sequelize.define<CategoriesAttributes>(
   },
   {
     timestamps: true,
+    tableName: 'categories',
   },
 );
 

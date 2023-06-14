@@ -8,6 +8,7 @@ interface staffAttribute
   id?: number;
   username: string;
   password: string;
+  role_id?: number;
 }
 
 export default staffAttribute;

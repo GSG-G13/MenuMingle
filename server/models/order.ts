@@ -3,7 +3,7 @@ import { OrderAttributes } from '../utils/types';
 import sequelize from '../db/config/connection';
 
 const Order = sequelize.define<OrderAttributes>(
-  'orders',
+  'Order',
   {
     id: {
       type: DataTypes.INTEGER,
