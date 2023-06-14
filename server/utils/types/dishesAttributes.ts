@@ -3,9 +3,7 @@ import {
   InferAttributes,
   InferCreationAttributes,
   CreationOptional,
-  ForeignKey,
 } from 'sequelize';
-import CategoriesAttributes from './categoriesAttributes';
 
 interface DishesAttributes
   extends Model<
@@ -18,9 +16,6 @@ interface DishesAttributes
   image: string;
   availability: boolean;
   ingredients: string;
-  categoryId?: ForeignKey<CategoriesAttributes['id']>;
-  createdAt?: CreationOptional<Date>; // I still need explanation about why would i need it.
-  updatedAt?: CreationOptional<Date>;
 }
 
 export default DishesAttributes;

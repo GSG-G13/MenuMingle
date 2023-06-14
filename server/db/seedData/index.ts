@@ -1,2 +1,2 @@
-export * from './categorySeedData';
 export * from './dishSeedData';
+export * from './categorySeedData';
