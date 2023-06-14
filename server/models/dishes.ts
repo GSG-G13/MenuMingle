@@ -36,5 +36,4 @@ const Dish = sequelize.define<DishesAttributes>(
   },
 );
 
-
 export default Dish;
