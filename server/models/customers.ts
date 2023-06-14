@@ -14,7 +14,7 @@ const Customer = sequelize.define<customersAttributes>(
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    phoneNumber: {
+    phone_number: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -22,7 +22,7 @@ const Customer = sequelize.define<customersAttributes>(
       },
     },
   },
-  { timestamps: true },
+  { timestamps: true, tableName: 'customers' },
 );
 
 export default Customer;

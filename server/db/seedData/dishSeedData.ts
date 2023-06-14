@@ -5,7 +5,7 @@ export const dishSeedData = [
     image: 'mango.jpg',
     availability: true,
     ingredients: 'Mango, Sugar',
-    categoryId: 1,
+    category_id: 1,
   },
   {
     name: 'Grape leaves',
@@ -13,7 +13,7 @@ export const dishSeedData = [
     image: 'grapeleaves.jpg',
     availability: true,
     ingredients: 'Rice, Grape Leaves, OliveOil, Lemon',
-    categoryId: 2,
+    category_id: 2,
   },
   {
     name: 'Grilled Salmon',
@@ -21,7 +21,7 @@ export const dishSeedData = [
     image: 'grilled_salmon.jpg',
     availability: true,
     ingredients: 'Salmon, Lemon, Olive Oil, Dill',
-    categoryId: 3,
+    category_id: 3,
   },
   {
     name: 'Chocolate Lava Cake',
@@ -29,7 +29,7 @@ export const dishSeedData = [
     image: 'chocolate_lava_cake.jpg',
     availability: true,
     ingredients: 'Chocolate, Butter, Sugar, Eggs',
-    categoryId: 4,
+    category_id: 4,
   },
   {
     name: 'Caesar Salad',
@@ -37,6 +37,6 @@ export const dishSeedData = [
     image: 'caesar_salad.jpg',
     availability: true,
     ingredients: 'Romaine Lettuce, Parmesan Cheese, Croutons, Caesar Dressing',
-    categoryId: 5,
+    category_id: 5,
   },
 ];

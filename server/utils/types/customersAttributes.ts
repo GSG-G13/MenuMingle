@@ -1,8 +1,8 @@
-import { Model } from 'sequelize';
+import { Model, CreationOptional } from 'sequelize';
 
 interface customersAttributes extends Model {
-  id: number;
+  id: CreationOptional<number>;
   name: string;
-  phoneNumber: string;
+  phone_number: string;
 }
 export default customersAttributes;
