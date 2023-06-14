@@ -33,7 +33,8 @@ const Dish = sequelize.define<DishesAttributes>(
   },
   {
     timestamps: true,
-    // tableName: 'dishes',
   },
 );
+
+
 export default Dish;

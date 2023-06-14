@@ -3,7 +3,7 @@ import { CartAttributes } from '../utils/types';
 import sequelize from '../db/config/connection';
 
 const Cart = sequelize.define<CartAttributes>(
-  'carts',
+  'cart',
   {
     id: {
       type: DataTypes.INTEGER,

@@ -21,7 +21,7 @@ if (nodeEnv === 'development') {
 }
 
 const sequelize = new Sequelize(connectionString, {
-  logging: true,
+  logging: (...msg) => console.log(msg),
   dialectOptions: {
     charset: 'utf8',
     ssl: false,
