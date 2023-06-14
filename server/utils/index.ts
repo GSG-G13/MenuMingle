@@ -1,4 +1,2 @@
-import { loginSchema } from './validation';
-import CustomError from './helpers/CustomError';
-
-export { loginSchema, CustomError };
+export { default as CustomError } from './helper/customError';
+export { default as loginSchema } from '../utils/validation/loginSchema';
