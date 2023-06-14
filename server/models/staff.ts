@@ -1,23 +1,35 @@
 import { DataTypes } from 'sequelize';
-import staffAttribute from '../utils/types/stuffAttributes';
+import { staffAttribute } from '../utils/types';
 import sequelize from '../db/config/connection';
 
-const Staff = sequelize.define<staffAttribute>('staffs', {
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-  },
-  roleId: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: 'roles',
-      key: 'id',
+const Staff = sequelize.define<staffAttribute>(
+  'staffs',
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [6, 255],
+      },
+    },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        len: [3, 50],
+      },
     },
   },
-  password: DataTypes.STRING,
-  username: DataTypes.STRING,
-  email: DataTypes.STRING,
-});
+  {
+    timestamps: true,
+    tableName: 'staffs',
+  },
+);
 
 export default Staff;

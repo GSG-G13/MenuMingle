@@ -12,6 +12,7 @@ interface RolesAttributes
   > {
   id: CreationOptional<number>;
   role: string;
+  description?: string;
 }
 
 export default RolesAttributes;

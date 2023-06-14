@@ -1,34 +1,28 @@
-// import bcrypt from 'bcrypt';
-// import { NextFunction, Response, Request } from 'express';
-// import { signupSchema } from '../../utils';
-// import { Staff } from '../../models';
-// import { CustomError } from '../../utils/index.js';
-// import { number, string } from 'joi';
-// const signupController = (req: Request, res: Response, next: NextFunction) => {
-//   const {
-//     body: { username, email, password },
-//   } = req;
-//   signupSchema
-//     .validateAsync({ username, email, password })
-//     .then(({ email }) => {
-//       return Staff.findAll({ where: { email: email } });
-//     })
-//     .then(({ rows }) => {
-//       if (rows.length > 0) {
-//         throw new CustomError(401, 'this email already exist');
-//       }
-//     })
-//     .then(() => bcrypt.hash(password, 12))
-//     .then(hash => {
-//       return Staff.create({ id: 1, username, email, password: hash });
-//     })
+import bcrypt from 'bcrypt';
+import { NextFunction, Response, Request } from 'express';
+import { Staff } from '../../models';
+import { CustomError, signupSchema } from '../../utils';
 
-//     .catch(error => {
-//       next(error);
-//     });
+const signupController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { username, password } = await signupSchema.validateAsync(req.body);
+    const existStaff = await Staff.findOne({ where: { username } });
+    console.log(existStaff);
+    if (existStaff) {
+      throw new CustomError(401, 'this email already exist');
+    }
+    const hashedPassword = await bcrypt.hash(password, 12);
+    const created = await Staff.create({ username, password: hashedPassword });
+    return res.json({
+      data: created,
+    });
+  } catch (error: any) {
+    return next(error);
+  }
+};
 
-//   res.status(200).json({
-//     massage: 'its works',
-//   });
-// };
-// export default signupController;
+export default signupController;

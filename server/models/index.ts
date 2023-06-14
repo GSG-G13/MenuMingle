@@ -1,9 +1,24 @@
-import Dishes from './dishes';
-import Categories from './categories';
+import Category from './categories';
 import Staff from './staff';
 import Customer from './customers';
+import Role from './roles';
+import Cart from './cart';
+import Order from './order';
+import Dish from './dishes';
 
-Dishes.hasOne(Categories);
-Categories.belongsTo(Dishes);
+Dish.belongsTo(Category, { foreignKey: 'category_id' });
+Category.hasMany(Dish, { foreignKey: 'category_id', sourceKey: 'id' });
 
-export { Dishes, Categories, Staff, Customer };
+Order.belongsTo(Dish, { foreignKey: 'dish_id' });
+Dish.hasMany(Order, { foreignKey: 'dish_id', sourceKey: 'id' });
+
+Order.belongsTo(Customer, { foreignKey: 'customer_id' });
+Customer.hasMany(Order, { foreignKey: 'customer_id', sourceKey: 'id' });
+
+Order.belongsTo(Cart, { foreignKey: 'cart_id' });
+Cart.hasMany(Order, { foreignKey: 'cart_id', sourceKey: 'id' });
+
+Staff.belongsTo(Role, { foreignKey: 'role_id' });
+Role.hasMany(Staff, { foreignKey: 'role_id', sourceKey: 'id' });
+
+export { Dish, Category, Staff, Customer, Role, Cart, Order };
