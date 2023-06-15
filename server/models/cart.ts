@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize';
 import { CartAttributes } from '../utils/types';
-import sequelize from '../db/config/connection';
+import sequelize from '../db/connection';
 
 const Cart = sequelize.define<CartAttributes>(
   'Cart',

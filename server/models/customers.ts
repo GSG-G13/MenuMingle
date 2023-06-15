@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../db/config/connection';
+import sequelize from '../db/connection';
 import { customersAttributes } from '../utils/types/';
 
 const Customer = sequelize.define<customersAttributes>(

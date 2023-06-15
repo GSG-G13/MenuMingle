@@ -5,16 +5,15 @@
   "main": "index.js",
   "scripts": {
     "init": "npm i && npm run prepare && cd client && npm i",
-    "test": "cross-env NODE_ENV=testing NODE_ENV=test jest --forceExit --detectOpenHandles --runInBand",
+    "test": "cross-env NODE_ENV=test jest --forceExit --testTimeout=20000 --detectOpenHandles --runInBand",
     "build": "npx tsc",
     "start": "cross-env NODE_ENV=production node ./dist/index.js",
     "lint": "cross-env eslint . --ext .ts",
     "lint-fix": "cross-env eslint . --ext .ts --fix",
     "dev": "cross-env NODE_ENV=development npx nodemon server/index.ts",
     "prepare": "husky install",
-    "db-build":"cross-env NODE_ENV=development ts-node server/db/build.ts",
-    "seed-build":"cross-env NODE_ENV=development npm run db-build && ts-node server/db/seed.ts"
-
+    "db-build": "cross-env NODE_ENV=development ts-node server/db/build.ts",
+    "seed-build": "cross-env NODE_ENV=development npm run db-build && ts-node server/db/seed.ts"
   },
   "keywords": [],
   "author": "",
@@ -40,6 +39,8 @@
     "pg": "^8.11.0",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.32.0",
+    "supertest": "^6.3.3",
+    "ts-jest": "^29.1.0",
     "typescript-eslint": "^0.0.1-alpha.0"
   },
   "devDependencies": {
@@ -48,7 +49,9 @@
     "@types/compression": "^1.7.2",
     "@types/cookie-parser": "^1.4.3",
     "@types/express": "^4.17.17",
+    "@types/jest": "^29.5.2",
     "@types/node": "^20.2.6",
+    "@types/supertest": "^2.0.12",
     "@types/webpack": "^5.28.1",
     "@typescript-eslint/eslint-plugin": "^5.59.9",
     "@typescript-eslint/parser": "^5.59.9",

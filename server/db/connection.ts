@@ -1,5 +1,5 @@
 import { Sequelize } from 'sequelize';
-import configs from '../../config/environment';
+import configs from '../config/environment';
 
 const {
   env: { nodeEnv, testUrl, productionUrl, developmentUrl },
@@ -26,7 +26,5 @@ const sequelize = new Sequelize(connectionString, {
     ssl: false,
   },
 });
-
-sequelize.sync();
 
 export default sequelize;

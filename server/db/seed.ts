@@ -1,13 +1,18 @@
-import { dishSeedData, categorySeedData } from './seedData';
-import { Dish, Category } from '../models';
+import { dishSeedData, categorySeedData, rolesSeed } from './seedData';
+import { Dish, Category, Role, sequelize } from '../models';
 
 const seedDatabase = async () => {
   try {
-    await Dish.bulkCreate(dishSeedData);
-    await Category.bulkCreate(categorySeedData);
+    await sequelize.sync({ force: true, logging: true });
+
+    await Category.bulkCreate(categorySeedData, { logging: false });
+    await Dish.bulkCreate(dishSeedData, { logging: false });
+    await Role.bulkCreate(rolesSeed, { logging: false });
   } catch (error) {
     console.error('Error creating seed data:', error);
   }
 };
 
 seedDatabase();
+
+export default seedDatabase;

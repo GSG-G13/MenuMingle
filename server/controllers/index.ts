@@ -1,1 +1,1 @@
-export { default as signupController } from './staff/signup';
+export * from './auth';

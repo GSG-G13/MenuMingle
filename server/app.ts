@@ -1,15 +1,13 @@
-import express, { Express, json, urlencoded } from 'express';
+import express, { json, urlencoded } from 'express';
 import cors from 'cors';
-import serverError from './middleware/serverError';
-import clientError from './middleware/clientError';
-
 import cookieParser from 'cookie-parser';
 import compression from 'compression';
 
-import { router } from './routes/index';
-import { userRouter } from './routes/staff';
+import serverError from './middleware/serverError';
+import clientError from './middleware/clientError';
+import router from './routes';
 
-const app: Express = express();
+const app = express();
 
 app.use([
   cors(),
@@ -20,8 +18,6 @@ app.use([
 ]);
 
 app.use('/api/v1', router);
-app.use('/api/v1/', userRouter);
-
 app.use(serverError);
 app.use(clientError);
 

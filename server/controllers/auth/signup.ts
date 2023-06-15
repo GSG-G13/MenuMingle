@@ -1,3 +1,5 @@
+import { NextFunction, Response, Request } from 'express';
+
 import {
   hashPassword,
   signToken,
@@ -5,7 +7,6 @@ import {
   signupSchema,
 } from '../../utils';
 import { StatusCodes } from '../../utils/enum';
-import { NextFunction, Response, Request } from 'express';
 import { Staff } from '../../models';
 import { staffAttribute } from '../../utils/types';
 
@@ -26,6 +27,7 @@ const signupController = async (
     }
 
     const hashedPassword = await hashPassword(password);
+
     const created: staffAttribute = await Staff.create({
       username,
       password: hashedPassword,
@@ -38,7 +40,9 @@ const signupController = async (
       role: roleId,
     });
 
-    return res.cookie('token', token).json({
+    return res.status(StatusCodes.Created).cookie('token', token).json({
+      error: false,
+      msg: 'The user have been created successfully!',
       data: created,
     });
   } catch (error: unknown) {

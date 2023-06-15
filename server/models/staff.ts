@@ -1,9 +1,9 @@
 import { DataTypes } from 'sequelize';
 import { staffAttribute } from '../utils/types';
-import sequelize from '../db/config/connection';
+import sequelize from '../db/connection';
 
 const Staff = sequelize.define<staffAttribute>(
-  'staffs',
+  'Staff',
   {
     id: {
       type: DataTypes.INTEGER,

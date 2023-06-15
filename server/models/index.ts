@@ -5,20 +5,21 @@ import Role from './roles';
 import Cart from './cart';
 import Order from './order';
 import Dish from './dishes';
+import sequelize from '../db/connection';
 
-Dish.belongsTo(Category, { foreignKey: 'category_id' });
-Category.hasMany(Dish, { foreignKey: 'category_id', sourceKey: 'id' });
+Dish.belongsTo(Category, { foreignKey: 'categoryId' });
+Category.hasMany(Dish, { foreignKey: 'categoryId', sourceKey: 'id' });
 
-Order.belongsTo(Dish, { foreignKey: 'dish_id' });
-Dish.hasMany(Order, { foreignKey: 'dish_id', sourceKey: 'id' });
+Order.belongsTo(Dish, { foreignKey: 'dishId' });
+Dish.hasMany(Order, { foreignKey: 'dishId', sourceKey: 'id' });
 
-Order.belongsTo(Customer, { foreignKey: 'customer_id' });
-Customer.hasMany(Order, { foreignKey: 'customer_id', sourceKey: 'id' });
+Order.belongsTo(Customer, { foreignKey: 'customerId' });
+Customer.hasMany(Order, { foreignKey: 'customerId', sourceKey: 'id' });
 
-Order.belongsTo(Cart, { foreignKey: 'cart_id' });
-Cart.hasMany(Order, { foreignKey: 'cart_id', sourceKey: 'id' });
+Order.belongsTo(Cart, { foreignKey: 'cartId' });
+Cart.hasMany(Order, { foreignKey: 'cartId', sourceKey: 'id' });
 
-Staff.belongsTo(Role, { foreignKey: 'role_id' });
-Role.hasMany(Staff, { foreignKey: 'role_id', sourceKey: 'id' });
+Staff.belongsTo(Role, { foreignKey: 'roleId' });
+Role.hasMany(Staff, { foreignKey: 'roleId', sourceKey: 'id' });
 
-export { Dish, Category, Staff, Customer, Role, Cart, Order };
+export { sequelize, Dish, Category, Staff, Customer, Role, Cart, Order };

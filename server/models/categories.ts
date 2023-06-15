@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize';
 import { CategoriesAttributes } from '../utils/types';
-import sequelize from '../db/config/connection';
+import sequelize from '../db/connection';
 
 const Category = sequelize.define<CategoriesAttributes>(
   'Category',
