@@ -43,7 +43,6 @@ const signupController = async (
     return res.status(StatusCodes.Created).cookie('token', token).json({
       error: false,
       msg: 'The user have been created successfully!',
-      data: created,
     });
   } catch (error: unknown) {
     return next(error);
