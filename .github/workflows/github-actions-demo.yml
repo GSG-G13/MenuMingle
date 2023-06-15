@@ -62,9 +62,6 @@ jobs:
 
         run: npm i
 
-
-
-
       - name: Connect to PostgreSQL
 
         # Runs a script that creates a PostgreSQL table, populates
@@ -77,6 +74,7 @@ jobs:
 
         env:
 
-          DATABASE_TEST: ${{ secrets.TEST_DB }}
-
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DEV_DB_URL: ${{ secrets.DEV_DB_URL }}
+          TEST_DB_URL: ${{ secrets.TEST_DB_URL }}
+          PRODUCTION_DB_URL: ${{ secrets.PRODUCTION_DB_URL }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
