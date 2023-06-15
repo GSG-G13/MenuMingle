@@ -12,7 +12,8 @@
     "lint-fix": "cross-env eslint . --ext .ts --fix",
     "dev": "cross-env NODE_ENV=development npx nodemon server/index.ts",
     "prepare": "husky install",
-    "seed-build": "cross-env NODE_ENV=development npm run db-build && ts-node server/db/seed.ts"
+    "db-build": "cross-env NODE_ENV=development ts-node server/db/build.ts",
+    "seed-build": "cross-env NODE_ENV=development ts-node server/db/seed.ts"
   },
   "keywords": [],
   "author": "",
