@@ -1,7 +1,6 @@
 import './index.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-// eslint-disable-next-line import/extensions
-import Login from './pages/Login';
+import { Login, SignUp } from './pages';
 
 const router = createBrowserRouter([
   {
@@ -11,6 +10,10 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <Login />,
+  },
+  {
+    path: '/signup',
+    element: <SignUp />,
   },
 ]);
 
