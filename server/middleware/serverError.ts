@@ -9,6 +9,7 @@ const serverError = (
   _next: NextFunction,
 ) => {
   const { status, message } = err;
+  console.log(err, 'server error midlleware');
 
   return res.status(status || StatusCodes.ServerError).json({
     error: true,

@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize';
 import { staffAttribute } from '../utils/types';
-import sequelize from '../db/config/connection';
+import sequelize from '../db/connection';
 
 const Staff = sequelize.define<staffAttribute>(
   'Staff',
@@ -28,7 +28,7 @@ const Staff = sequelize.define<staffAttribute>(
   },
   {
     timestamps: true,
-    tableName: 'staff',
+    tableName: 'staffs',
   },
 );
 

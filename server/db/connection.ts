@@ -1,5 +1,5 @@
 import { Sequelize } from 'sequelize';
-import configs from '../../config/environment';
+import configs from '../config/environment';
 
 const {
   env: { nodeEnv, testUrl, productionUrl, developmentUrl },
@@ -21,7 +21,6 @@ if (nodeEnv === 'development') {
 }
 
 const sequelize = new Sequelize(connectionString, {
-  logging: (...msg) => console.log(msg),
   dialectOptions: {
     charset: 'utf8',
     ssl: false,

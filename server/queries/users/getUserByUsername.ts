@@ -1,4 +1,4 @@
-import { Staff, Roles } from '../../models';
+import { Staff, Role } from '../../models';
 
 const getUserByUsername = async (username: string) => {
   const user = await Staff.findOne({
@@ -7,7 +7,7 @@ const getUserByUsername = async (username: string) => {
     },
     include: [
       {
-        model: Roles,
+        model: Role,
         attributes: ['name'],
       },
     ],

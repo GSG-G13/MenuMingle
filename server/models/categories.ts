@@ -1,9 +1,9 @@
 import { DataTypes } from 'sequelize';
 import { CategoriesAttributes } from '../utils/types';
-import sequelize from '../db/config/connection';
+import sequelize from '../db/connection';
 
-const Categories = sequelize.define<CategoriesAttributes>(
-  'dish',
+const Category = sequelize.define<CategoriesAttributes>(
+  'Category',
   {
     id: {
       type: DataTypes.INTEGER,
@@ -21,4 +21,4 @@ const Categories = sequelize.define<CategoriesAttributes>(
   },
 );
 
-export default Categories;
+export default Category;
