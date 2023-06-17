@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Joi from 'joi';
 
 import {
   Avatar,
@@ -36,20 +37,49 @@ const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
 
 const SignUp = () => {
   const [role, setRole] = React.useState();
+  const [errors, setErrors] = React.useState({});
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    try {
-      const res = await axios.post(`${serverUrl}/api/v1/auth/register`, {
-        username: data.get('username'),
-        password: data.get('password'),
-        roleId: +role,
-      });
-      window.location.href = '/login';
-    } catch (err: any) {
-      throw new Error(err);
+    const schema = Joi.object({
+      username: Joi.string().min(3).max(30).required().lowercase(),
+      password: Joi.string()
+        .min(8)
+        .max(30)
+        .required()
+        .pattern(
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+        ),
+      role: Joi.number().required(),
+    });
+
+    const formData = {
+      username: data.get('username'),
+      password: data.get('password'),
+      role: +role,
+    };
+
+    const result = schema.validate(formData);
+
+    const { error } = result;
+    if (error) {
+      // Handle validation error
+      setErrors(error.details[0]);
+    } else {
+      // Data is valid, proceed with submission
+      try {
+        const res = await axios.post(`${serverUrl}/api/v1/auth/register`, {
+          username: data.get('username'),
+          password: data.get('password'),
+          roleId: +role,
+        });
+
+        window.location.href = '/login';
+      } catch (err: any) {
+        throw new Error(err);
+      }
     }
   };
 
@@ -102,6 +132,11 @@ const SignUp = () => {
                 <BasicSelect role={role} setRole={setRole} />
               </Grid>
             </Grid>
+            {errors && (
+              <Typography variant="body2" color="error">
+                {errors.message}
+              </Typography>
+            )}
             <Button
               type="submit"
               fullWidth
