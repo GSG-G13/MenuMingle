@@ -1,9 +1,9 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../db/config/connection';
+import sequelize from '../db/connection';
 import { customersAttributes } from '../utils/types/';
 
 const Customer = sequelize.define<customersAttributes>(
-  'customers',
+  'Customer',
   {
     id: {
       type: DataTypes.INTEGER,
@@ -18,7 +18,7 @@ const Customer = sequelize.define<customersAttributes>(
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [3, 50],
+        len: [3, 10],
       },
     },
   },
