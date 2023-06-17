@@ -1,9 +1,13 @@
 import { FC } from 'react';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+
+import {
+  Box,
+  InputLabel,
+  MenuItem,
+  FormControl,
+  Select,
+  SelectChangeEvent,
+} from '@mui/material';
 
 const BasicSelect: FC<{ role: string; setRole: any }> = ({ role, setRole }) => {
   const handleChange = (event: SelectChangeEvent) => {
@@ -17,12 +21,12 @@ const BasicSelect: FC<{ role: string; setRole: any }> = ({ role, setRole }) => {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={role}
+          value={role || ''}
           label="role"
           onChange={handleChange}
         >
-          <MenuItem value="admin">Admin</MenuItem>
-          <MenuItem value="cook">Cook</MenuItem>
+          <MenuItem value="1">Admin</MenuItem>
+          <MenuItem value="2">Cooker</MenuItem>
         </Select>
       </FormControl>
     </Box>
