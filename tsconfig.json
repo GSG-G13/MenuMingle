@@ -34,7 +34,11 @@
     "server",
   ],
   "exclude": [
-  "__tests__/**.js"
+    "__tests__/**.js",
+    "typings/browser.d.ts",
+    "typings/browser",
+    "node_modules"
+  
   ],
 
 }

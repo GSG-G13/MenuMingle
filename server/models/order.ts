@@ -1,9 +1,9 @@
 import { DataTypes } from 'sequelize';
 import { OrderAttributes } from '../utils/types';
-import sequelize from '../db/config/connection';
+import sequelize from '../db/connection';
 
 const Order = sequelize.define<OrderAttributes>(
-  'orders',
+  'Order',
   {
     id: {
       type: DataTypes.INTEGER,

@@ -1,9 +1,9 @@
 import { DataTypes } from 'sequelize';
 import { RolesAttributes } from '../utils/types';
-import sequelize from '../db/config/connection';
+import sequelize from '../db/connection';
 
-const Roles = sequelize.define<RolesAttributes>(
-  'roles',
+const Role = sequelize.define<RolesAttributes>(
+  'Role',
   {
     id: {
       type: DataTypes.INTEGER,
@@ -14,12 +14,8 @@ const Roles = sequelize.define<RolesAttributes>(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    description: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
   },
   { timestamps: true, tableName: 'roles' },
 );
 
-export default Roles;
+export default Role;

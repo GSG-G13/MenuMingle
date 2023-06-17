@@ -1,9 +1,9 @@
 import { DataTypes } from 'sequelize';
 import { DishesAttributes } from '../utils/types';
-import sequelize from '../db/config/connection';
+import sequelize from '../db/connection';
 
-const Dishes = sequelize.define<DishesAttributes>(
-  'dish',
+const Dish = sequelize.define<DishesAttributes>(
+  'Dish',
   {
     id: {
       type: DataTypes.INTEGER,
@@ -37,4 +37,4 @@ const Dishes = sequelize.define<DishesAttributes>(
   },
 );
 
-export default Dishes;
+export default Dish;
