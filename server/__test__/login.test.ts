@@ -8,39 +8,32 @@ beforeAll(async () => {
 });
 
 describe('Testing the signup route.', () => {
-  it('Testing the success path, the controller should return 201 stats code.', done => {
-    supertest(app)
+  it('Testing the success path, the controller should return 201 stats code.', async () => {
+    await supertest(app)
       .post('/api/v1/auth/register')
       .send({
         username: 'ahmad',
         password: 'root123',
         roleId: 1,
       })
-      .end((err, res) => {
-        if (err) return done(err);
-        expect(res.status).toBe(201);
-        return done();
-      });
-  });
+      .expect(201);
 
-  it('Testing the success path, the controller should return 201 stats code.', done => {
-    supertest(app)
+    const res = await supertest(app)
       .post('/api/v1/auth/login')
       .send({
         username: 'ahmad',
         password: 'root123',
       })
-      .end((err, res) => {
-        if (err) return done(err);
-        expect(res.status).toBe(200);
-        return done();
-      });
+      .expect(200);
+
+    expect(res.body.msg).toBe('the has been login successfully');
   });
-  it('Testing the success path, the controller should return 201 stats code.', done => {
+
+  it('Testing the success path, the controller should return 401 status code.', done => {
     supertest(app)
       .post('/api/v1/auth/login')
       .send({
-        username: 'ahmad',
+        username: 'ahmed',
         password: 'wrong password',
       })
       .end((err, res) => {
@@ -49,6 +42,7 @@ describe('Testing the signup route.', () => {
         return done();
       });
   });
+
   it('Testing the success path, the controller should return 201 stats code.', done => {
     supertest(app)
       .post('/api/v1/auth/login')
