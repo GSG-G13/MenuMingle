@@ -11,7 +11,7 @@ const createDish = async (req: Request, res: Response, next: NextFunction) => {
     if (!newDish) {
       throw new CustomError(
         StatusCodes.ServerError,
-        'this email already exist',
+        'Dish could not be created',
       );
     }
     res.status(201).json({

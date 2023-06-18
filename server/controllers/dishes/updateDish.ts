@@ -13,7 +13,7 @@ const updateDish = async (req: Request, res: Response, next: NextFunction) => {
       where: { id },
       returning: true,
     });
-    if (updatedCount === 0 || !updatedDishes || updatedDishes.length === 0) {
+    if (updatedCount === 0) {
       throw new CustomError(
         StatusCodes.NotFound,
         'Dish not found or could not be updated',
