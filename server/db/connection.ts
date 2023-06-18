@@ -1,12 +1,13 @@
 import { Sequelize } from 'sequelize';
-import configs from '../../config/environment';
+import configs from '../config/environment';
+
 const {
   env: { nodeEnv, testUrl, productionUrl, developmentUrl },
 } = configs;
 let connectionString: string;
 
 if (!testUrl || !productionUrl || !developmentUrl) {
-  throw new Error('invalid');
+  throw new Error(`invalid ${nodeEnv} URL`);
 }
 
 if (nodeEnv === 'development') {
@@ -20,9 +21,9 @@ if (nodeEnv === 'development') {
 }
 
 const sequelize = new Sequelize(connectionString, {
-  logging: true,
   dialectOptions: {
     charset: 'utf8',
+    ssl: false,
   },
 });
 

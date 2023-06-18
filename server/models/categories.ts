@@ -1,25 +1,24 @@
 import { DataTypes } from 'sequelize';
 import { CategoriesAttributes } from '../utils/types';
-import sequelize from '../db/config/connection';
+import sequelize from '../db/connection';
 
-const Categories = sequelize.define<CategoriesAttributes>('dish', {
-  id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true,
+const Category = sequelize.define<CategoriesAttributes>(
+  'Category',
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   },
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false,
+  {
+    timestamps: true,
+    tableName: 'categories',
   },
-  createdAt: {
-    type: DataTypes.DATE,
-    allowNull: true,
-  },
-  updatedAt: {
-    type: DataTypes.DATE,
-    allowNull: true,
-  },
-});
+);
 
-export default Categories;
+export default Category;

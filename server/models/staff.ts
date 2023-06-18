@@ -1,28 +1,20 @@
 import { DataTypes } from 'sequelize';
 import { staffAttribute } from '../utils/types';
-import sequelize from '../db/config/connection';
+import sequelize from '../db/connection';
 
 const Staff = sequelize.define<staffAttribute>(
-  'staffs',
+  'Staff',
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    roleId: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'roles',
-        key: 'id',
-      },
-      allowNull: false,
-    },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [6, 255], // Example validation for password length
+        len: [6, 255],
       },
     },
     username: {
@@ -30,20 +22,13 @@ const Staff = sequelize.define<staffAttribute>(
       allowNull: false,
       unique: true,
       validate: {
-        len: [3, 50], // Example validation for username length
-      },
-    },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-      validate: {
-        isEmail: true, // Example validation for email format
+        len: [3, 50],
       },
     },
   },
   {
     timestamps: true,
+    tableName: 'staffs',
   },
 );
 

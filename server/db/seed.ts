@@ -1,18 +1,18 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { dishSeedData, categorySeedData } from './seedData';
-import staffsSeedData from './seedData/staffSeedData';
-import customersSeedData from './seedData/customersSeedData';
-import { Dishes, Categories, Customer, Staff } from '../models';
+import { dishSeedData, categorySeedData, rolesSeed } from './seedData';
+import { Dish, Category, Role, sequelize } from '../models';
 
 const seedDatabase = async () => {
   try {
-    const createdDishes = await Dishes.bulkCreate(dishSeedData);
-    const createdCategories = await Categories.bulkCreate(categorySeedData); // i kept them inside a variable cause we might need them later
-    const createStaff = await Customer.bulkCreate(staffsSeedData);
-    const createCustomers = await Customer.bulkCreate(customersSeedData);
+    await sequelize.sync({ force: true, logging: true });
+
+    await Category.bulkCreate(categorySeedData, { logging: false });
+    await Dish.bulkCreate(dishSeedData, { logging: false });
+    await Role.bulkCreate(rolesSeed, { logging: false });
   } catch (error) {
     console.error('Error creating seed data:', error);
   }
 };
 
 seedDatabase();
+
+export default seedDatabase;
