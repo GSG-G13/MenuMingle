@@ -12,6 +12,7 @@
     "start": "vite"
   },
   "dependencies": {
+    "@mui/material": "^5.13.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

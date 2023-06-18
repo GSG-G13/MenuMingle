@@ -1,9 +1,14 @@
 /* eslint-disable react/button-has-type */
-import react from 'react';
-import './App.css';
+import CartNavBar from './components/cartComponent/CartNavBar';
+import FootSection from './components/cartComponent/FootSection';
 
 const App = () => {
-  return <>Hello</>;
+  return (
+    <>
+      <CartNavBar />
+      <FootSection />
+    </>
+  );
 };
 
 export default App;
