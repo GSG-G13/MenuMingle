@@ -40,11 +40,22 @@ const signupController = async (
       role: roleId,
     });
 
-    return res.status(StatusCodes.Created).cookie('token', token).json({
-      error: false,
-      msg: 'The user have been created successfully!',
-    });
-  } catch (error: unknown) {
+    return res
+      .status(StatusCodes.Created)
+      .cookie('token', token)
+      .json({
+        error: false,
+        msg: 'The user have been created successfully!',
+        data: {
+          id: created.id,
+          username: created.username,
+        },
+      });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    if (error.name === 'ValidationError') {
+      throw new CustomError(StatusCodes.BadRequest, 'Wrong login credentials');
+    }
     return next(error);
   }
 };

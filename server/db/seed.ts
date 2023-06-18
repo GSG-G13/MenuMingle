@@ -3,7 +3,7 @@ import { Dish, Category, Role, sequelize } from '../models';
 
 const seedDatabase = async () => {
   try {
-    await sequelize.sync({ force: true, logging: true });
+    await sequelize.sync({ force: true, logging: false });
 
     await Category.bulkCreate(categorySeedData, { logging: false });
     await Dish.bulkCreate(dishSeedData, { logging: false });

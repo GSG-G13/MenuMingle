@@ -12,6 +12,7 @@ const loginController = async (
 ) => {
   try {
     const { username, password } = await loginSchema.validateAsync(req.body);
+
     const existStaff = await Staff.findOne({ where: { username } });
     if (!existStaff) {
       throw new CustomError(
@@ -25,7 +26,10 @@ const loginController = async (
       res.json({
         error: false,
         msg: 'the has been login successfully',
-        existStaff,
+        data: {
+          id: existStaff.id,
+          username: existStaff.username,
+        },
       });
     } else {
       throw new CustomError(
@@ -33,7 +37,11 @@ const loginController = async (
         'please check the password',
       );
     }
-  } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    if (error.name === 'ValidationError') {
+      throw new CustomError(StatusCodes.BadRequest, 'Wrong login credentials');
+    }
     next(error);
   }
 };
