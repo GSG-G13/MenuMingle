@@ -1,18 +1,25 @@
 import { Request, Response, NextFunction } from 'express';
-import { Dishes } from '../../models';
+import { Dish } from '../../models';
+import { dishSchema } from '../../utils/validation/joi';
+import { CustomError } from '../../utils';
+import { StatusCodes } from '../../utils/enum';
 
 const updateDish = async (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
-  const { dish } = req.body;
+
   try {
-    const updatedDish = await Dishes.update(dish, { where: { id } });
-    if (!updatedDish) {
-      return res.status(400).json({
-        error: true,
-        message: 'Bad request',
-        data: {},
-      });
+    const newDish = await dishSchema.validateAsync(req.body);
+    const [updatedCount, updatedDishes] = await Dish.update(newDish, {
+      where: { id },
+      returning: true,
+    });
+    if (updatedCount === 0 || !updatedDishes || updatedDishes.length === 0) {
+      throw new CustomError(
+        StatusCodes.NotFound,
+        'Dish not found or could not be updated',
+      );
     }
+    const updatedDish = updatedDishes[0];
     res.status(200).json({
       error: false,
       message: 'Dish updated successfully',

@@ -1,18 +1,18 @@
 import { Request, Response, NextFunction } from 'express';
-import { Dishes } from '../../models';
+import { Dish } from '../../models';
 import { dishSchema } from '../../utils/validation/joi';
+import { CustomError } from '../../utils';
+import { StatusCodes } from '../../utils/enum';
 
 const createDish = async (req: Request, res: Response, next: NextFunction) => {
-  const { dish } = req.body;
   try {
-    const Dish = await dishSchema.validateAsync(dish);
-    const newDish = await Dishes.create(Dish);
+    const dish = await dishSchema.validateAsync(req.body);
+    const newDish = await Dish.create(dish);
     if (!newDish) {
-      return res.status(400).json({
-        error: true,
-        message: 'Bad request',
-        data: {},
-      });
+      throw new CustomError(
+        StatusCodes.ServerError,
+        'this email already exist',
+      );
     }
     res.status(201).json({
       error: false,

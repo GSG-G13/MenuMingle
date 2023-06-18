@@ -1,5 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
-import { Dishes } from '../../models';
+import { Dish } from '../../models';
+import { StatusCodes } from '../../utils/enum';
+import { CustomError } from '../../utils';
 
 const getAllDishes = async (
   req: Request,
@@ -7,13 +9,9 @@ const getAllDishes = async (
   next: NextFunction,
 ) => {
   try {
-    const dishes = await Dishes.findAll();
+    const dishes = await Dish.findAll();
     if (!dishes) {
-      return res.status(404).json({
-        error: true,
-        message: 'Dishes not found',
-        data: {},
-      });
+      throw new CustomError(StatusCodes.NotFound, 'Dishes not found');
     }
     res.status(200).json({
       error: false,
