@@ -1,9 +1,12 @@
 import { dishSeedData, categorySeedData, rolesSeed } from './seedData';
 import { Dish, Category, Role, sequelize } from '../models';
+import configs from '../config/environment';
+
+const { nodeEnv } = configs.env;
 
 const seedDatabase = async () => {
   try {
-    await sequelize.sync({ force: true, logging: true });
+    await sequelize.sync({ force: true, logging: false });
 
     await Category.bulkCreate(categorySeedData, { logging: false });
     await Dish.bulkCreate(dishSeedData, { logging: false });
@@ -13,6 +16,8 @@ const seedDatabase = async () => {
   }
 };
 
-seedDatabase();
+if (nodeEnv !== 'test') {
+  seedDatabase();
+}
 
 export default seedDatabase;
