@@ -14,11 +14,12 @@ if (nodeEnv === 'development') {
   connectionString = developmentUrl as string;
 } else if (nodeEnv === 'production') {
   connectionString = productionUrl as string;
-} else if (nodeEnv === 'testing') {
+} else if (nodeEnv === 'test') {
   connectionString = testUrl as string;
 } else {
   connectionString = developmentUrl as string;
 }
+console.log(connectionString);
 
 const sequelize = new Sequelize(connectionString, {
   dialectOptions: {

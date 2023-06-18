@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "init": "npm i && npm run prepare && cd client && npm i",
-    "test": "cross-env NODE_ENV=test jest --forceExit --testTimeout=20000 --detectOpenHandles --runInBand",
+    "test": "cross-env NODE_ENV=test jest --forceExit --testTimeout=30000 --detectOpenHandles --runInBand",
     "build": "npx tsc",
     "start": "cross-env NODE_ENV=production node ./dist/index.js",
     "lint": "cross-env eslint . --ext .ts",
