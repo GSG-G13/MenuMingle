@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Joi from 'joi';
+import { useNavigate } from 'react-router-dom';
 
 import {
   Avatar,
@@ -14,46 +14,22 @@ import {
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import axios from 'axios';
-import BasicSelect from '../components';
-
-const Copyright = (props: any) => {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {'Copyright © '}
-      <Link color="inherit" href="/">
-        Menu Mingle
-      </Link>
-      {new Date().getFullYear()}.
-    </Typography>
-  );
-};
+import { url } from 'inspector';
+import { SignupSchema } from '../utils/validations';
+import { BasicSelect, Copyright } from '../components';
+import SignupImage from '../assets/signupbg.png';
 
 const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
 
-const SignUp = () => {
-  const [role, setRole] = React.useState();
-  const [errors, setErrors] = React.useState({});
+const SignUp: React.FC = () => {
+  const [role, setRole] = React.useState<string>('');
+  const [errorToThrow, setErrorToThrow] = React.useState<any>();
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-
-    const schema = Joi.object({
-      username: Joi.string().min(3).max(30).required().lowercase(),
-      password: Joi.string()
-        .min(8)
-        .max(30)
-        .required()
-        .pattern(
-          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-        ),
-      role: Joi.number().required(),
-    });
 
     const formData = {
       username: data.get('username'),
@@ -61,22 +37,22 @@ const SignUp = () => {
       role: +role,
     };
 
-    const result = schema.validate(formData);
+    const result = SignupSchema.validate(formData);
 
     const { error } = result;
     if (error) {
       // Handle validation error
-      setErrors(error.details[0]);
+      setErrorToThrow(error.details[0]);
     } else {
       // Data is valid, proceed with submission
       try {
-        const res = await axios.post(`${serverUrl}/api/v1/auth/register`, {
+        await axios.post(`${serverUrl}/api/v1/auth/register`, {
           username: data.get('username'),
           password: data.get('password'),
           roleId: +role,
         });
 
-        window.location.href = '/login';
+        navigate('/login');
       } catch (err: any) {
         throw new Error(err);
       }
@@ -84,18 +60,32 @@ const SignUp = () => {
   };
 
   return (
-    <>
-      <Container component="main" maxWidth="xs">
+    <div
+      style={{
+        width: '100%',
+        height: '100vh',
+        backgroundImage: `url(${SignupImage})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
+      <Container component="main" maxWidth="xs" sx={{ marginTop: '0' }}>
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: '0 !important',
+            paddingTop: '50px !important',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar
+            sx={{
+              m: 1,
+            }}
+          >
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -105,7 +95,9 @@ const SignUp = () => {
             component="form"
             noValidate
             onSubmit={handleSubmit}
-            sx={{ mt: 3 }}
+            sx={{
+              mt: 3,
+            }}
           >
             <Grid container spacing={2}>
               <Grid item xs={12}>
@@ -132,16 +124,16 @@ const SignUp = () => {
                 <BasicSelect role={role} setRole={setRole} />
               </Grid>
             </Grid>
-            {errors && (
+            {errorToThrow && (
               <Typography variant="body2" color="error">
-                {errors.message}
+                {errorToThrow.message}
               </Typography>
             )}
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, backgroundColor: '#FA4A0C' }}
             >
               Sign Up
             </Button>
@@ -156,7 +148,7 @@ const SignUp = () => {
         </Box>
       </Container>
       <Copyright sx={{ mt: 5 }} />
-    </>
+    </div>
   );
 };
 
