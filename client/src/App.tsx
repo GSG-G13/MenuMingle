@@ -1,11 +1,12 @@
 import './index.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { Login, SignUp } from './pages';
+import SplashPage from './pages/SplashPage/Splash';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <h1>Home</h1>,
+    element: <SplashPage />,
   },
   {
     path: '/login',
