@@ -5,9 +5,10 @@ interface staffAttribute
     InferAttributes<staffAttribute>,
     InferCreationAttributes<staffAttribute>
   > {
-  id: number;
+  id?: number;
   username: string;
   password: string;
+  role_id?: number;
 }
 
 export default staffAttribute;

@@ -46,10 +46,13 @@ const FilterComponent: React.FC<FilterComponentProps> = ({
     <ButtonGroup
       sx={{
         display: 'inline-flex',
-        height: 50,
+        height: 70,
         width: '100%',
         whiteSpace: 'nowrap',
         overflowX: 'scroll',
+        '&::-webkit-scrollbar': {
+          display: 'none',
+        },
       }}
     >
       {categories.map(category => (

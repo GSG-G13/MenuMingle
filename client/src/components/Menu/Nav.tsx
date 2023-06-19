@@ -15,7 +15,7 @@ const Navbar = () => {
       }}
     >
       <Toolbar>
-        <img src={logo} alt="Logo" style={{ marginRight: '10px', height: '40px' }} />
+        <img src={logo} alt="Logo" style={{ marginRight: '10px', height: '50px' }} />
         <Typography
           variant="h6"
           component="div"

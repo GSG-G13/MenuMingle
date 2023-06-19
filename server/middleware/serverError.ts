@@ -10,6 +10,8 @@ const serverError = (
 ) => {
   const { status, message } = err;
 
+  console.log(err);
+
   return res.status(status || StatusCodes.ServerError).json({
     error: true,
     msg: message || 'server Error',
