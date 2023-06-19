@@ -1,58 +1,73 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
+
 import axios from 'axios';
+import {
+  Avatar,
+  Button,
+  CssBaseline,
+  TextField,
+  Link,
+  Grid,
+  Box,
+  Typography,
+  Container,
+  FormControlLabel,
+  Checkbox,
+} from '@mui/material';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { SignInSchema } from '../utils/validations';
+import SignupImage from '../assets/signupbg.png';
+import { Copyright } from '../components';
 
-const Copyright = (props: any) => {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}.
-    </Typography>
-  );
-};
-
-// TODO remove, this demo shouldn't need to reset the theme.
-const defaultTheme = createTheme();
+const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
 
 const Login = () => {
+  const [errorToThrow, setErrorToThrow] = React.useState<any>();
+
+  const navigate = useNavigate();
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    try {
-      const res = await axios.post('/api/v1/auth/login', {
-        username: data.get('username'),
-        password: data.get('password'),
-      });
-      console.log(res);
-      window.location.href = '/dashboard'; // Change this URL to the desired destination
-    } catch (err) {
-      console.log(err);
+    const formData = {
+      username: data.get('username'),
+      password: data.get('password'),
+    };
+
+    const result = SignInSchema.validate(formData);
+
+    const { error } = result;
+
+    if (error) {
+      // Handle validation error
+      setErrorToThrow(error.details[0]);
+    } else {
+      try {
+        await axios.post(`${serverUrl}/api/v1/auth/login`, {
+          username: data.get('username'),
+          password: data.get('password'),
+        });
+
+        navigate('/dashboard'); // Change this URL to the desired destination
+      } catch (err: any) {
+        throw new Error(err);
+      }
     }
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <div
+      style={{
+        width: '100%',
+        height: '100vh',
+        backgroundImage: `url(${SignupImage})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -63,7 +78,7 @@ const Login = () => {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1 }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -99,11 +114,16 @@ const Login = () => {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
+            {errorToThrow && (
+              <Typography variant="body2" color="error">
+                {errorToThrow.message}
+              </Typography>
+            )}
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, backgroundColor: '#FA4A0C' }}
             >
               Sign In
             </Button>
@@ -123,7 +143,7 @@ const Login = () => {
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
-    </ThemeProvider>
+    </div>
   );
 };
 
