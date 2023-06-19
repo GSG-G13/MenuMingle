@@ -12,6 +12,13 @@ const serverError = (
 
   console.log(err);
 
+  if (err.name === 'ValidationError') {
+    return res.status(StatusCodes.BadRequest).json({
+      error: true,
+      msg: err.message,
+    });
+  }
+
   return res.status(status || StatusCodes.ServerError).json({
     error: true,
     msg: message || 'server Error',
