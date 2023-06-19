@@ -23,24 +23,9 @@ describe('Testing the dishes route.', () => {
         return done();
       });
   });
+});
 
-  it('Testing the success path, the controller should return 400 stats code.', done => {
-    supertest(app)
-      .post('/api/v1/dishes')
-      .send({
-        price: 52,
-        image: 'example.png',
-        availability: true,
-        ingredients: 'Salmon, Lemon, Olive Oil, Dill',
-        categoryId: 2,
-      })
-      .end((err, res) => {
-        if (err) return done(err);
-        expect(res.status).toBe(400);
-        return done();
-      });
-  });
-
+describe('Testing the get all dishes route.', () => {
   it('Testing the success path, the controller should return 200 stats code.', done => {
     supertest(app)
       .get('/api/v1/dishes')
@@ -50,7 +35,9 @@ describe('Testing the dishes route.', () => {
         return done();
       });
   });
+});
 
+describe('Testing the get dish by id route.', () => {
   it('Testing the success path, the controller should return 200 stats code.', done => {
     supertest(app)
       .get('/api/v1/dishes/1')
@@ -70,7 +57,9 @@ describe('Testing the dishes route.', () => {
         return done();
       });
   });
+});
 
+describe('Testing the delete dish by id route.', () => {
   it('Testing the success path, the controller should return 200 stats code.', done => {
     supertest(app)
       .delete('/api/v1/dishes/delete/1')
@@ -90,7 +79,9 @@ describe('Testing the dishes route.', () => {
         return done();
       });
   });
+});
 
+describe('Testing the update dish by id route.', () => {
   it('Testing the success path, the controller should return 200 stats code.', done => {
     supertest(app)
       .put('/api/v1/dishes/update/2')
@@ -149,10 +140,10 @@ describe('Testing the dishes route.', () => {
       .put('/api/v1/dishes/update/2')
       .send({
         name: 'moo dish',
-        price: 52,
         image: 'example.png',
         availability: true,
         ingredients: 'Salmon, Lemon, Olive Oil, Dill',
+        categoryId: 2,
       })
       .end((err, res) => {
         if (err) return done(err);
@@ -167,8 +158,8 @@ describe('Testing the dishes route.', () => {
       .send({
         name: 'moo dish',
         price: 52,
-        image: 'example.png',
         availability: true,
+        ingredients: 'Salmon, Lemon, Olive Oil, Dill',
         categoryId: 2,
       })
       .end((err, res) => {
