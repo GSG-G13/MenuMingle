@@ -21,7 +21,7 @@ export const dishSeedData = [
     image: 'grilled_salmon.jpg',
     availability: true,
     ingredients: 'Salmon, Lemon, Olive Oil, Dill',
-    category_id: 2,
+    category_id: 3,
   },
   {
     name: 'Chocolate Lava Cake',
@@ -29,7 +29,7 @@ export const dishSeedData = [
     image: 'chocolate_lava_cake.jpg',
     availability: true,
     ingredients: 'Chocolate, Butter, Sugar, Eggs',
-    category_id: 1,
+    category_id: 4,
   },
   {
     name: 'Caesar Salad',
@@ -37,6 +37,6 @@ export const dishSeedData = [
     image: 'caesar_salad.jpg',
     availability: true,
     ingredients: 'Romaine Lettuce, Parmesan Cheese, Croutons, Caesar Dressing',
-    category_id: 2,
+    category_id: 5,
   },
 ];

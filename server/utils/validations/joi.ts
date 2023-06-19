@@ -1,12 +1,9 @@
 import Joi from 'joi';
 
 const signupSchema = Joi.object({
-  roleId: Joi.number(),
+  roleId: Joi.number().required(),
   username: Joi.string().min(3).max(30).required(),
-  password: Joi.string()
-    .min(5)
-    .pattern(/^[a-zA-Z0-9]{3,30}$/)
-    .required(),
+  password: Joi.string().min(5).required(),
 });
 
 const dishSchema = Joi.object({
@@ -18,4 +15,9 @@ const dishSchema = Joi.object({
   categoryId: Joi.number().required(),
 });
 
-export { signupSchema, dishSchema };
+const loginSchema = Joi.object({
+  username: Joi.string().min(3).max(30).required(),
+  password: Joi.string().min(5).max(30).required(),
+});
+
+export { signupSchema, dishSchema, loginSchema };
