@@ -12,6 +12,8 @@
     "start": "vite"
   },
   "dependencies": {
+    "@mui/base": "^5.0.0-beta.4",
+    "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

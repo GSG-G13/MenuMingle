@@ -1,36 +1,107 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/button-has-type */
+/* eslint-disable no-console */
 /* eslint-disable jsx-a11y/alt-text */
 import * as core from '@mui/material';
-import IconButton from '@mui/material/IconButton';
-import { Add } from '@mui/icons-material';
-import myPhoto from '../../assets/NDPBK-d-03M.png';
+import RemoveIcon from '@mui/icons-material/Remove';
+import AddIcon from '@mui/icons-material/Add';
+import ClearIcon from '@mui/icons-material/Clear';
+import { CssBaseline } from '@mui/material';
+import { useEffect, useState } from 'react';
 
-const { Paper, Typography, List, ListItem, ListItemText } = core;
+const { Typography, Stack } = core;
+const obj = {
+  margin: '0 !important',
+  backgroundColor: '#FF7A00',
+  borderRadius: '50px',
+  color: '#fff',
+  width: '22px',
+  height: '22px',
+  padding: '4px',
+};
 
-const FootSection = () => {
+const FoodSection = ({
+  ele: { name, price, id, count },
+  menuState,
+  setMenuState,
+}) => {
+  const [countNumber, setCountNumber] = useState(count);
+  useEffect(() => {
+    const element = menuState.find(dish => dish.id === id);
+    element.count = countNumber;
+    const allItems = menuState.filter(dish => dish.id !== id);
+    allItems.push(element);
+    const antherAllItem = allItems.filter(dish => dish.count >= 0);
+    setMenuState(antherAllItem);
+    localStorage.setItem('menu', JSON.stringify(menuState));
+  }, [countNumber]);
   return (
-    <Paper sx={{ margin: '20px' }}>
-      <Typography variant="h6" component="h2">
-        Foods
-      </Typography>
-      <List>
-        <ListItem>
-          <img src={myPhoto} alt="rs" />
-          <div>
-            <span>Burgur Ala Ala</span>
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{ mr: 2 }}
-            >
-              <Add />
-            </IconButton>
-          </div>
-          <ListItemText primary="Item 1" secondary="Price: $10" />
-        </ListItem>
-      </List>
-    </Paper>
+    <Stack
+      direction="row"
+      spacing={2}
+      sx={{
+        height: '120px',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: '20px',
+      }}
+    >
+      <CssBaseline />
+      <Stack>
+        <img
+          src="https://cdn.discordapp.com/attachments/1113720646581616660/1120246167624757249/meal.png"
+          alt="alternative img"
+        />
+      </Stack>
+      <Stack direction="column" spacing={1}>
+        <Typography variant="subtitle2" component="p">
+          {name}
+        </Typography>
+        <Typography variant="subtitle2" component="p">
+          {price}
+        </Typography>
+      </Stack>
+      <Stack
+        direction="column"
+        spacing={2}
+        sx={{
+          height: '5rem',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+      >
+        <RemoveIcon
+          sx={obj}
+          onClick={() => {
+            setCountNumber(countNumber - 1);
+          }}
+        />
+
+        <Typography
+          variant="subtitle1"
+          sx={{ margin: '0 !important', fontWeight: 'bold' }}
+        >
+          {countNumber}
+        </Typography>
+        <AddIcon
+          sx={obj}
+          onClick={() => {
+            setCountNumber(countNumber + 1);
+          }}
+        />
+      </Stack>
+      <ClearIcon
+        sx={{
+          width: '24px',
+          height: '24px',
+          borderRadius: '50%',
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          padding: '4px',
+          color: '#fff',
+        }}
+      />
+    </Stack>
   );
 };
 
-export default FootSection;
+export default FoodSection;
