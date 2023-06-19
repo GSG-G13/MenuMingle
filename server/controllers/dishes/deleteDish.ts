@@ -5,17 +5,19 @@ import { StatusCodes } from '../../utils/enum';
 import { CustomError } from '../../utils';
 
 const deleteDish = async (req: Request, res: Response, next: NextFunction) => {
-  const { id } = req.params;
   try {
+    const { id } = req.params;
     const dish: DishesAttributes | null = await Dish.findByPk(id);
     if (!dish) {
       throw new CustomError(StatusCodes.NotFound, 'Dish not found');
     }
     await Dish.destroy({ where: { id } });
-    res.status(200).json({
+    return res.json({
       error: false,
       message: 'Dish deleted successfully',
-      data: dish,
+      data: {
+        dishId: id,
+      },
     });
   } catch (err) {
     return next(err);

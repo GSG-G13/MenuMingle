@@ -4,13 +4,13 @@ import { StatusCodes } from '../../utils/enum';
 import { CustomError } from '../../utils';
 
 const getDishById = async (req: Request, res: Response, next: NextFunction) => {
-  const { id } = req.params;
   try {
+    const { id } = req.params;
     const dish = await Dish.findByPk(id);
     if (!dish) {
       throw new CustomError(StatusCodes.NotFound, 'Dish not found');
     }
-    res.status(200).json({
+    return res.json({
       error: false,
       message: 'Dish found successfully',
       data: dish,

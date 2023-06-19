@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { Dish } from '../../models';
-import { dishSchema } from '../../utils/validation/joi';
+import { dishSchema } from '../../utils';
 import { CustomError } from '../../utils';
 import { StatusCodes } from '../../utils/enum';
 
@@ -14,10 +14,12 @@ const createDish = async (req: Request, res: Response, next: NextFunction) => {
         'Dish could not be created',
       );
     }
-    res.status(201).json({
+    return res.status(201).json({
       error: false,
       message: 'Dish created successfully',
-      data: newDish,
+      data: {
+        dishId: newDish.id,
+      },
     });
   } catch (err) {
     return next(err);

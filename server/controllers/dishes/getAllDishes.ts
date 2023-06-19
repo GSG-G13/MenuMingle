@@ -13,7 +13,7 @@ const getAllDishes = async (
     if (!dishes) {
       throw new CustomError(StatusCodes.NotFound, 'Dishes not found');
     }
-    res.status(200).json({
+    return res.json({
       error: false,
       message: 'Dishes found successfully',
       data: dishes,

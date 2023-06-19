@@ -1,13 +1,12 @@
 import { Request, Response, NextFunction } from 'express';
 import { Dish } from '../../models';
-import { dishSchema } from '../../utils/validation/joi';
+import { dishSchema } from '../../utils';
 import { CustomError } from '../../utils';
 import { StatusCodes } from '../../utils/enum';
 
 const updateDish = async (req: Request, res: Response, next: NextFunction) => {
-  const { id } = req.params;
-
   try {
+    const { id } = req.params;
     const newDish = await dishSchema.validateAsync(req.body);
     const [updatedCount, updatedDishes] = await Dish.update(newDish, {
       where: { id },
@@ -20,7 +19,7 @@ const updateDish = async (req: Request, res: Response, next: NextFunction) => {
       );
     }
     const updatedDish = updatedDishes[0];
-    res.status(200).json({
+    return res.json({
       error: false,
       message: 'Dish updated successfully',
       data: updatedDish,
