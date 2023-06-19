@@ -10,6 +10,7 @@ import {
   Order,
 } from '../models';
 const { nodeEnv } = config.env;
+
 const buildModels = async () => {
   await Dishes.sync({ alter: true });
   await Categories.sync({ alter: true });

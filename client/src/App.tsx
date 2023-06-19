@@ -1,9 +1,9 @@
 /* eslint-disable react/button-has-type */
 import react from 'react';
-import './App.css';
+import Menu from './components/Menu';
 
 const App = () => {
-  return <>Hello</>;
+  return <Menu />;
 };
 
 export default App;
