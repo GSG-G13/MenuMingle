@@ -20,20 +20,17 @@ const obj = {
   padding: '4px',
 };
 
-const FoodSection = ({
-  ele: { name, price, id, count },
-  menuState,
-  setMenuState,
-}) => {
+const FoodSection = ({ ele, menuState, index, setMenuState }: any) => {
+  const { name, price, count } = ele;
   const [countNumber, setCountNumber] = useState(count);
+  const [notes, setNotes] = useState('');
   useEffect(() => {
-    const element = menuState.find(dish => dish.id === id);
-    element.count = countNumber;
-    const allItems = menuState.filter(dish => dish.id !== id);
-    allItems.push(element);
-    const antherAllItem = allItems.filter(dish => dish.count >= 0);
-    setMenuState(antherAllItem);
-    localStorage.setItem('menu', JSON.stringify(menuState));
+    const myEl = ele;
+    myEl.count = countNumber;
+    const myMen = menuState;
+    myMen[index] = myEl;
+    setMenuState(myMen);
+    localStorage.setItem('menu', JSON.stringify(myMen));
   }, [countNumber]);
   return (
     <Stack

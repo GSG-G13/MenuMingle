@@ -57,7 +57,7 @@ const dishSeedData = [
 const AllCart = () => {
   const [menu, setMenu] = useState([]);
   useEffect(() => {
-    localStorage.setItem('menu', JSON.stringify(dishSeedData));
+    // localStorage.setItem('menu', JSON.stringify(dishSeedData));
     const data = JSON.parse(localStorage.getItem('menu'));
     setMenu(data);
   }, []);
@@ -65,7 +65,13 @@ const AllCart = () => {
   return (
     <>
       {menu.map((dish, index) => (
-        <FoodSection key={index} ele={dish} menuState={menu} setMenuState={setMenu} />
+        <FoodSection
+          index={index}
+          key={dish.id}
+          ele={dish}
+          menuState={menu}
+          setMenuState={setMenu}
+        />
       ))}
     </>
   );
