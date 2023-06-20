@@ -1,0 +1,7 @@
+.splash-box {
+  transition: opacity 1s ease-in-out;
+}
+
+.splash-box.animate {
+  opacity: 0;
+}
