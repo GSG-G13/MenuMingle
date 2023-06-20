@@ -9,7 +9,7 @@ import {
 
 export const dishesRouter = Router();
 
-dishesRouter.get('/api/dishes', getAllDishes);
+dishesRouter.get('/', getAllDishes);
 dishesRouter.get('/:id', getDishById);
 dishesRouter.post('/create', createDish);
 dishesRouter.delete('/delete/:id', deleteDish);
