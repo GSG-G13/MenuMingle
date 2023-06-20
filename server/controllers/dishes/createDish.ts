@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
 import { Dish } from '../../models';
-import { dishSchema } from '../../utils';
+import { Payload, dishSchema } from '../../utils';
 import { CustomError } from '../../utils';
 import { StatusCodes } from '../../utils/enum';
 
-const createDish = async (req: Request, res: Response, next: NextFunction) => {
+const createDish = async (req: any, res: Response, next: NextFunction) => {
   try {
     const dish = await dishSchema.validateAsync(req.body);
     const newDish = await Dish.create(dish);

@@ -7,10 +7,18 @@ import {
   getDishById,
 } from '../controllers';
 
+import verifyAccessToken from '../middleware/authMiddileware';
+import checkAdminAuth from '../middleware/checkAdminAuth';
+
 export const dishesRouter = Router();
 
 dishesRouter.get('/', getAllDishes);
 dishesRouter.get('/:id', getDishById);
-dishesRouter.post('/create', createDish);
-dishesRouter.delete('/delete/:id', deleteDish);
-dishesRouter.put('/update/:id', updateDish);
+dishesRouter.post('/create', verifyAccessToken, checkAdminAuth, createDish);
+dishesRouter.delete(
+  '/delete/:id',
+  verifyAccessToken,
+  checkAdminAuth,
+  deleteDish,
+);
+dishesRouter.put('/update/:id', verifyAccessToken, checkAdminAuth, updateDish);
