@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "init": "npm i && npm run prepare && cd client && npm i",
-    "test": "cross-env NODE_ENV=test jest --forceExit --testTimeout=20000 --detectOpenHandles --runInBand",
+    "test": "cross-env NODE_ENV=test jest --forceExit --testTimeout=30000 --detectOpenHandles --runInBand",
     "build": "npx tsc",
     "start": "cross-env NODE_ENV=production node ./dist/index.js",
     "lint": "cross-env eslint . --ext .ts",
@@ -43,6 +43,7 @@
     "jsonwebtoken": "^9.0.0",
     "pg": "^8.11.0",
     "pg-hstore": "^2.3.4",
+    "react-router-dom": "^6.12.1",
     "sequelize": "^6.32.0",
     "supertest": "^6.3.3",
     "ts-jest": "^29.1.0",

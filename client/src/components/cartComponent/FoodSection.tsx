@@ -2,7 +2,7 @@ import * as core from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
 import { CssBaseline } from '@mui/material';
 import { useEffect, useState, FC } from 'react';
-import { FoodSectionProps } from '../../utils/interfaces';
+import { DishType, FoodSectionProps } from '../../utils/interfaces';
 
 import MiddleComponent from './MiddleComponent';
 import LiftComponent from './LiftComponent';
@@ -19,7 +19,7 @@ const FoodSection: FC<FoodSectionProps> = ({
   useEffect(() => {
     const myEl = dish;
     myEl.count = countNumber;
-    let myMen: [] = menuState;
+    let myMen: DishType[] = menuState;
     myMen[index] = myEl;
     myMen = myMen.filter(element => element.count > 0);
     setMenuState(myMen);

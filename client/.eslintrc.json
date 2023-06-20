@@ -1,9 +1,7 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
-  "plugins": [
-    "@typescript-eslint", "react", "react-hooks","promise"
-  ],
+  "plugins": ["@typescript-eslint", "react", "react-hooks", "promise"],
   "extends": [
     "airbnb",
     "eslint:recommended",
@@ -11,7 +9,6 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
     "prettier"
-    
   ],
   "rules": {
     "import/extensions": [
@@ -20,7 +17,10 @@
         ".json": "never"
       }
     ],
-    "react/function-component-definition": [2, { "namedComponents": "arrow-function" }],
+    "react/function-component-definition": [
+      2,
+      { "namedComponents": "arrow-function" }
+    ],
     "react/jsx-filename-extension": ["error", { "extensions": [".tsx"] }],
     "react/react-in-jsx-scope": "off",
     "import/no-unresolved": "off",
@@ -37,6 +37,7 @@
         "endOfLine": "auto"
       }
     ],
-    "generator-star-spacing": "off"
+    "generator-star-spacing": "off",
+    "react/jsx-props-no-spreading": "off"
   }
 }

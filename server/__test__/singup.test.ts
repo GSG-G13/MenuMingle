@@ -3,7 +3,9 @@ import supertest from 'supertest';
 import app from '../app';
 import { seedDatabase } from '../db';
 
-beforeAll(() => seedDatabase());
+beforeAll(async () => {
+  await seedDatabase();
+});
 
 describe('Testing the signup route.', () => {
   it('Testing the success path, the controller should return 201 stats code.', done => {

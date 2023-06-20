@@ -1,19 +1,18 @@
 {
-    "[typescriptreact]": {
-        "editor.formatOnSave": false
-    },
-    "[typescript]": {
-        "editor.formatOnSave": false
-    },
-    "[javascript]": {
-        "editor.formatOnSave": false
-    },
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
-    },
-    "eslint.workingDirectories": [
-        "client"
-    ],
-    "editor.tabSize": 2,
-    "files.eol": "\n"
+  "[typescriptreact]": {
+    "editor.formatOnSave": false
+  },
+  "[typescript]": {
+    "editor.formatOnSave": false
+  },
+  "[javascript]": {
+    "editor.formatOnSave": false
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.workingDirectories": ["client"],
+  "editor.tabSize": 2,
+  "files.eol": "\n",
+  "cSpell.words": ["marwan"]
 }
