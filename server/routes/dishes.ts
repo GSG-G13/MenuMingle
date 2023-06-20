@@ -8,17 +8,11 @@ import {
 } from '../controllers';
 
 import verifyAccessToken from '../middleware/authMiddileware';
-import checkAdminAuth from '../middleware/checkAdminAuth';
 
 export const dishesRouter = Router();
 
 dishesRouter.get('/', getAllDishes);
 dishesRouter.get('/:id', getDishById);
-dishesRouter.post('/create', verifyAccessToken, checkAdminAuth, createDish);
-dishesRouter.delete(
-  '/delete/:id',
-  verifyAccessToken,
-  checkAdminAuth,
-  deleteDish,
-);
-dishesRouter.put('/update/:id', verifyAccessToken, checkAdminAuth, updateDish);
+dishesRouter.post('/create', verifyAccessToken('admin'), createDish);
+dishesRouter.delete('/delete/:id', verifyAccessToken('admin'), deleteDish);
+dishesRouter.put('/update/:id', verifyAccessToken('admin'), updateDish);

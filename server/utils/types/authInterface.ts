@@ -3,7 +3,7 @@ import { Request } from 'express';
 import Payload from './payload';
 
 type CustomRequest = {
-  user: Payload;
+  user?: Payload;
 } & Request;
 
 export default CustomRequest;
