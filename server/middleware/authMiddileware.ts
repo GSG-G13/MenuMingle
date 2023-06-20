@@ -22,7 +22,7 @@ const verifyAccessToken = (role: string) => {
       if (req.user.role === role) {
         next();
       }
-      throw new CustomError(StatusCodes.Unauthenticated, 'unauthenticated');
+      throw new CustomError(StatusCodes.Unauthorized, 'Unauthorized');
     } catch (err) {
       next(err);
     }
