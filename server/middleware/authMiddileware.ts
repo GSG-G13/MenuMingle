@@ -12,19 +12,20 @@ const verifyAccessToken = (role: string) => {
         throw new CustomError(StatusCodes.Unauthenticated, 'unauthenticated');
       }
 
-      const user = await verifyToken(token);
+      const user = (await verifyToken(token)) as Payload;
 
       if (!user) {
         throw new CustomError(StatusCodes.Unauthenticated, 'unauthenticated');
       }
 
       req.user = user as Payload;
-      if (req.user.role === role) {
-        next();
+
+      if (user.role === role) {
+        return next();
       }
       throw new CustomError(StatusCodes.Unauthorized, 'Unauthorized');
     } catch (err) {
-      next(err);
+      return next(err);
     }
   };
 };
