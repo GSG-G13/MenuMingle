@@ -7,7 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import CssBaseline from '@mui/material/CssBaseline';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-const DenseAppBar = () => {
+const CartNavBar = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <CssBaseline />
@@ -29,4 +29,4 @@ const DenseAppBar = () => {
     </Box>
   );
 };
-export default DenseAppBar;
+export default CartNavBar;

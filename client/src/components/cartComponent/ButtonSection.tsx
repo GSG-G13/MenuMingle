@@ -4,11 +4,13 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { useState } from 'react';
+import { useState, FC } from 'react';
+import { ButtonSectionProps } from '../../utils';
 
-const { TextField, Button, Box } = core;
-const ButtomSection = () => {
+const { TextField, Button } = core;
+const ButtonSection: FC<ButtonSectionProps> = ({ notes, setNotes }) => {
   const [open, setOpen] = useState(false);
+
   return (
     <>
       <core.CssBaseline />
@@ -25,6 +27,9 @@ const ButtomSection = () => {
             variant="standard"
             sx={{
               width: '18rem',
+            }}
+            onChange={e => {
+              setNotes(e.target.value);
             }}
           />
         </DialogContent>
@@ -54,4 +59,4 @@ const ButtomSection = () => {
   );
 };
 
-export default ButtomSection;
+export default ButtonSection;

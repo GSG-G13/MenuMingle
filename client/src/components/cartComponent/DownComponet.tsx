@@ -1,9 +1,8 @@
-import { Margin } from '@mui/icons-material';
 import * as core from '@mui/material';
 
 const { Card, Button, Typography } = core;
 
-const DownComponet = () => {
+const DownComponent = () => {
   return (
     <div
       style={{
@@ -41,4 +40,4 @@ const DownComponet = () => {
   );
 };
 
-export default DownComponet;
+export default DownComponent;
