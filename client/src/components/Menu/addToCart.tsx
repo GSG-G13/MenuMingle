@@ -9,6 +9,7 @@ type Item = {
   image: string;
   availability: boolean;
   ingredients: string;
+  count: number;
   categoryId: number;
 };
 
@@ -29,8 +30,16 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({ item }) => {
 
   const handleAddToCart = () => {
     const storedItems: Item[] = JSON.parse(localStorage.getItem('items') || '[]');
-    const updatedItems: Item[] = [...storedItems, item];
-    localStorage.setItem('items', JSON.stringify(updatedItems));
+    const foundItem = storedItems.find(storedItem => storedItem.id === item.id);
+
+    if (foundItem) {
+      foundItem.count = 1; // Update the count to 1
+    } else {
+      const newItem: Item = { ...item, count: 1 }; // Create a new object with count set to 1
+      storedItems.push(newItem);
+    }
+
+    localStorage.setItem('items', JSON.stringify(storedItems));
     setIsChecked(true);
   };
 

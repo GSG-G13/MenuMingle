@@ -9,6 +9,7 @@ type Dish = {
   image: string;
   availability: boolean;
   ingredients: string;
+  count: number;
   categoryId: number;
 };
 

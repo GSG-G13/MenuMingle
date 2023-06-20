@@ -6,8 +6,18 @@ const signupSchema = Joi.object({
   password: Joi.string().min(5).required(),
 });
 
+const dishSchema = Joi.object({
+  name: Joi.string().min(3).max(30).required(),
+  price: Joi.number().required(),
+  image: Joi.string().min(3).required(),
+  availability: Joi.boolean().required(),
+  ingredients: Joi.string().min(3).required(),
+  categoryId: Joi.number().required(),
+});
+
 const loginSchema = Joi.object({
   username: Joi.string().min(3).max(30).required(),
-  password: Joi.string().min(5).required(),
+  password: Joi.string().min(5).max(30).required(),
 });
-export { signupSchema, loginSchema };
+
+export { signupSchema, dishSchema, loginSchema };
