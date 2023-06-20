@@ -21,6 +21,7 @@ interface Dish {
 }
 
 const Menu = () => {
+  const [allDishes, setAllDishes] = useState<Dish[]>([]);
   const [filteredDishes, setFilteredDishes] = useState<Dish[]>([]);
   const categories: Category[] = [
     {
@@ -58,25 +59,30 @@ const Menu = () => {
     }
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const dishes = await fetchDishes();
-      setFilteredDishes(dishes);
-    };
+  const fetchData = async () => {
+    const dishes = await fetchDishes();
+    setAllDishes(dishes);
+    setFilteredDishes(dishes);
+  };
 
+  useEffect(() => {
     fetchData();
   }, []);
 
   const filterDishes = (categoryId: number) => {
-    const filtered = filteredDishes.filter(dish => dish.categoryId === categoryId);
-    setFilteredDishes(filtered);
+    if (categoryId === 0) {
+      setFilteredDishes(allDishes);
+    } else {
+      const filtered = allDishes.filter(dish => dish.categoryId === categoryId);
+      setFilteredDishes(filtered);
+    }
   };
 
   return (
     <div style={{ width: '100%' }}>
       <Navbar />
       <FilterComponent categories={categories} onCategorySelect={filterDishes} />
-      <DishList dishes={filteredDishes.length > 0 ? filteredDishes : []} />
+      <DishList dishes={filteredDishes} />
     </div>
   );
 };

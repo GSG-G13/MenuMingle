@@ -1,5 +1,6 @@
 export const dishSeedData = [
   {
+    id: 1,
     name: 'Mango Juice',
     price: 12,
     image: 'mango.jpg',
@@ -8,6 +9,7 @@ export const dishSeedData = [
     category_id: 1,
   },
   {
+    id: 2,
     name: 'Grape leaves',
     price: 16.55,
     image: 'grapeleaves.jpg',
@@ -16,6 +18,7 @@ export const dishSeedData = [
     category_id: 2,
   },
   {
+    id: 3,
     name: 'Grilled Salmon',
     price: 18.99,
     image: 'grilled_salmon.jpg',
@@ -24,6 +27,7 @@ export const dishSeedData = [
     category_id: 3,
   },
   {
+    id: 4,
     name: 'Chocolate Lava Cake',
     price: 7.99,
     image: 'chocolate_lava_cake.jpg',
@@ -32,6 +36,7 @@ export const dishSeedData = [
     category_id: 4,
   },
   {
+    id: 5,
     name: 'Caesar Salad',
     price: 9.99,
     image: 'caesar_salad.jpg',
