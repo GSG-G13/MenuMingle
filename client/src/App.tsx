@@ -3,6 +3,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { Login, SignUp } from './pages';
 import SplashPage from './pages/SplashPage/Splash';
 import CartPage from './pages/CartPage';
+import WaitingRoom from './pages/WatingRoom';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
   {
     path: '/cartPage',
     element: <CartPage />,
+  },
+  {
+    path: '/WaitingRoom',
+    element: <WaitingRoom />,
   },
 ]);
 

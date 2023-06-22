@@ -23,7 +23,7 @@ const FoodSection: FC<FoodSectionProps> = ({
     myMen[index] = myEl;
     myMen = myMen.filter(element => element.count > 0);
     setMenuState(myMen);
-    localStorage.getItem('items', JSON.stringify(myMen));
+    localStorage.setItem('items', JSON.stringify(myMen));
   }, [countNumber]);
   return (
     <Stack
@@ -34,6 +34,7 @@ const FoodSection: FC<FoodSectionProps> = ({
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: '20px',
+        width: '30%',
       }}
     >
       <CssBaseline />
