@@ -10,7 +10,7 @@ const CartPage = () => {
   const [menu, setMenu] = useState([]);
   const [notes, setNotes] = useState('');
   useEffect(() => {
-    const storedMenu = localStorage.getItem('menu');
+    const storedMenu = localStorage.getItem('items');
     const data = storedMenu ? JSON.parse(storedMenu) : null;
     setMenu(data);
   }, []);

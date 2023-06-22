@@ -4,7 +4,7 @@ import DishType from './DishType';
 
 interface FoodSectionProps {
   dish: DishType;
-  menuState: [];
+  menuState: DishType[];
   index: number;
   setMenuState: Dispatch<SetStateAction<DishType[]>>;
 }

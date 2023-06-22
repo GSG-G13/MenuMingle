@@ -4,9 +4,9 @@ import { AllCartProps } from '../../utils/interfaces';
 
 const AllCart: FC<AllCartProps> = ({ menu, setMenu }) => {
   return (
-    <>
-      <span>Food</span>
-      {menu.map((dish, index) => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+      <span style={{ marginTop: '20px' }}>dishes</span>
+      {menu?.map((dish, index) => (
         <FoodSection
           index={index}
           key={dish.id}
@@ -15,7 +15,7 @@ const AllCart: FC<AllCartProps> = ({ menu, setMenu }) => {
           menuState={menu}
         />
       ))}
-    </>
+    </div>
   );
 };
 

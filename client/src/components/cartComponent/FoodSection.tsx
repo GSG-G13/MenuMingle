@@ -23,7 +23,7 @@ const FoodSection: FC<FoodSectionProps> = ({
     myMen[index] = myEl;
     myMen = myMen.filter(element => element.count > 0);
     setMenuState(myMen);
-    localStorage.setItem('menu', JSON.stringify(myMen));
+    localStorage.getItem('items', JSON.stringify(myMen));
   }, [countNumber]);
   return (
     <Stack

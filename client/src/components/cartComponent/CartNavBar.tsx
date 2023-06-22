@@ -1,28 +1,25 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import CssBaseline from '@mui/material/CssBaseline';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  Typography,
+  IconButton,
+  CssBaseline,
+} from '@mui/material';
+import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 
 const CartNavBar = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <CssBaseline />
-      <AppBar position="static" sx={{ backgroundColor: '#000' }}>
+      <AppBar position="static" sx={{ backgroundColor: '#fff' }}>
         <Toolbar variant="dense">
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <ArrowBackIcon />
+          <IconButton color="#fff">
+            <MenuOpenIcon />
           </IconButton>
-          <Typography variant="h6" color="inherit" component="div">
-            Details Cart
+          <Typography variant="h6" color="#000" component="div">
+            Orders
           </Typography>
         </Toolbar>
       </AppBar>
