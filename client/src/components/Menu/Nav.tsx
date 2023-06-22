@@ -1,8 +1,11 @@
 import { AppBar, Toolbar, Typography, IconButton } from '@mui/material';
 import FastfoodOutlinedIcon from '@mui/icons-material/FastfoodOutlined';
+import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo.png';
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
   return (
     <AppBar
       position="static"
@@ -23,7 +26,14 @@ const Navbar = () => {
         >
           Menu
         </Typography>
-        <IconButton color="inherit" aria-label="Orders" sx={{ color: 'black' }}>
+        <IconButton
+          color="inherit"
+          aria-label="Orders"
+          sx={{ color: 'black' }}
+          onClick={() => {
+            navigate('/cartPage');
+          }}
+        >
           <FastfoodOutlinedIcon />
         </IconButton>
       </Toolbar>
