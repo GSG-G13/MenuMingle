@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React from 'react';
 import { Button, ButtonGroup, Grid } from '@mui/material';
 import { styled } from '@mui/system';
@@ -9,7 +10,7 @@ interface Category {
 
 interface FilterComponentProps {
   categories: Category[];
-  onCategorySelect: (categoryId: number) => void;
+  onCategorySelect: (category_id: number) => void;
 }
 
 const StyledButton = styled(Button)`
@@ -38,8 +39,8 @@ const FilterComponent: React.FC<FilterComponentProps> = ({
   categories,
   onCategorySelect,
 }) => {
-  const handleCategorySelect = (categoryId: number) => {
-    onCategorySelect(categoryId);
+  const handleCategorySelect = (category_id: number) => {
+    onCategorySelect(category_id);
   };
 
   return (

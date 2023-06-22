@@ -9,7 +9,7 @@ interface DishCardProps {
     price: number;
     image: string;
     ingredients: string;
-    categoryId: number;
+    category_id: number;
     count: number;
     availability: boolean;
   };

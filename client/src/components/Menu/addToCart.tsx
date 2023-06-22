@@ -10,7 +10,7 @@ type Item = {
   availability: boolean;
   ingredients: string;
   count: number;
-  categoryId: number;
+  category_id: number;
 };
 
 type AddToCartButtonProps = {
@@ -26,7 +26,7 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({ item }) => {
     if (foundItem) {
       setIsChecked(true);
     }
-  }, [item.id]);
+  }, []);
 
   const handleAddToCart = () => {
     const storedItems: Item[] = JSON.parse(localStorage.getItem('items') || '[]');

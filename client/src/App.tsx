@@ -1,20 +1,30 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
 import { Login, SignUp } from './pages';
 import SplashPage from './pages/SplashPage/Splash';
 import Menu from './components/Menu';
 
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <SplashPage />,
+  },
+  {
+    path: '/login',
+    element: <Login />,
+  },
+  {
+    path: '/signup',
+    element: <SignUp />,
+  },
+  {
+    path: '/menu',
+    element: <Menu />,
+  },
+]);
+
 const App = () => {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<SplashPage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/menu" element={<Menu />} />
-      </Routes>
-    </Router>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default App;
