@@ -50,7 +50,7 @@ const categories: Category[] = [
 ];
 
 const Menu = () => {
-  const [cat, setCat] = useState<number>(1);
+  const [cat, setCat] = useState<number>(0);
   const [dishes, setDishes] = useState<Dish[]>([]);
 
   const fetchDishes = async () => {
