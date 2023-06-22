@@ -1,26 +1,12 @@
 /* eslint-disable consistent-return */
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
-import { useState, useEffect } from 'react';
-import DishList from './dishList';
-import FilterComponent from './filter';
-import Navbar from './Nav';
+import { useState } from 'react';
+import DishList from '../components/Menu/dishList';
+import FilterComponent from '../components/Menu/filter';
+import Navbar from '../components/Menu/Nav';
 
-interface Category {
-  id: number;
-  name: string;
-}
-
-interface Dish {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
-  availability: boolean;
-  ingredients: string;
-  count: number;
-  category_id: number;
-}
+import { Category, Dish } from '../utils/interfaces';
 
 const categories: Category[] = [
   {
@@ -63,13 +49,13 @@ const Menu = () => {
     }
   };
 
-  const { isLoading, isError, data, error } = useQuery({
+  const { isLoading, isError } = useQuery({
     queryKey: ['dishes'],
     queryFn: fetchDishes,
   });
 
-  if (isLoading) return 'loading...';
-  if (isError) return `Error: ${error}`;
+  if (isLoading) return <div> loading</div>;
+  if (isError) return <div>Error</div>;
 
   return (
     <div style={{ width: '100%' }}>

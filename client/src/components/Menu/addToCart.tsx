@@ -2,20 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { IconButton } from '@mui/material';
 import { AddCircle, CheckCircle } from '@mui/icons-material';
 
-type Item = {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
-  availability: boolean;
-  ingredients: string;
-  count: number;
-  category_id: number;
-};
-
-type AddToCartButtonProps = {
-  item: Item;
-};
+import { AddToCartButtonProps, Item } from '../../utils/interfaces';
 
 const AddToCartButton: React.FC<AddToCartButtonProps> = ({ item }) => {
   const [isChecked, setIsChecked] = useState(false);

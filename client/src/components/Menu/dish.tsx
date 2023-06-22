@@ -2,18 +2,7 @@ import React from 'react';
 import { Card, CardHeader, CardMedia, CardContent, Typography } from '@mui/material';
 import AddToCart from './addToCart';
 
-interface DishCardProps {
-  dish: {
-    id: number;
-    name: string;
-    price: number;
-    image: string;
-    ingredients: string;
-    category_id: number;
-    count: number;
-    availability: boolean;
-  };
-}
+import { DishCardProps } from '../../utils/interfaces';
 
 const DishCard: React.FC<DishCardProps> = ({ dish }) => {
   const { name, price, image, ingredients } = dish;

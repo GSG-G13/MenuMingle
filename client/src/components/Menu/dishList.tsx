@@ -2,21 +2,7 @@ import React from 'react';
 import { Grid } from '@mui/material';
 import DishCard from './dish';
 
-type Dish = {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
-  availability: boolean;
-  ingredients: string;
-  count: number;
-  category_id: number;
-};
-
-type DishListProps = {
-  dishes: Dish[];
-  cat: number;
-};
+import { DishListProps } from '../../utils/interfaces';
 
 const DishList: React.FC<DishListProps> = ({ dishes, cat }) => {
   return (

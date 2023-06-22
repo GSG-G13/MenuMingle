@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
 import { Login, SignUp } from './pages';
 import SplashPage from './pages/SplashPage/Splash';
-import Menu from './components/Menu';
+import Menu from './pages/Menu';
 
 const router = createBrowserRouter([
   {

@@ -3,15 +3,7 @@ import React from 'react';
 import { Button, ButtonGroup, Grid } from '@mui/material';
 import { styled } from '@mui/system';
 
-interface Category {
-  id: number;
-  name: string;
-}
-
-interface FilterComponentProps {
-  categories: Category[];
-  onCategorySelect: (category_id: number) => void;
-}
+import { FilterComponentProps } from '../../utils/interfaces';
 
 const StyledButton = styled(Button)`
   color: black;
