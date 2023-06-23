@@ -2,7 +2,7 @@ import './index.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { Login, SignUp } from './pages';
 import SplashPage from './pages/SplashPage/Splash';
-import CartPage from './pages/CartPage';
+import CartPage from './pages/Cart';
 
 const router = createBrowserRouter([
   {
