@@ -36,7 +36,6 @@ export const dishSeedData = [
     category_id: 4,
   },
   {
-    id: 5,
     name: 'Caesar Salad',
     price: 9.99,
     image:
