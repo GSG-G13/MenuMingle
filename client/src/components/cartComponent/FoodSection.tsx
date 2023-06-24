@@ -8,12 +8,7 @@ import MiddleComponent from './MiddleComponent';
 import LiftComponent from './LiftComponent';
 
 const { Stack } = core;
-const FoodSection: FC<FoodSectionProps> = ({
-  dish,
-  menuState,
-  index,
-  setMenuState,
-}) => {
+const FoodSection: FC<FoodSectionProps> = ({ dish, menuState, index, setMenuState }) => {
   const { name, price, count } = dish;
   const [countNumber, setCountNumber] = useState(count);
   useEffect(() => {
@@ -23,7 +18,7 @@ const FoodSection: FC<FoodSectionProps> = ({
     myMen[index] = myEl;
     myMen = myMen.filter(element => element.count > 0);
     setMenuState(myMen);
-    localStorage.getItem('items', JSON.stringify(myMen));
+    localStorage.setItem('items', JSON.stringify(myMen));
   }, [countNumber]);
   return (
     <Stack
@@ -34,14 +29,12 @@ const FoodSection: FC<FoodSectionProps> = ({
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: '20px',
+        width: '30%',
       }}
     >
       <CssBaseline />
       <MiddleComponent name={name} price={price} />
-      <LiftComponent
-        countNumber={countNumber}
-        setCountNumber={setCountNumber}
-      />
+      <LiftComponent countNumber={countNumber} setCountNumber={setCountNumber} />
       <ClearIcon
         sx={{
           width: '24px',
