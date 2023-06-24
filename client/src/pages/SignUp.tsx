@@ -19,7 +19,7 @@ import { SignupSchema } from '../utils/validations';
 import { BasicSelect, Copyright } from '../components';
 import SignupImage from '../assets/signupbg.png';
 
-const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
+const serverUrl = import.meta.env.VITE_APP_SERVER_URL || 'localhost:8080';
 
 const SignUp: React.FC = () => {
   const [role, setRole] = React.useState<string>('');
