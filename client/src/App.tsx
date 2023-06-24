@@ -1,9 +1,10 @@
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { Login, SignUp } from './pages';
 import SplashPage from './pages/SplashPage/Splash';
 import CartPage from './pages/CartPage';
 import WaitingRoom from './pages/WatingRoom';
+import Menu from './pages/Menu';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: '/waiting-room',
     element: <WaitingRoom />,
+  },
+  {
+    path: '/menu',
+    element: <Menu />,
   },
 ]);
 
