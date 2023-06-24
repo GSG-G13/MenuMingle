@@ -10,6 +10,7 @@ import router from './routes';
 const app = express();
 
 app.use([
+  cors(),
   json(),
   urlencoded({ extended: false }),
   compression(),
