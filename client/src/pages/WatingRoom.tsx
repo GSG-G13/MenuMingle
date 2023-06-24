@@ -9,6 +9,7 @@ const WaitingRoom = () => {
       style={{
         display: 'flex',
         flexDirection: 'column',
+        widows: '80%',
         gap: '20px',
         justifyContent: 'center',
       }}

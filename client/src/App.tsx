@@ -23,7 +23,7 @@ const router = createBrowserRouter([
     element: <CartPage />,
   },
   {
-    path: '/WaitingRoom',
+    path: '/waiting-room',
     element: <WaitingRoom />,
   },
 ]);
