@@ -27,5 +27,10 @@ const loginSchema = Joi.object({
   username: Joi.string().min(3).max(30).required(),
   password: Joi.string().min(5).max(30).required(),
 });
+const cartSchema = Joi.object({
+  orders: Joi.array().required(),
+  customerId: Joi.number().required(),
+  note: Joi.string().required(),
+});
 
-export { signupSchema, dishSchema, loginSchema };
+export { signupSchema, dishSchema, loginSchema, cartSchema };
