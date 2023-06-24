@@ -1,20 +1,19 @@
 import { NextFunction, Response, Request } from 'express';
 import { Cart, Order, Dish } from '../../models';
 import { CartStatus } from '../../utils';
-import { Op, literal } from 'sequelize';
+import { fn, literal } from 'sequelize';
+import { cartSchema } from '../../utils';
 
 const addToCart = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const {
-      body: { orders, customerId, note },
-    } = req;
-    const DishesIds = orders.map((order: any) => order.dish_id);
+    const { orders, customerId, note } = await cartSchema.validateAsync(
+      req.body,
+    );
 
     const cart = await Cart.create({
       note,
       status: CartStatus.Value1,
       customerId,
-      totalPrice: 1,
     });
 
     const cartId = await cart.id;
@@ -22,35 +21,31 @@ const addToCart = async (req: Request, res: Response, next: NextFunction) => {
     orders.forEach((element: any) => {
       element.cart_id = cartId;
     });
-    const createdOrder = await Order.bulkCreate(orders);
+    await Order.bulkCreate(orders);
 
-    const allDishesPrices = await Dish.findAll({
-      attributes: [[literal(`SUM(price * quantity)`), 'price']],
-      where: {
-        id: {
-          [Op.in]: DishesIds,
-        },
-      },
+    const allDishesPrices = await Order.findAll({
+      attributes: [[fn('SUM', literal('price * quantity')), 'totalPrice']],
       include: [
         {
-          model: Order,
-          as: 'Orders',
+          model: Cart,
+          where: { id: cartId },
+          attributes: [],
+        },
+        {
+          model: Dish,
           attributes: [],
         },
       ],
-      group: ['Dish.id', 'Orders.id'],
+      group: ['Order.id', 'Dish.id', 'Cart.id'],
     });
-    const totalPrice = allDishesPrices.reduce((acc, current) => {
-      return (acc += current.price);
-    }, 0);
-    cart.totalPrice = totalPrice;
 
-    res.json({
-      status: 'the order is in progress',
-      cart,
+    return res.json({
+      error: false,
+      msg: 'the order has been saved successfully',
+      data: allDishesPrices,
     });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
 export default addToCart;

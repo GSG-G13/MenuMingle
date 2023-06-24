@@ -15,7 +15,6 @@ interface CartAttributes
   note: string;
   status: CartStatus;
   customerId: string;
-  totalPrice: number;
 }
 
 export default CartAttributes;

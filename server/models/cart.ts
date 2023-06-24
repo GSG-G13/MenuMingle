@@ -18,9 +18,6 @@ const Cart = sequelize.define<CartAttributes>(
     customerId: {
       type: DataTypes.STRING,
     },
-    totalPrice: {
-      type: DataTypes.FLOAT,
-    },
     status: {
       type: DataTypes.ENUM(
         CartStatus.Value1,
