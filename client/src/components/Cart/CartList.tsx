@@ -7,14 +7,8 @@ import ButtonSection from './Pop';
 
 const CartList = (): JSX.Element => {
   const [cartItems, setCartItems] = useState<Item[]>([]);
-
   const handleDelete = (itemId: number): void => {
-    const itemsString = localStorage.getItem('items');
-    const items: Item[] = itemsString ? JSON.parse(itemsString) : [];
-
-    const updatedItems: Item[] = items.filter(item => item.id !== itemId);
-
-    localStorage.setItem('items', JSON.stringify(updatedItems));
+    setCartItems(prevCartItems => prevCartItems.filter(item => item.id !== itemId));
   };
 
   useEffect(() => {
