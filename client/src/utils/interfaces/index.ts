@@ -52,3 +52,10 @@ export interface DishListProps {
   dishes: Dish[];
   cat: number;
 }
+
+export interface cartItemInterface {
+  item: Item;
+  onIncrement: () => void;
+  onDecrement: () => void;
+  onDelete: () => void;
+}
