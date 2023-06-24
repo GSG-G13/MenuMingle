@@ -35,17 +35,19 @@ const addToCart = async (req: Request, res: Response, next: NextFunction) => {
         {
           model: Order,
           as: 'Orders',
-          attributes: ['quantity'],
+          attributes: [],
         },
       ],
       group: ['Dish.id', 'Orders.id'],
     });
-    const totalPrice = allDishesPrices[0].dataValues.price;
-    console.log(totalPrice);
+    const totalPrice = allDishesPrices.reduce((acc, current) => {
+      return (acc += current.price);
+    }, 0);
+    cart.totalPrice = totalPrice;
 
     res.json({
       status: 'the order is in progress',
-      totalPrice,
+      cart,
     });
   } catch (error) {
     next(error);
