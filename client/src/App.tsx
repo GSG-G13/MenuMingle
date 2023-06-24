@@ -1,8 +1,7 @@
 import './index.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { io, Socket } from 'socket.io-client';
+import { io } from 'socket.io-client';
 import { useEffect } from 'react';
-import path from 'path';
 import { Login, SignUp } from './pages';
 import SplashPage from './pages/SplashPage/Splash';
 
