@@ -31,7 +31,7 @@ const Navbar = () => {
           aria-label="Orders"
           sx={{ color: 'black' }}
           onClick={() => {
-            navigate('/cartPage');
+            navigate('/cart');
           }}
         >
           <FastfoodOutlinedIcon />
