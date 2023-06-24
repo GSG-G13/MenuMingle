@@ -2,16 +2,16 @@ import { Grid, Typography, Box } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
+import { cartItemInterface } from '../../utils';
 
-const CartItem = ({ item, onIncrement, onDecrement, onDelete }) => {
+const CartItem = ({
+  item,
+  onIncrement,
+  onDecrement,
+  onDelete,
+}: cartItemInterface): JSX.Element => {
   return (
-    <Grid
-      item
-      xs={12}
-      sm={6}
-      md={4}
-      style={{ width: '100%', marginLeft: '20px' }}
-    >
+    <Grid item xs={12} sm={6} md={4} style={{ width: '100%', marginLeft: '20px' }}>
       <Box
         display="flex"
         alignItems="center"

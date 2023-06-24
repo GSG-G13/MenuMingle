@@ -1,4 +1,4 @@
-// keep this file for later I am goning to try to make it work if we had more time later
+// keep this file for later I am gonna  try working on it if we had more time later
 
 // import React, { useState } from 'react';
 // import CartItem from './cartItem';

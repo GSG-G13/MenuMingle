@@ -1,26 +1,36 @@
 import { useEffect, useState } from 'react';
 import { Grid, Typography, Button } from '@mui/material';
 import CartItem from './CartItem';
-import EmptyCart from './empty';
-import DownComponent from './DownComponet';
+import EmptyCart from './Empty';
+import { Item } from '../../utils';
+import ButtonSection from './Pop';
 
-const CartList = () => {
-  const [cartItems, setCartItems] = useState([]);
+const CartList = (): JSX.Element => {
+  const [cartItems, setCartItems] = useState<Item[]>([]);
+
+  const handleDelete = (itemId: number): void => {
+    const itemsString = localStorage.getItem('items');
+    const items: Item[] = itemsString ? JSON.parse(itemsString) : [];
+
+    const updatedItems: Item[] = items.filter(item => item.id !== itemId);
+
+    localStorage.setItem('items', JSON.stringify(updatedItems));
+  };
 
   useEffect(() => {
     const storedItems = localStorage.getItem('items');
     if (storedItems) {
-      setCartItems(JSON.parse(storedItems));
+      setCartItems(JSON.parse(storedItems) as Item[]);
     }
-  }, [cartItems]);
+  }, []);
 
-  const handleClearCart = () => {
+  const handleClearCart = (): void => {
     localStorage.removeItem('items');
     setCartItems([]);
   };
 
-  const handleIncrement = itemId => {
-    const updatedItems = cartItems.map(item => {
+  const handleIncrement = (itemId: number): void => {
+    const updatedItems: Item[] = cartItems.map(item => {
       if (item.id === itemId) {
         return { ...item, count: item.count + 1 };
       }
@@ -30,8 +40,8 @@ const CartList = () => {
     localStorage.setItem('items', JSON.stringify(updatedItems));
   };
 
-  const handleDecrement = itemId => {
-    const updatedItems = cartItems.map(item => {
+  const handleDecrement = (itemId: number): void => {
+    const updatedItems: Item[] = cartItems.map(item => {
       if (item.id === itemId && item.count > 1) {
         return { ...item, count: item.count - 1 };
       }
@@ -40,7 +50,8 @@ const CartList = () => {
     setCartItems(updatedItems);
     localStorage.setItem('items', JSON.stringify(updatedItems));
   };
-  const calculateTotalPrice = () => {
+
+  const calculateTotalPrice = (): string => {
     let totalPrice = 0;
 
     cartItems.forEach(item => {
@@ -49,15 +60,9 @@ const CartList = () => {
 
     return totalPrice.toFixed(2);
   };
-  const handleDelete = itemId => {
-    const items = JSON.parse(localStorage.getItem('items')) || [];
 
-    const updatedItems = items.filter(item => item.id !== itemId);
-
-    localStorage.setItem('items', JSON.stringify(updatedItems));
-  };
   return (
-    <Grid container spacing={2} style={{ width: '100%' }}>
+    <Grid container spacing={2} style={{ width: '100%', marginTop: '5%' }}>
       {cartItems.map(item => (
         <CartItem
           key={item.id}
@@ -76,6 +81,9 @@ const CartList = () => {
               fontSize: '14px',
               textTransform: 'none',
               textDecoration: 'underline',
+              position: 'fixed',
+              top: '6%',
+              right: '5px',
             }}
           >
             ClearCart
@@ -83,7 +91,23 @@ const CartList = () => {
         ) : (
           <EmptyCart />
         )}
-        <DownComponent totalPrice={calculateTotalPrice()} />
+
+        <Typography
+          align="center"
+          sx={{
+            marginTop: 2,
+            position: 'fixed',
+            bottom: '60px',
+            left: '5px',
+            width: '100%',
+            backgroundColor: '#fff',
+            fontWeight: 'bold',
+          }}
+        >
+          <ButtonSection />
+          {/* we need to handel the notes here to add them to orders table in db <= for later  */}
+          Total Price: ${calculateTotalPrice()}
+        </Typography>
       </Grid>
     </Grid>
   );

@@ -1,12 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import {
-  AppBar,
-  Box,
-  Toolbar,
-  Typography,
-  IconButton,
-  CssBaseline,
-} from '@mui/material';
+import { AppBar, Box, Toolbar, Typography, IconButton, CssBaseline } from '@mui/material';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import { useNavigate } from 'react-router-dom';
 
@@ -16,10 +8,7 @@ const CartNavBar = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <CssBaseline />
-      <AppBar
-        position="static"
-        sx={{ backgroundColor: '#fff', marginBottom: '10px' }}
-      >
+      <AppBar position="static" sx={{ backgroundColor: '#fff', marginBottom: '10px' }}>
         <Toolbar variant="dense">
           <IconButton onClick={() => navigate('/menu')}>
             <MenuOpenIcon />

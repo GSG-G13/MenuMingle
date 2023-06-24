@@ -9,14 +9,12 @@ const EmptyCart = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: '40%',
+        marginTop: '10%',
       }}
     >
       <img src={empty} alt="No Items" style={{ width: '90%' }} />
-      <Typography
-        sx={{ textAlign: 'center', fontSize: '16px', marginTop: '10px' }}
-      >
-        Hungry? Let's fill your plate!
+      <Typography sx={{ textAlign: 'center', fontSize: '16px', marginTop: '10px' }}>
+        Hungry? Let&apos;s fill your plate!
       </Typography>
     </Grid>
   );

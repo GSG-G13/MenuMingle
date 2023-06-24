@@ -1,6 +1,6 @@
 import * as core from '@mui/material';
 
-const { Card, Button, Typography } = core;
+const { Button } = core;
 
 const DownComponent = () => {
   return (
