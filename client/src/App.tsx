@@ -10,25 +10,6 @@ import Menu from './pages/Menu';
 
 const socket = io('http://localhost:8080');
 
-const TestComponent = () => {
-  const sendMessage = () => {
-    console.log('hi there');
-  };
-
-  useEffect(() => {
-    socket.emit('send_message', { message: 'hello' });
-  });
-
-  return (
-    <>
-      <input type="text" placeholder="write your massage" />
-      <button type="button" onClick={sendMessage}>
-        send massage
-      </button>
-    </>
-  );
-};
-
 const router = createBrowserRouter([
   {
     path: '/',
@@ -43,20 +24,8 @@ const router = createBrowserRouter([
     element: <SignUp />,
   },
   {
-    path: '/cartPage',
-    element: <CartPage />,
-  },
-  {
     path: '/waiting-room',
     element: <WaitingRoom />,
-  },
-  {
-    path: '/menu',
-    element: <Menu />,
-  },
-  {
-    path: '/testSocket',
-    element: <TestComponent />,
   },
   {
     path: '/menu',
