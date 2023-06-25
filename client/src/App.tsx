@@ -1,22 +1,22 @@
 import './index.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { io } from 'socket.io-client';
+// import { io } from 'socket.io-client';
 import { useEffect } from 'react';
 import { Login, SignUp } from './pages';
 import SplashPage from './pages/SplashPage/Splash';
 import CartPage from './pages/Cart';
 import Menu from './pages/Menu';
-
-const socket = io('http://localhost:8080');
+import AdminDash from './pages/Admin';
+// const socket = io('http://localhost:8080');
 
 const TestComponent = () => {
   const sendMessage = () => {
     console.log('hi');
   };
 
-  useEffect(() => {
-    socket.emit('send_message', { message: 'hello' });
-  });
+  // useEffect(() => {
+  //   socket.emit('send_message', { message: 'hello' });
+  // });
 
   return (
     <>
@@ -52,6 +52,10 @@ const router = createBrowserRouter([
   {
     path: '/cart',
     element: <CartPage />,
+  },
+  {
+    path: '/Admin',
+    element: <AdminDash />,
   },
 ]);
 
