@@ -1,6 +1,5 @@
 import { Typography } from '@mui/material';
 import Picture from '../components/watingRoomComponent/Picture';
-// import { CartNavBar } from '../components/cartComponent';
 import VerticalLinearStepper from '../components/watingRoomComponent/Status';
 
 const WaitingRoom = () => {
@@ -14,7 +13,6 @@ const WaitingRoom = () => {
         justifyContent: 'center',
       }}
     >
-      {/* <CartNavBar /> */}
       <Picture status="true" />
       <VerticalLinearStepper />
       <Typography
