@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import React, { FC, useState } from 'react';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import {
   Table,
@@ -14,38 +14,44 @@ import {
   CssBaseline,
   Typography,
   TablePagination,
+  Alert,
 } from '@mui/material';
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
-import { useNavigate } from 'react-router-dom';
+import { DishType } from '../../utils';
 import EditDish from './edit';
-import loader from '../loader';
 
-interface Dish {
-  id: number;
-  name: string;
-  image: string;
-  ingredients: string;
-  price: number;
-}
+const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
 
-const DishesTable: React.FC = () => {
-  const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+const DishesTable: FC = () => {
+  const [open, setOpen] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(0);
+  const [rowsPerPage, setRowsPerPage] = useState<number>(5);
 
-  const [dishes, setDishes] = useState<Dish[]>([]);
+  const [dishes, setDishes] = useState<DishType[]>([]);
 
   const fetchDishes = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/v1/dishes');
+      const response = await axios.get(`${serverUrl}/api/v1/dishes`);
       setDishes(response.data.data);
-      return response.data.data as Dish[];
+      return response.data.data as DishType[];
     } catch (error) {
       throw new Error('Error fetching dishes');
     }
   };
+  const deleteDish = async (id: number): Promise<void> => {
+    try {
+      const respone = await axios.delete(`${serverUrl}/api/v1/dishes/delete/${id}`);
+      console.log(respone);
+    } catch (error) {
+      throw new Error('Can not delete the dish');
+    }
+  };
+  const {
+    mutate,
+    isError: isMutationError,
+    isSuccess: isMutationSuccess,
+  } = useMutation<void, Error>(deleteDish);
 
   const { isLoading, isError } = useQuery({
     queryKey: ['dishes'],
@@ -53,6 +59,15 @@ const DishesTable: React.FC = () => {
   });
   if (isLoading) return <loader />;
   if (isError) return <div>Error</div>;
+  if (isMutationError) {
+    return <Alert severity="error">This is an error alert — check it out!</Alert>;
+  }
+  if (isMutationSuccess) {
+    return <Alert severity="success">This is an error alert — check it out!</Alert>;
+  }
+
+  // console.log(isMutationError);
+  // console.log(isSuccess);
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
@@ -145,7 +160,7 @@ const DishesTable: React.FC = () => {
                     onClick={() => setOpen(true)}
                   />
                 </>
-                <DeleteOutlineRoundedIcon />
+                <DeleteOutlineRoundedIcon onClick={() => mutate(row.id)} />
               </TableCell>
             </TableRow>
           ))}
