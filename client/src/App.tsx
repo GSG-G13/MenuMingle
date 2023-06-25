@@ -1,14 +1,13 @@
 import './index.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { io } from 'socket.io-client';
-import { useEffect } from 'react';
 import { Login, SignUp } from './pages';
 import SplashPage from './pages/SplashPage/Splash';
 import WaitingRoom from './pages/WatingRoom';
 import CartPage from './pages/Cart';
 import Menu from './pages/Menu';
 
-const socket = io('http://localhost:8080');
+export const socket = io('http://localhost:8080');
 
 const router = createBrowserRouter([
   {

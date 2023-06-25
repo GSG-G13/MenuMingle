@@ -1,8 +1,17 @@
+import { useEffect } from 'react';
 import { Typography } from '@mui/material';
 import Picture from '../components/watingRoomComponent/Picture';
 import VerticalLinearStepper from '../components/watingRoomComponent/Status';
 
+import { socket } from '../App';
+
 const WaitingRoom = () => {
+  useEffect(() => {
+    socket.on('newOrders', data => {
+      console.log(data);
+    });
+  });
+
   return (
     <div
       style={{
