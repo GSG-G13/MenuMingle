@@ -13,3 +13,7 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
+  padding: 0;
+  height: 100%;
+}
