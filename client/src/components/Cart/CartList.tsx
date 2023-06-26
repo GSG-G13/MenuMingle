@@ -1,13 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, FC } from 'react';
 import { Grid, Typography, Button } from '@mui/material';
 import CartItem from './CartItem';
 import EmptyCart from './Empty';
-import { Item } from '../../utils';
+import { Item, ButtonSectionProps } from '../../utils';
 import ButtonSection from './Pop';
 
-const CartList = (): JSX.Element => {
+const CartList: FC<ButtonSectionProps> = ({ notes, setNotes }): JSX.Element => {
   const [cartItems, setCartItems] = useState<Item[]>([]);
   const handleDelete = (itemId: number): void => {
+    const itemsString = localStorage.getItem('items');
+    const items: Item[] = itemsString ? JSON.parse(itemsString) : [];
+
+    const updatedItems: Item[] = items.filter(item => item.id !== itemId);
+
+    localStorage.setItem('items', JSON.stringify(updatedItems));
     setCartItems(prevCartItems => prevCartItems.filter(item => item.id !== itemId));
   };
 
@@ -57,7 +63,7 @@ const CartList = (): JSX.Element => {
 
   return (
     <Grid container spacing={2} style={{ width: '100%', marginTop: '5%' }}>
-      {cartItems.map(item => (
+      {cartItems?.map(item => (
         <CartItem
           key={item.id}
           item={item}
@@ -98,7 +104,7 @@ const CartList = (): JSX.Element => {
             fontWeight: 'bold',
           }}
         >
-          <ButtonSection />
+          <ButtonSection notes={notes} setNotes={setNotes} />
           {/* we need to handel the notes here to add them to orders table in db <= for later  */}
           Total Price: ${calculateTotalPrice()}
         </Typography>

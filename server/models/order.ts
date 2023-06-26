@@ -11,10 +11,15 @@ const Order = sequelize.define<OrderAttributes>(
       primaryKey: true,
       allowNull: false,
     },
+    quantity: {
+      type: DataTypes.INTEGER,
+      defaultValue: 1,
+    },
   },
   {
     timestamps: true,
     tableName: 'orders',
+    modelName: 'Order',
   },
 );
 
