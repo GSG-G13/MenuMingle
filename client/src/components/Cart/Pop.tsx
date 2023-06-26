@@ -8,8 +8,8 @@ import { useState, FC } from 'react';
 import InsertCommentIcon from '@mui/icons-material/InsertComment';
 import { ButtonSectionProps } from '../../utils';
 
-const { TextField, Button } = core;
-const ButtonSection: FC<ButtonSectionProps> = ({ notes, setNotes }) => {
+const { TextField, Button, Typography } = core;
+const ButtonSection: FC<ButtonSectionProps> = ({ setNotes }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -22,12 +22,21 @@ const ButtonSection: FC<ButtonSectionProps> = ({ notes, setNotes }) => {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
+            paddingTop: '44px',
           }}
         >
-          Any preferences for your order?
+          <Typography sx={{ color: 'blueviolet', margin: 'auto' }}>
+            {' '}
+            Any preferences for your order?
+          </Typography>
           <Button
             onClick={() => setOpen(false)}
-            sx={{ color: '#FF7A00', position: 'absolute', top: 0, right: 0 }}
+            sx={{
+              color: '#FF7A00',
+              position: 'absolute',
+              top: 0,
+              right: 0,
+            }}
           >
             x
           </Button>
@@ -37,18 +46,25 @@ const ButtonSection: FC<ButtonSectionProps> = ({ notes, setNotes }) => {
             autoFocus
             id="name"
             fullWidth
+            placeholder="Write Note here ..."
             sx={{
               borderRadius: '20px',
               color: '#000',
+
               '& .MuiOutlinedInput-root': {
+                padding: '1rem 14px',
+                height: '106px',
+                '&:placeholder': {
+                  color: 'red',
+                },
                 '& fieldset': {
-                  borderColor: '#000',
+                  borderColor: '#a2a2a2',
                 },
                 '&:hover fieldset': {
-                  borderColor: '#000',
+                  borderColor: '#a2a2a2',
                 },
                 '&.Mui-focused fieldset': {
-                  borderColor: '#000',
+                  borderColor: '#a2a2a2',
                 },
               },
             }}
@@ -58,7 +74,9 @@ const ButtonSection: FC<ButtonSectionProps> = ({ notes, setNotes }) => {
           />
         </DialogContent>
         <DialogActions>
-          <Button sx={{ color: '#000' }}>Add</Button>
+          <Button sx={{ color: '#000' }} onClick={() => setOpen(false)}>
+            Add
+          </Button>
         </DialogActions>
       </Dialog>
       <div
