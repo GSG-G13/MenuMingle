@@ -9,7 +9,7 @@ import InsertCommentIcon from '@mui/icons-material/InsertComment';
 import { ButtonSectionProps } from '../../utils';
 
 const { TextField, Button, Typography } = core;
-const ButtonSection: FC<ButtonSectionProps> = ({ notes, setNotes }) => {
+const ButtonSection: FC<ButtonSectionProps> = ({ setNotes }) => {
   const [open, setOpen] = useState(false);
 
   return (

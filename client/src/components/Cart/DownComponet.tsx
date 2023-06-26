@@ -1,25 +1,29 @@
 import * as core from '@mui/material';
 import axios from 'axios';
 import { FC, useEffect, useState } from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { ButtonSectionProps } from '../../utils';
 
 const { Button, Alert } = core;
 
+type BodyType = {
+  orders: [] | null;
+  note: string;
+  customerId: number;
+};
+
 const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
 
-const DownComponent: FC<ButtonSectionProps> = ({ notes, setNotes }) => {
+const DownComponent: FC<ButtonSectionProps> = ({ notes }) => {
   const goToWaitingRoom = useNavigate();
 
   const [orders, setOrders] = useState<[] | null>([]);
-  const { isError, isSuccess, isLoading, mutate } = useMutation(
-    'post',
-    (reqBody: any) => {
-      return axios.post(`${serverUrl}/api/v1/cart/add-to-cart`, reqBody);
-    },
-  );
+  const { isError, isSuccess, mutate } = useMutation({
+    mutationKey: ['post'],
+    mutationFn: (reqBody: BodyType) =>
+      axios.post(`${serverUrl}/api/v1/cart/add-to-cart`, reqBody),
+  });
   const handleCheckout = () => {
     const body = {
       orders,
@@ -27,18 +31,18 @@ const DownComponent: FC<ButtonSectionProps> = ({ notes, setNotes }) => {
       customerId: 123456,
     };
     mutate(body);
-    console.log(isError);
-    console.log(isSuccess);
   };
 
   useEffect(() => {
     let dataFromLocalStorage = JSON.parse(localStorage.getItem('items') as string);
-    dataFromLocalStorage = dataFromLocalStorage.map((dish: { id: any; count: any }) => {
-      return {
-        dish_id: dish.id,
-        quantity: dish.count,
-      };
-    });
+    dataFromLocalStorage = dataFromLocalStorage?.map(
+      (dish: { id: number; count: number }) => {
+        return {
+          dish_id: dish.id,
+          quantity: dish.count,
+        };
+      },
+    );
     setOrders(dataFromLocalStorage);
   }, []);
   if (isError) {

@@ -63,7 +63,7 @@ const CartList: FC<ButtonSectionProps> = ({ notes, setNotes }): JSX.Element => {
 
   return (
     <Grid container spacing={2} style={{ width: '100%', marginTop: '5%' }}>
-      {cartItems.map(item => (
+      {cartItems?.map(item => (
         <CartItem
           key={item.id}
           item={item}
