@@ -8,6 +8,7 @@ const DishForm = ({ onSubmit, initialValue }) => {
     body: initialValue.ingredients || '',
     image: initialValue.image || '',
     price: initialValue.price || '',
+    availability: true,
   });
 
   const handleChangeInput = e => {

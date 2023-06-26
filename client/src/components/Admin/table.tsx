@@ -41,8 +41,7 @@ const DishesTable: FC = () => {
   };
   const deleteDish = async (id: number): Promise<void> => {
     try {
-      const respone = await axios.delete(`${serverUrl}/api/v1/dishes/delete/${id}`);
-      console.log(respone);
+      await axios.delete(`${serverUrl}/api/v1/dishes/delete/${id}`);
     } catch (error) {
       throw new Error('Can not delete the dish');
     }
@@ -65,9 +64,6 @@ const DishesTable: FC = () => {
   if (isMutationSuccess) {
     return <Alert severity="success">This is an error alert — check it out!</Alert>;
   }
-
-  // console.log(isMutationError);
-  // console.log(isSuccess);
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,

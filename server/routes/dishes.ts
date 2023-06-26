@@ -17,4 +17,5 @@ dishesRouter.post('/create', verifyAccessToken('admin'), createDish);
 // dishesRouter.delete('/delete/:id', verifyAccessToken('admin'), deleteDish);
 dishesRouter.delete('/delete/:id', deleteDish);
 
-dishesRouter.put('/update/:id', verifyAccessToken('admin'), updateDish);
+dishesRouter.put('/update/:id', updateDish);
+// dishesRouter.put('/update/:id', verifyAccessToken('admin'), updateDish);

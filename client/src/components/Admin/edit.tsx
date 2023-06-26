@@ -3,14 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import DishForm from './form';
 
-const fetchDish = async id => {
-  const response = await axios.get(`http://localhost:8080/api/v1/dishes/${id}`);
+const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
+
+const fetchDish = async (id: number) => {
+  const response = await axios.get(`${serverUrl}/api/v1/dishes/${id}`);
   return response.data;
 };
 
 const updateDish = async (id, updatedDish) => {
   const response = await axios.put(
-    `http://localhost:8080/api/v1/dishes/update/${id}`,
+    `${serverUrl}/api/v1/dishes/update/${id}`,
     updatedDish,
   );
   return response.data;
