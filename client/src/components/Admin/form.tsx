@@ -1,71 +1,35 @@
-/* eslint-disable @typescript-eslint/prefer-as-const */
-import React, { useState } from 'react';
-import { TextField, Button } from '@mui/material';
+import { useState, ChangeEvent } from 'react';
+import { Button } from '@mui/material';
+import TextFieldComponent from './TextFieldComponent';
 
-const DishForm = ({ onSubmit, initialValue }) => {
-  console.log(initialValue);
+const DishForm = ({ onSubmit, dishToUpdate }) => {
+  const [dish, setDish] = useState(dishToUpdate);
 
-  const [dish, setDish] = useState({
-    image: '',
-    price: '',
-    ingredients: '',
-    name: '',
-    availability: true,
-  });
-
-  const handleChangeInput = e => {
+  const handleChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
     setDish({
       ...dish,
-      [e.target.name]: e.target.value,
+      [event.target.name]: event.target.value,
     });
   };
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    onSubmit(dish);
-    setDish({
-      ingredients: '',
-      image: '',
-      price: '',
-    });
+  const handleSubmit = (event: ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    const { price, name, image, ingredients, availability } = dish;
+    const dishWithoutId = { price, name, availability, image, ingredients };
+    onSubmit(dishWithoutId);
   };
-
+  const inputs = ['name', 'ingredients', 'image', 'price'];
   return (
     <form onSubmit={handleSubmit}>
-      <TextField
-        label="Name"
-        name="name"
-        value={dish.name}
-        onChange={handleChangeInput}
-        fullWidth
-        margin="normal"
-        sx={{ mt: 2, borderRadius: '20%' }}
-      />
-      <TextField
-        label="Ingredients"
-        name="Ingredients"
-        value={dish.ingredients}
-        onChange={handleChangeInput}
-        fullWidth
-        margin="normal"
-      />
-      <TextField
-        label="Image"
-        name="image"
-        value={dish.image}
-        onChange={handleChangeInput}
-        fullWidth
-        margin="normal"
-      />
-      <TextField
-        label="Price"
-        name="price"
-        value={dish.price}
-        onChange={handleChangeInput}
-        type="number"
-        fullWidth
-        margin="normal"
-      />
+      {inputs.map(input => {
+        return (
+          <TextFieldComponent
+            dishToUpdate={dish}
+            handleChangeInput={handleChangeInput}
+            labelValue={input}
+          />
+        );
+      })}
       <Button
         type="submit"
         sx={{ border: '1px solid black', textTransform: 'none', marginTop: '20px' }}

@@ -1,16 +1,13 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
+import { FC } from 'react';
 import axios from 'axios';
+import { Alert } from '@mui/material';
 import DishForm from './form';
+import { EditDishProps, DishType } from '../../utils';
 
 const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
 
-const fetchDish = async (id: number) => {
-  const response = await axios.get(`${serverUrl}/api/v1/dishes/${id}`);
-  return response.data;
-};
-
-const updateDish = async (id, updatedDish) => {
+const updateDish = async (id: number, updatedDish: DishType) => {
   const response = await axios.put(
     `${serverUrl}/api/v1/dishes/update/${id}`,
     updatedDish,
@@ -18,37 +15,26 @@ const updateDish = async (id, updatedDish) => {
   return response.data;
 };
 
-const EditDish = ({ id }) => {
-  const queryClient = useQueryClient();
-  const navigate = useNavigate();
-
-  const {
-    isLoading,
-    isError,
-    data: dish,
-    error,
-  } = useQuery({
-    queryKey: ['Dishes', id],
-    queryFn: () => fetchDish(id),
-  });
-
-  const updateDishMutation = useMutation(updatedDish => updateDish(id, updatedDish), {
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['Dishes'] });
-      navigate('/admin');
+const EditDish: FC<EditDishProps> = ({ dishToUpdate, setOpen }) => {
+  const { mutate, isError, isLoading } = useMutation(
+    updatedDish => updateDish(3, updatedDish),
+    {
+      onSuccess: () => {
+        <Alert severity="success">This is a success alert — check it out!</Alert>;
+      },
     },
-  });
+  );
 
-  const handleSubmit = updatedDish => {
-    updateDishMutation.mutate(updatedDish);
+  const handleSubmit = (updatedDish: DishType) => {
+    mutate(updatedDish);
+    setOpen(false);
   };
-
-  if (isLoading) return 'loading...';
-  if (isError) return `Error: ${error.message}`;
 
   return (
     <div>
-      <DishForm onSubmit={handleSubmit} initialValue={dish} />
+      {isLoading && <span>there is Error in life</span>}
+      {isError && <span>there is Error in life</span>}
+      <DishForm onSubmit={handleSubmit} dishToUpdate={dishToUpdate} />
     </div>
   );
 };

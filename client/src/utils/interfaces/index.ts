@@ -1,7 +1,11 @@
+import { Dispatch, SetStateAction } from 'react';
+import DishType from './DishType';
+
 export { default as FoodSectionProps } from './FoodSectionProps';
 export { default as DishType } from './DishType';
 export { default as AllCartProps } from './AllCartProps';
 export { default as ButtonSectionProps } from './ButtonSectionProps';
+
 export interface Category {
   id: number;
   name: string;
@@ -58,4 +62,8 @@ export interface cartItemInterface {
   onIncrement: () => void;
   onDecrement: () => void;
   onDelete: () => void;
+}
+export interface EditDishProps {
+  dishToUpdate: DishType;
+  setOpen: Dispatch<SetStateAction<boolean>>;
 }

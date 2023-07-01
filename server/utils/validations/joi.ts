@@ -19,7 +19,7 @@ const dishSchema = Joi.object({
     'any.required': `Dish not found or could not be updated`,
   }),
   availability: Joi.boolean().optional(),
-  ingredients: Joi.string().min(3).optional(),
+  ingredients: Joi.string().optional(),
   categoryId: Joi.number().optional(),
 });
 

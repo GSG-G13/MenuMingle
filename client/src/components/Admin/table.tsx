@@ -27,9 +27,8 @@ const DishesTable: FC = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(5);
-
   const [dishes, setDishes] = useState<DishType[]>([]);
-
+  const [dishToUpdate, setDishToUpdate] = useState<DishType>();
   const fetchDishes = async () => {
     try {
       const response = await axios.get(`${serverUrl}/api/v1/dishes`);
@@ -56,17 +55,15 @@ const DishesTable: FC = () => {
     queryKey: ['dishes'],
     queryFn: fetchDishes,
   });
-  if (isLoading) return <loader />;
+  if (isLoading) return <div>loading</div>;
   if (isError) return <div>Error</div>;
-  if (isMutationError) {
+  if (isMutationError)
     return <Alert severity="error">This is an error alert — check it out!</Alert>;
-  }
-  if (isMutationSuccess) {
+  if (isMutationSuccess)
     return <Alert severity="success">This is an error alert — check it out!</Alert>;
-  }
 
   const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
+    _event: React.MouseEvent<HTMLButtonElement> | null,
     newPage: number,
   ) => {
     setPage(newPage);
@@ -106,61 +103,63 @@ const DishesTable: FC = () => {
           {(rowsPerPage > 0
             ? dishes.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : dishes
-          ).map(row => (
-            <TableRow
-              key={row.name}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {row.id}
-              </TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>
-                <img
-                  src={row.image}
-                  alt={row.name}
-                  style={{
-                    width: '60px',
-                    height: '60px',
-                    marginRight: '16px',
-                    borderRadius: '20%',
-                  }}
-                />
-              </TableCell>
-              <TableCell>{row.ingredients}</TableCell>
-              <TableCell>${row.price}</TableCell>
-              <TableCell>
-                <>
-                  <CssBaseline />
-
-                  <Dialog
-                    open={open}
-                    onClose={() => setOpen(!open)}
-                    sx={{
-                      '& > .MuiBackdrop-root': {
-                        backgroundColor: 'rgba(0, 0, 0, 0.1)',
-                      },
-                    }}
-                  >
-                    <DialogContent>
-                      <EditDish key={row.id} id={row.id} />
-                    </DialogContent>
-                  </Dialog>
-
-                  <EditRoundedIcon
+          ).map(row => {
+            return (
+              <TableRow
+                key={row.name}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {row.id}
+                </TableCell>
+                <TableCell>{row.name}</TableCell>
+                <TableCell>
+                  <img
+                    src={row.image}
+                    alt={row.name}
                     style={{
-                      color: '#000',
-                      bottom: '50px',
-                      left: '10px',
+                      width: '60px',
+                      height: '60px',
+                      marginRight: '16px',
+                      borderRadius: '20%',
                     }}
-                    onClick={() => setOpen(true)}
                   />
-                </>
-                <DeleteOutlineRoundedIcon onClick={() => mutate(row.id)} />
-              </TableCell>
-            </TableRow>
-          ))}
-
+                </TableCell>
+                <TableCell>{row.ingredients}</TableCell>
+                <TableCell>${row.price}</TableCell>
+                <TableCell>
+                  <>
+                    <CssBaseline />
+                    <EditRoundedIcon
+                      style={{
+                        color: '#000',
+                        bottom: '50px',
+                        left: '10px',
+                      }}
+                      onClick={() => {
+                        setOpen(true);
+                        setDishToUpdate(row);
+                      }}
+                    />
+                  </>
+                  <DeleteOutlineRoundedIcon onClick={() => mutate(row.id)} />
+                </TableCell>
+              </TableRow>
+            );
+          })}
+          <Dialog
+            open={open}
+            onClose={() => setOpen(!open)}
+            sx={{
+              '& > .MuiBackdrop-root': {
+                backgroundColor: 'rgba(0, 0, 0, 0.1)',
+              },
+            }}
+          >
+            <DialogContent>
+              <EditDish dishToUpdate={dishToUpdate} setOpen={setOpen} />
+            </DialogContent>
+          </Dialog>
           {emptyRows > 0 && (
             <TableRow style={{ height: 53 * emptyRows }}>
               <TableCell colSpan={6} />
@@ -175,7 +174,7 @@ const DishesTable: FC = () => {
           page={page}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
-          style={{ diplay: 'flex', position: 'fixed' }}
+          style={{ position: 'fixed' }}
         />
       </Table>
     </TableContainer>
