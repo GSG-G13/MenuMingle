@@ -3,11 +3,13 @@ import React, { useState } from 'react';
 import { TextField, Button } from '@mui/material';
 
 const DishForm = ({ onSubmit, initialValue }) => {
+  console.log(initialValue);
+
   const [dish, setDish] = useState({
-    title: initialValue.name || '',
-    body: initialValue.ingredients || '',
-    image: initialValue.image || '',
-    price: initialValue.price || '',
+    image: '',
+    price: '',
+    ingredients: '',
+    name: '',
     availability: true,
   });
 
@@ -22,8 +24,7 @@ const DishForm = ({ onSubmit, initialValue }) => {
     e.preventDefault();
     onSubmit(dish);
     setDish({
-      Name: '',
-      Ingredients: '',
+      ingredients: '',
       image: '',
       price: '',
     });
