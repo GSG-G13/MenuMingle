@@ -5,12 +5,17 @@ import compression from 'compression';
 
 import serverError from './middleware/serverError';
 import clientError from './middleware/clientError';
+import { ServerCors } from './utils';
 import router from './routes';
 
 const app = express();
 
 app.use([
-  cors(),
+  cors({
+    origin: ServerCors.Origin as string,
+    methods: ServerCors.Methods as string,
+    credentials: Boolean(ServerCors.Credentials),
+  }),
   json(),
   urlencoded({ extended: false }),
   compression(),
