@@ -8,11 +8,13 @@ import {
   OutlinedInput,
   Select,
   MenuItem,
+  SelectChangeEvent,
 } from '@mui/material';
-import { useState, ChangeEvent } from 'react';
+import { useState, FormEvent, ChangeEventHandler } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { DishType } from '../../utils';
+import { useCategories, useAvailabilities, useInputs } from '../../hocks';
 
 const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
 
@@ -23,49 +25,23 @@ const createDishRequest = async (DishInfo: DishType) => {
 
 const CreateDish = () => {
   const [open, setOpen] = useState<boolean>(false);
-  const [dishToCreate, setDishToCreate] = useState();
+  const [dishToCreate, setDishToCreate] = useState<object>();
+
   const { mutate } = useMutation(createDishRequest);
-  const categories = [
-    {
-      id: 1,
-      value: 'Drinks',
-    },
-    {
-      id: 2,
 
-      value: 'Appetizers',
-    },
-    {
-      id: 3,
+  const categories = useCategories();
+  const availabilities = useAvailabilities();
+  const inputs = useInputs();
 
-      value: 'Main Course',
-    },
-    {
-      id: 4,
-      value: 'Desserts',
-    },
-    {
-      id: 5,
-      value: 'Salads',
-    },
-  ];
-  const availabilities = [
-    {
-      status: 'available',
-      value: true,
-    },
-    {
-      status: 'notAvailable',
-      value: false,
-    },
-  ];
-  const inputs = ['name', 'ingredients', 'image', 'price', 'availability', 'category_id'];
-
-  const handleCreateDish = (event: ChangeEvent<HTMLElement>) => {
+  const handleCreateDish = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     mutate(dishToCreate);
   };
-  const handleChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeInput = (
+    event:
+      | SelectChangeEvent<string>
+      | ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     setDishToCreate({
       ...dishToCreate,
       [event.target.name]: event.target.value,
