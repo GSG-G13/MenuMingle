@@ -1,7 +1,6 @@
-import { Grid } from '@mui/material';
 import inProgress from '../../assets/Group 17388.png';
 
-const Picture = status => {
+const Picture = () => {
   return (
     <img
       src={inProgress}

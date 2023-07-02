@@ -14,7 +14,6 @@ import {
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import axios from 'axios';
-import { url } from 'inspector';
 import { SignupSchema } from '../utils/validations';
 import { BasicSelect, Copyright } from '../components';
 import SignupImage from '../assets/signupbg.png';

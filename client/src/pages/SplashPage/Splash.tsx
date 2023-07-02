@@ -1,6 +1,6 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState } from 'react';
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+import { useState } from 'react';
 import { Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo.png';

@@ -13,9 +13,7 @@ import {
   Typography,
   TablePagination,
 } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
-import loader from '../loader';
 
 interface Order {
   id: number;
@@ -26,7 +24,6 @@ interface Order {
 }
 
 const Done: React.FC = () => {
-  const navigate = useNavigate();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -36,7 +33,7 @@ const Done: React.FC = () => {
     try {
       const response = await axios.get('http://localhost:8080/api/v1/dishes');
       setOrders(response.data.data);
-      return response.data.data as Dish[];
+      return response.data.data;
     } catch (error) {
       throw new Error('Error fetching orders');
     }
@@ -46,11 +43,11 @@ const Done: React.FC = () => {
     queryKey: ['orders'],
     queryFn: fetchOrders,
   });
-  if (isLoading) return <loader />;
+  if (isLoading) return <div>is Loading</div>;
   if (isError) return <div>Error</div>;
 
   const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
+    _event: React.MouseEvent<HTMLButtonElement> | null,
     newPage: number,
   ) => {
     setPage(newPage);
@@ -99,7 +96,7 @@ const Done: React.FC = () => {
               <TableCell>{row.name}</TableCell>
               <TableCell>
                 <img
-                  src={row.count}
+                  src={row.count.toString()}
                   alt={row.name}
                   style={{
                     width: '60px',

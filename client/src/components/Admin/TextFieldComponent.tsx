@@ -1,6 +1,12 @@
 import { TextField } from '@mui/material';
+import { FC } from 'react';
+import { TextFieldComponentProps } from '../../utils';
 
-const TextFieldComponent = ({ dishToUpdate, handleChangeInput, labelValue }) => {
+const TextFieldComponent: FC<TextFieldComponentProps> = ({
+  dishToUpdate,
+  handleChangeInput,
+  labelValue,
+}) => {
   return (
     <TextField
       label={labelValue}
