@@ -1,16 +1,8 @@
-import {
-  Model,
-  InferAttributes,
-  InferCreationAttributes,
-  CreationOptional,
-} from 'sequelize';
+import { Model } from 'sequelize';
 
-interface orderAttributes
-  extends Model<
-    InferAttributes<orderAttributes>,
-    InferCreationAttributes<orderAttributes>
-  > {
-  id: CreationOptional<number>;
+interface orderAttributes extends Model {
+  id: number | undefined;
+  quantity: number;
 }
 
 export default orderAttributes;

@@ -4,6 +4,7 @@ import {
   InferCreationAttributes,
   CreationOptional,
 } from 'sequelize';
+import { CartStatus } from '../enum';
 
 interface CartAttributes
   extends Model<
@@ -11,7 +12,9 @@ interface CartAttributes
     InferCreationAttributes<CartAttributes>
   > {
   id: CreationOptional<number>;
-  note?: string;
+  note: string;
+  status: CartStatus;
+  customerId: string;
 }
 
 export default CartAttributes;
