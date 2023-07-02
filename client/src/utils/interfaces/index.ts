@@ -67,3 +67,7 @@ export interface EditDishProps {
   dishToUpdate: DishType;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }
+export interface DishFormProps {
+  onSubmit: (updatedDish: DishType) => void;
+  dishToUpdate: DishType;
+}

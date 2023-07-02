@@ -20,7 +20,7 @@ const dishSchema = Joi.object({
   }),
   availability: Joi.boolean().optional(),
   ingredients: Joi.string().optional(),
-  categoryId: Joi.number().optional(),
+  category_id: Joi.number().optional(),
 });
 
 const loginSchema = Joi.object({

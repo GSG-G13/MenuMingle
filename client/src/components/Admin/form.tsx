@@ -1,8 +1,9 @@
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, FC } from 'react';
 import { Button } from '@mui/material';
 import TextFieldComponent from './TextFieldComponent';
+import { DishFormProps } from '../../utils';
 
-const DishForm = ({ onSubmit, dishToUpdate }) => {
+const DishForm: FC<DishFormProps> = ({ onSubmit, dishToUpdate }) => {
   const [dish, setDish] = useState(dishToUpdate);
 
   const handleChangeInput = (event: ChangeEvent<HTMLInputElement>) => {

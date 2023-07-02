@@ -15,11 +15,13 @@ import {
   Typography,
   TablePagination,
   Alert,
+  Stack,
 } from '@mui/material';
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
 import { DishType } from '../../utils';
 import EditDish from './edit';
+import CreateDish from './CreateDish';
 
 const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
 
@@ -28,7 +30,8 @@ const DishesTable: FC = () => {
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(5);
   const [dishes, setDishes] = useState<DishType[]>([]);
-  const [dishToUpdate, setDishToUpdate] = useState<DishType>();
+  const [dishToUpdate, setDishToUpdate] = useState<DishType>(dishes[0]);
+
   const fetchDishes = async () => {
     try {
       const response = await axios.get(`${serverUrl}/api/v1/dishes`);
@@ -38,6 +41,7 @@ const DishesTable: FC = () => {
       throw new Error('Error fetching dishes');
     }
   };
+
   const deleteDish = async (id: number): Promise<void> => {
     try {
       await axios.delete(`${serverUrl}/api/v1/dishes/delete/${id}`);
@@ -45,16 +49,18 @@ const DishesTable: FC = () => {
       throw new Error('Can not delete the dish');
     }
   };
+
   const {
     mutate,
     isError: isMutationError,
     isSuccess: isMutationSuccess,
-  } = useMutation<void, Error>(deleteDish);
+  } = useMutation(deleteDish);
 
   const { isLoading, isError } = useQuery({
     queryKey: ['dishes'],
     queryFn: fetchDishes,
   });
+
   if (isLoading) return <div>loading</div>;
   if (isError) return <div>Error</div>;
   if (isMutationError)
@@ -83,11 +89,23 @@ const DishesTable: FC = () => {
     <TableContainer component={Paper} style={{ background: 'transparent' }}>
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
         <TableHead sx={{ boxShadow: '2px 2px 2px #E0E0E0' }}>
-          <Typography
-            sx={{ margin: '20px 20px 20px 20px', fontWeight: 'bold', fontSize: '18px' }}
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            width="100%"
           >
-            All Dishes
-          </Typography>
+            <Typography
+              sx={{ margin: '20px 20px 20px 20px', fontWeight: 'bold', fontSize: '18px' }}
+            >
+              All Dishes
+            </Typography>
+            <Typography
+              sx={{ margin: '20px 20px 20px 20px', fontWeight: 'bold', fontSize: '18px' }}
+            >
+              <CreateDish />
+            </Typography>
+          </Stack>
           <TableRow sx={{ height: '40px', fontSize: '18px' }}>
             <TableCell sx={{ fontSize: '18px', fontWeight: 'bold' }}>ID</TableCell>
             <TableCell sx={{ fontSize: '18px', fontWeight: 'bold' }}>Name</TableCell>
