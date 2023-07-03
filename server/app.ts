@@ -2,6 +2,7 @@ import express, { json, urlencoded } from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import compression from 'compression';
+import { join } from 'path';
 
 import serverError from './middleware/serverError';
 import clientError from './middleware/clientError';
@@ -20,6 +21,7 @@ app.use([
   urlencoded({ extended: false }),
   compression(),
   cookieParser(),
+  express.static(join(__dirname, '..', 'client', 'dist')),
 ]);
 
 app.use('/api/v1', router);
