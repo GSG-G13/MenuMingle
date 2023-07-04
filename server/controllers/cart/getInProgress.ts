@@ -18,9 +18,11 @@ const getInProgress = async (
       },
     });
 
-    res.json(dishes);
+    res.json({
+      error: false,
+      data: dishes,
+    });
   } catch (error) {
-    console.error('Error retrieving orders in progress:', error);
     next(error);
   }
 };
