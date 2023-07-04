@@ -18,7 +18,7 @@ import { SignupSchema } from '../utils/validations';
 import { BasicSelect, Copyright } from '../components';
 import SignupImage from '../assets/signupbg.png';
 
-const serverUrl = import.meta.env.VITE_APP_SERVER_URL || 'localhost:8080';
+const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
 
 const SignUp: React.FC = () => {
   const [role, setRole] = React.useState<string>('');
@@ -45,11 +45,15 @@ const SignUp: React.FC = () => {
     } else {
       // Data is valid, proceed with submission
       try {
-        await axios.post(`${serverUrl}/api/v1/auth/register`, {
-          username: data.get('username'),
-          password: data.get('password'),
-          roleId: +role,
-        });
+        await axios.post(
+          `${serverUrl}/api/v1/auth/register`,
+          {
+            username: data.get('username'),
+            password: data.get('password'),
+            roleId: +role,
+          },
+          { withCredentials: true },
+        );
 
         navigate('/login');
       } catch (err: any) {

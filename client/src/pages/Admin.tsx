@@ -1,6 +1,6 @@
-import { Outlet } from 'react-router-dom';
-import Navbar from '../components/Cook/Nav';
-import pg from '../assets/pg.png';
+import Navbar from '../components/Admin/Nav';
+import DishesTable from '../components/Admin/table';
+import pg from '../assets/bg.png';
 
 const styles = {
   backgroundImage: `url(${pg})`,
@@ -9,12 +9,12 @@ const styles = {
   width: '100%',
   height: '100vh',
 };
-const CookDash = () => {
+const AdminDash = () => {
   return (
     <div style={styles}>
       <Navbar />
-      <Outlet />
+      <DishesTable />
     </div>
   );
 };
-export default CookDash;
+export default AdminDash;

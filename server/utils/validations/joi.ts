@@ -7,20 +7,20 @@ const signupSchema = Joi.object({
 });
 
 const dishSchema = Joi.object({
-  name: Joi.string().min(3).max(30).required().messages({
+  name: Joi.string().min(3).optional().max(30).messages({
     'any.required': `Dish not found or could not be updated`,
     'string.min': `name should have a minimum length of {#limit}`,
     'string.max': `name should have a maximum length of {#limit}`,
   }),
-  price: Joi.number().required().messages({
+  price: Joi.number().optional().messages({
     'any.required': `Dish not found or could not be updated`,
   }),
-  image: Joi.string().min(3).required().messages({
+  image: Joi.string().min(3).optional().messages({
     'any.required': `Dish not found or could not be updated`,
   }),
-  availability: Joi.boolean().required(),
-  ingredients: Joi.string().min(3).required(),
-  categoryId: Joi.number().required(),
+  availability: Joi.boolean().optional(),
+  ingredients: Joi.string().optional(),
+  category_id: Joi.number().optional(),
 });
 
 const loginSchema = Joi.object({

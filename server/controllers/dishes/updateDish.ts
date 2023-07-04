@@ -7,6 +7,8 @@ import { StatusCodes } from '../../utils/enum';
 const updateDish = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;
+    console.log(req.body);
+
     const newDish = await dishSchema.validateAsync(req.body);
     const [updatedCount, updatedDishes] = await Dish.update(newDish, {
       where: { id },

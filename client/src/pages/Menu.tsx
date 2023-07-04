@@ -54,7 +54,7 @@ const Menu = () => {
     queryFn: fetchDishes,
   });
 
-  if (isLoading) return <div> loading</div>;
+  if (isLoading) return <div>is loading</div>;
   if (isError) return <div>Error</div>;
 
   return (

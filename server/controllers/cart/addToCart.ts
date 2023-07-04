@@ -6,7 +6,6 @@ import { cartSchema } from '../../utils';
 
 const addToCart = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    
     const { orders, customerId, note } = await cartSchema.validateAsync(
       req.body,
     );
