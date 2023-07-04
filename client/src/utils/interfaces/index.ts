@@ -72,3 +72,12 @@ export interface DishFormProps {
   onSubmit: (updatedDish: DishType) => void;
   dishToUpdate: DishType;
 }
+
+export interface DishWithQuantity extends DishType {
+  quantity: number;
+}
+export interface ordersTable {
+  id: number;
+  open: boolean;
+  onClose: () => void;
+}

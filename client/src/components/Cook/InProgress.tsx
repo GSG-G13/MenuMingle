@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 
 import {
   Table,
@@ -13,7 +14,12 @@ import {
   Typography,
   TablePagination,
 } from '@mui/material';
-import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
+
+import Loader from '../loader';
+import Popup from './Popup';
+import Done from './Done';
+
+const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
 
 interface Order {
   id: number;
@@ -21,19 +27,30 @@ interface Order {
   status: boolean;
   count: number;
   cartId: number;
+  note: string;
 }
 
 const InProgressOrders: React.FC = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [open, setOpen] = useState(false);
+  const [orderId, setOrderId] = useState();
 
+  const handleOpen = (id: number) => {
+    setOpen(true);
+    setOrderId(id);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   const [orders, setOrders] = useState<Order[]>([]);
 
   const fetchOrders = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/v1/dishes');
-      setOrders(response.data.data);
-      return response.data.data;
+      const response = await axios.get(`${serverUrl}/api/v1/cart/inprogress`);
+      setOrders(response.data);
+      return response.data as Order[];
     } catch (error) {
       throw new Error('Error fetching orders');
     }
@@ -42,12 +59,14 @@ const InProgressOrders: React.FC = () => {
   const { isLoading, isError } = useQuery({
     queryKey: ['orders'],
     queryFn: fetchOrders,
+    refetchInterval: 120000,
+    refetchIntervalInBackground: true,
   });
-  if (isLoading) return <div>is loading</div>;
+  if (isLoading) return <Loader />;
   if (isError) return <div>Error</div>;
 
   const handleChangePage = (
-    _event: React.MouseEvent<HTMLButtonElement> | null,
+    event: React.MouseEvent<HTMLButtonElement> | null,
     newPage: number,
   ) => {
     setPage(newPage);
@@ -74,10 +93,8 @@ const InProgressOrders: React.FC = () => {
           </Typography>
           <TableRow sx={{ height: '40px', fontSize: '18px' }}>
             <TableCell sx={{ fontSize: '18px', fontWeight: 'bold' }}>ID</TableCell>
-            <TableCell sx={{ fontSize: '18px', fontWeight: 'bold' }}>Name</TableCell>
-            <TableCell sx={{ fontSize: '18px', fontWeight: 'bold' }}>Quantity</TableCell>
-            <TableCell sx={{ fontSize: '18px', fontWeight: 'bold' }}>CartId</TableCell>
-            <TableCell sx={{ fontSize: '18px', fontWeight: 'bold' }}>Status</TableCell>
+            <TableCell sx={{ fontSize: '18px', fontWeight: 'bold' }}>Note</TableCell>
+            <TableCell sx={{ fontSize: '18px', fontWeight: 'bold' }}>Orders</TableCell>
             <TableCell sx={{ fontSize: '18px', fontWeight: 'bold' }}>Action</TableCell>
           </TableRow>
         </TableHead>
@@ -85,34 +102,28 @@ const InProgressOrders: React.FC = () => {
           {(rowsPerPage > 0
             ? orders.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : orders
-          ).map(row => (
-            <TableRow
-              key={row.name}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {row.id}
-              </TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>
-                <img
-                  src={row.count.toString()}
-                  alt={row.name}
-                  style={{
-                    width: '60px',
-                    height: '60px',
-                    marginRight: '16px',
-                    borderRadius: '20%',
-                  }}
-                />
-              </TableCell>
-              <TableCell>{row.cartId}</TableCell>
-              <TableCell>{row.status}</TableCell>
-              <TableCell>
-                <CheckCircleOutlineRoundedIcon />{' '}
-              </TableCell>
-            </TableRow>
-          ))}
+          ).map(row => {
+            return (
+              <TableRow
+                key={row.id}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {row.id}
+                </TableCell>
+                <TableCell>{row.note}</TableCell>
+                <TableCell>
+                  <div>
+                    <FormatListBulletedIcon onClick={() => handleOpen(row.id)} />
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <Done id={row.id} />
+                </TableCell>
+              </TableRow>
+            );
+          })}
+          <Popup open={open} onClose={handleClose} id={orderId} />
 
           {emptyRows > 0 && (
             <TableRow style={{ height: 53 * emptyRows }}>
@@ -128,7 +139,7 @@ const InProgressOrders: React.FC = () => {
           page={page}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
-          style={{ position: 'fixed' }}
+          style={{ display: 'flex', position: 'fixed' }}
         />
       </Table>
     </TableContainer>

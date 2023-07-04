@@ -69,8 +69,19 @@ const CreateDish = () => {
 
   return (
     <>
-      <Button variant="contained" onClick={() => setOpen(true)}>
-        Contained
+      <Button
+        variant="outlined"
+        style={{
+          color: '#9EBAD7',
+          textTransform: 'none',
+          fontSize: '18px',
+          position: 'absolute',
+          right: '3%',
+          top: '18%',
+        }}
+        onClick={() => setOpen(true)}
+      >
+        NewDish +
       </Button>
 
       <Dialog
