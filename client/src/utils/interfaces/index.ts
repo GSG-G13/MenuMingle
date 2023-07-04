@@ -81,3 +81,8 @@ export interface ordersTable {
   open: boolean;
   onClose: () => void;
 }
+
+export interface ErrorPageInterface {
+  status: string;
+  imgUrl: string;
+}

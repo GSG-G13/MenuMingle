@@ -1,6 +1,7 @@
 import { Box, Typography, Button } from '@mui/material';
+import { ErrorPageInterface } from '../utils';
 
-const ErrorPage = ({ status, imgUrl }) => {
+const ErrorPage = ({ status, imgUrl }: ErrorPageInterface): JSX.Element => {
   return (
     <Box
       display="flex"
