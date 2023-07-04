@@ -46,6 +46,7 @@
     "react-router-dom": "^6.12.1",
     "sequelize": "^6.32.0",
     "socket.io": "^4.6.2",
+    "stripe": "^12.11.0",
     "supertest": "^6.3.3",
     "ts-jest": "^29.1.0",
     "typescript-eslint": "^0.0.1-alpha.0"
