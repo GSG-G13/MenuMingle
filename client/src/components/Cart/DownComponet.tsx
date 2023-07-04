@@ -1,56 +1,12 @@
 import * as core from '@mui/material';
-import axios from 'axios';
-import { FC, useEffect, useState } from 'react';
-import { useMutation } from '@tanstack/react-query';
+import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ButtonSectionProps } from '../../utils';
 
-const { Button, Alert } = core;
+const { Button } = core;
 
-type BodyType = {
-  orders: [] | null;
-  note: string;
-  customerId: number;
-};
-
-const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
-
-const DownComponent: FC<ButtonSectionProps> = ({ notes }) => {
+const DownComponent: FC<ButtonSectionProps> = () => {
   const goToWaitingRoom = useNavigate();
-
-  const [orders, setOrders] = useState<[] | null>([]);
-  const { isError, isSuccess, mutate } = useMutation({
-    mutationKey: ['post'],
-    mutationFn: (reqBody: BodyType) =>
-      axios.post(`${serverUrl}/api/v1/cart/add-to-cart`, reqBody),
-  });
-  const handleCheckout = () => {
-    const body = {
-      orders,
-      note: notes,
-      customerId: 123456,
-    };
-    mutate(body);
-  };
-
-  useEffect(() => {
-    let dataFromLocalStorage = JSON.parse(localStorage.getItem('items') as string);
-    dataFromLocalStorage = dataFromLocalStorage?.map(
-      (dish: { id: number; count: number }) => {
-        return {
-          dish_id: dish.id,
-          quantity: dish.count,
-        };
-      },
-    );
-    setOrders(dataFromLocalStorage);
-  }, []);
-  if (isError) {
-    return <Alert severity="error">This is an error alert — check it out!</Alert>;
-  }
-  if (isSuccess) {
-    goToWaitingRoom('payment');
-  }
 
   return (
     <Button
@@ -63,7 +19,9 @@ const DownComponent: FC<ButtonSectionProps> = ({ notes }) => {
         position: 'fixed',
         bottom: '10px',
       }}
-      onClick={handleCheckout}
+      onClick={() => {
+        goToWaitingRoom('/payment');
+      }}
     >
       Checkout
     </Button>

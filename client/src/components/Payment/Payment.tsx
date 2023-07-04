@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { useEffect, useState } from 'react';
 import { loadStripe, Stripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
@@ -12,7 +13,6 @@ const Payment = () => {
   useEffect(() => {
     fetch(`${serverUrl}/config`).then(async res => {
       const { publishableKey } = await res.json();
-      // console.log('publishablekey: ', publishableKey);
       setStripePromise(await loadStripe(publishableKey));
     });
   }, []);
