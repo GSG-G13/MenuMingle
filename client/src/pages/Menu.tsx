@@ -5,7 +5,6 @@ import { useState } from 'react';
 import DishList from '../components/Menu/dishList';
 import FilterComponent from '../components/Menu/filter';
 import Navbar from '../components/Menu/Nav';
-import loader from '../components/loader';
 
 import { Category, Dish } from '../utils/interfaces';
 
@@ -55,7 +54,7 @@ const Menu = () => {
     queryFn: fetchDishes,
   });
 
-  if (isLoading) return <loader />;
+  if (isLoading) return <div>is loading</div>;
   if (isError) return <div>Error</div>;
 
   return (

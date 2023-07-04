@@ -18,26 +18,25 @@ import {
 
 import { useQuery } from '@tanstack/react-query';
 import Loader from '../loader';
+import { ordersTable, DishWithQuantity } from '../../utils';
 
-const Popup = ({ open, onClose, id }) => {
-  const [dishes, setDishes] = useState([]);
-
+const Popup = ({ open, onClose, id }: ordersTable): JSX.Element => {
+  const [dishes, setDishes] = useState<DishWithQuantity[]>([]);
   const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
-
   const fetchDishes = async () => {
+    if (!id) return;
     const response = await axios.get(`${serverUrl}/api/v1/cart/${id}/dishes`);
     setDishes(response.data);
     return response;
   };
 
   const { isLoading, isError } = useQuery({
-    queryKey: ['dishes'],
+    queryKey: ['dishes', id],
     queryFn: fetchDishes,
+    refetchOnReconnect: true,
   });
-
   if (isLoading) return <Loader />;
   if (isError) return <div>Error</div>;
-
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>Dishes</DialogTitle>
@@ -58,18 +57,17 @@ const Popup = ({ open, onClose, id }) => {
                 <TableCell>Ingredients</TableCell>
               </TableRow>
             </TableHead>
-
             <TableBody>
-              {dishes.map(row => (
+              {dishes.map(dish => (
                 <TableRow
-                  key={row.name}
+                  key={dish.name}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    {row.name}
+                    {dish.name}
                   </TableCell>
-                  <TableCell>{row.quantity}</TableCell>
-                  <TableCell>{row.ingredients}</TableCell>
+                  <TableCell>{dish.quantity}</TableCell>
+                  <TableCell>{dish.ingredients}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

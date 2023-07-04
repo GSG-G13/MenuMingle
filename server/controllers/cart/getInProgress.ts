@@ -20,7 +20,6 @@ const getInProgress = async (
 
     res.json(dishes);
   } catch (error) {
-    console.error('Error retrieving orders in progress:', error);
     next(error);
   }
 };

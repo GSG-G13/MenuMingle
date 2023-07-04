@@ -5,6 +5,7 @@ export { default as FoodSectionProps } from './FoodSectionProps';
 export { default as DishType } from './DishType';
 export { default as AllCartProps } from './AllCartProps';
 export { default as ButtonSectionProps } from './ButtonSectionProps';
+export { default as TextFieldComponentProps } from './TextFieldComponent';
 
 export interface Category {
   id: number;
@@ -70,4 +71,14 @@ export interface EditDishProps {
 export interface DishFormProps {
   onSubmit: (updatedDish: DishType) => void;
   dishToUpdate: DishType;
+}
+
+export interface DishWithQuantity extends DishType {
+  quantity: number;
+}
+export interface ordersTable {
+  id: number;
+  open: boolean;
+  onClose: () => void;
+  onDelete: () => void;
 }

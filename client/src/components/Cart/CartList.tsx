@@ -105,7 +105,6 @@ const CartList: FC<ButtonSectionProps> = ({ notes, setNotes }): JSX.Element => {
           }}
         >
           <ButtonSection notes={notes} setNotes={setNotes} />
-          {/* we need to handel the notes here to add them to orders table in db <= for later  */}
           Total Price: ${calculateTotalPrice()}
         </Typography>
       </Grid>

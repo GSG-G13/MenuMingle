@@ -13,12 +13,11 @@ import {
   Paper,
   Typography,
   TablePagination,
-  Button,
 } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
 import Loader from '../loader';
-import Popup from './Orders';
+import Popup from './Popup';
 
 const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
 
@@ -32,13 +31,14 @@ interface Order {
 }
 
 const InProgressOrders: React.FC = () => {
-  const navigate = useNavigate();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [open, setOpen] = useState(false);
+  const [orderId, setOrderId] = useState();
 
-  const handleOpen = () => {
+  const handleOpen = (id: any) => {
     setOpen(true);
+    setOrderId(id);
   };
 
   const handleClose = () => {
@@ -102,26 +102,29 @@ const InProgressOrders: React.FC = () => {
           {(rowsPerPage > 0
             ? orders.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : orders
-          ).map(row => (
-            <TableRow
-              key={row.id}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {row.id}
-              </TableCell>
-              <TableCell>{row.note}</TableCell>
-              <TableCell>
-                <div>
-                  <FormatListBulletedIcon onClick={handleOpen} />
-                  <Popup open={open} onClose={handleClose} id={1} />
-                </div>
-              </TableCell>
-              <TableCell>
-                <CheckCircleOutlineRoundedIcon />
-              </TableCell>
-            </TableRow>
-          ))}
+          ).map(row => {
+            return (
+              <TableRow
+                key={row.id}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {row.id}
+                </TableCell>
+                <TableCell>{row.note}</TableCell>
+                <TableCell>
+                  <div>
+                    <FormatListBulletedIcon onClick={() => handleOpen(row.id)} />
+                    {/* <Popup open={open} onClose={handleClose} id={row.id} /> */}
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <CheckCircleOutlineRoundedIcon />
+                </TableCell>
+              </TableRow>
+            );
+          })}
+          <Popup open={open} onClose={handleClose} id={orderId} />
 
           {emptyRows > 0 && (
             <TableRow style={{ height: 53 * emptyRows }}>

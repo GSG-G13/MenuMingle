@@ -1,6 +1,5 @@
 import { Outlet } from 'react-router-dom';
 import Navbar from '../components/Cook/Nav';
-import DishesTable from '../components/Cook/table';
 import pg from '../assets/pg.png';
 
 const styles = {
