@@ -23,8 +23,5 @@ const deleteDish = async (req: Request, res: Response, next: NextFunction) => {
     return next(err);
   }
 };
-const getName = (name: string) => {
-  return `Hello you are name ${name}`;
-};
 
 export default deleteDish;
