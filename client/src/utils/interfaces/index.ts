@@ -80,5 +80,4 @@ export interface ordersTable {
   id: number;
   open: boolean;
   onClose: () => void;
-  onDelete: () => void;
 }

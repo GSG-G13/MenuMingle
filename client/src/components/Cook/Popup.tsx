@@ -36,7 +36,7 @@ const Popup = ({ open, onClose, id }: ordersTable): JSX.Element => {
     refetchOnReconnect: true,
   });
   if (isLoading) return <Loader />;
-  if (isError) return <div>Error</div>;
+  // if (isError) return <div>Error</div>;
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>Dishes</DialogTitle>

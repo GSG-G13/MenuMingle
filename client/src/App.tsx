@@ -41,16 +41,6 @@ const router = createBrowserRouter([
   {
     path: '/cook',
     element: <CookDash />,
-    children: [
-      {
-        path: '/cook/inprogress',
-        element: <InProgressOrders />,
-      },
-      {
-        path: '/cook/done',
-        element: <Done />,
-      },
-    ],
   },
 ]);
 

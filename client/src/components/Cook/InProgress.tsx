@@ -15,9 +15,9 @@ import {
   TablePagination,
 } from '@mui/material';
 
-import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
 import Loader from '../loader';
 import Popup from './Popup';
+import Done from './Done';
 
 const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
 
@@ -36,7 +36,7 @@ const InProgressOrders: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [orderId, setOrderId] = useState();
 
-  const handleOpen = (id: any) => {
+  const handleOpen = (id: number) => {
     setOpen(true);
     setOrderId(id);
   };
@@ -115,11 +115,10 @@ const InProgressOrders: React.FC = () => {
                 <TableCell>
                   <div>
                     <FormatListBulletedIcon onClick={() => handleOpen(row.id)} />
-                    {/* <Popup open={open} onClose={handleClose} id={row.id} /> */}
                   </div>
                 </TableCell>
                 <TableCell>
-                  <CheckCircleOutlineRoundedIcon />
+                  <Done id={row.id} />
                 </TableCell>
               </TableRow>
             );

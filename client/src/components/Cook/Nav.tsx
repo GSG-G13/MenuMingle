@@ -41,34 +41,7 @@ const Navbar = () => {
         >
           Welcome back, Let&apos;s kick off another day of success
         </Typography>
-        <div
-          style={{ display: 'flex', gap: '20px', height: '100%', marginRight: '20px' }}
-        >
-          <NavLink
-            to="/cook/inprogress"
-            style={({ isActive }) => {
-              return {
-                fontWeight: isActive ? 'bold' : '',
-                color: isActive ? '#FA4A0C' : 'black',
-                textDecoration: 'none',
-              };
-            }}
-          >
-            InProgress
-          </NavLink>
-          <NavLink
-            to="/cook/done"
-            style={({ isActive }) => {
-              return {
-                fontWeight: isActive ? 'bold' : '',
-                color: isActive ? '#FA4A0C' : 'black',
-                textDecoration: 'none',
-              };
-            }}
-          >
-            Done
-          </NavLink>
-        </div>
+
         <IconButton
           color="inherit"
           aria-label="Orders"

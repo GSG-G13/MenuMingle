@@ -1,6 +1,6 @@
-import { Outlet } from 'react-router-dom';
 import Navbar from '../components/Cook/Nav';
 import pg from '../assets/pg.png';
+import InProgressOrders from '../components/Cook/InProgress';
 
 const styles = {
   backgroundImage: `url(${pg})`,
@@ -13,7 +13,7 @@ const CookDash = () => {
   return (
     <div style={styles}>
       <Navbar />
-      <Outlet />
+      <InProgressOrders />
     </div>
   );
 };
