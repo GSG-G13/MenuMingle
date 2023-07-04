@@ -18,7 +18,10 @@ const getInProgress = async (
       },
     });
 
-    res.json(dishes);
+    res.json({
+      error: false,
+      data: dishes,
+    });
   } catch (error) {
     next(error);
   }

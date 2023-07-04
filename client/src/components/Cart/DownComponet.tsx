@@ -49,7 +49,7 @@ const DownComponent: FC<ButtonSectionProps> = ({ notes }) => {
     return <Alert severity="error">This is an error alert — check it out!</Alert>;
   }
   if (isSuccess) {
-    goToWaitingRoom('waiting-room');
+    goToWaitingRoom('payment');
   }
 
   return (

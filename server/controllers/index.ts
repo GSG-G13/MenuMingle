@@ -4,6 +4,7 @@ import deleteDish from './dishes/deleteDish';
 import updateDish from './dishes/updateDish';
 import getDishById from './dishes/getDishById';
 import logout from './auth/logout';
+import getOrderStatus from './cart/getCartStatus';
 
 export {
   createDish,
@@ -12,6 +13,7 @@ export {
   updateDish,
   getDishById,
   logout,
+  getOrderStatus,
 };
 export * from './auth';
 export * from './cart';
