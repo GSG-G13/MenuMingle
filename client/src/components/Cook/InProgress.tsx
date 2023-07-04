@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 
 import {
   Table,
@@ -12,10 +13,14 @@ import {
   Paper,
   Typography,
   TablePagination,
+  Button,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
-import loader from '../loader';
+import Loader from '../loader';
+import Popup from './Orders';
+
+const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
 
 interface Order {
   id: number;
@@ -23,20 +28,29 @@ interface Order {
   status: boolean;
   count: number;
   cartId: number;
+  note: string;
 }
 
 const InProgressOrders: React.FC = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [open, setOpen] = useState(false);
 
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   const [orders, setOrders] = useState<Order[]>([]);
 
   const fetchOrders = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/v1/dishes');
-      setOrders(response.data.data);
-      return response.data.data as Dish[];
+      const response = await axios.get(`${serverUrl}/api/v1/cart/inprogress`);
+      setOrders(response.data);
+      return response.data as Order[];
     } catch (error) {
       throw new Error('Error fetching orders');
     }
@@ -45,8 +59,10 @@ const InProgressOrders: React.FC = () => {
   const { isLoading, isError } = useQuery({
     queryKey: ['orders'],
     queryFn: fetchOrders,
+    refetchInterval: 120000,
+    refetchIntervalInBackground: true,
   });
-  if (isLoading) return <loader />;
+  if (isLoading) return <Loader />;
   if (isError) return <div>Error</div>;
 
   const handleChangePage = (
@@ -77,10 +93,8 @@ const InProgressOrders: React.FC = () => {
           </Typography>
           <TableRow sx={{ height: '40px', fontSize: '18px' }}>
             <TableCell sx={{ fontSize: '18px', fontWeight: 'bold' }}>ID</TableCell>
-            <TableCell sx={{ fontSize: '18px', fontWeight: 'bold' }}>Name</TableCell>
-            <TableCell sx={{ fontSize: '18px', fontWeight: 'bold' }}>Quantity</TableCell>
-            <TableCell sx={{ fontSize: '18px', fontWeight: 'bold' }}>CartId</TableCell>
-            <TableCell sx={{ fontSize: '18px', fontWeight: 'bold' }}>Status</TableCell>
+            <TableCell sx={{ fontSize: '18px', fontWeight: 'bold' }}>Note</TableCell>
+            <TableCell sx={{ fontSize: '18px', fontWeight: 'bold' }}>Orders</TableCell>
             <TableCell sx={{ fontSize: '18px', fontWeight: 'bold' }}>Action</TableCell>
           </TableRow>
         </TableHead>
@@ -90,29 +104,21 @@ const InProgressOrders: React.FC = () => {
             : orders
           ).map(row => (
             <TableRow
-              key={row.name}
+              key={row.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
                 {row.id}
               </TableCell>
-              <TableCell>{row.name}</TableCell>
+              <TableCell>{row.note}</TableCell>
               <TableCell>
-                <img
-                  src={row.count}
-                  alt={row.name}
-                  style={{
-                    width: '60px',
-                    height: '60px',
-                    marginRight: '16px',
-                    borderRadius: '20%',
-                  }}
-                />
+                <div>
+                  <FormatListBulletedIcon onClick={handleOpen} />
+                  <Popup open={open} onClose={handleClose} id={1} />
+                </div>
               </TableCell>
-              <TableCell>{row.cartId}</TableCell>
-              <TableCell>{row.status}</TableCell>
               <TableCell>
-                <CheckCircleOutlineRoundedIcon />{' '}
+                <CheckCircleOutlineRoundedIcon />
               </TableCell>
             </TableRow>
           ))}
@@ -131,7 +137,7 @@ const InProgressOrders: React.FC = () => {
           page={page}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
-          style={{ diplay: 'flex', position: 'fixed' }}
+          style={{ display: 'flex', position: 'fixed' }}
         />
       </Table>
     </TableContainer>

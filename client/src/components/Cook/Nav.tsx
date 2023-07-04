@@ -45,18 +45,6 @@ const Navbar = () => {
           style={{ display: 'flex', gap: '20px', height: '100%', marginRight: '20px' }}
         >
           <NavLink
-            to="/cook/incoming"
-            style={({ isActive }) => {
-              return {
-                fontWeight: isActive ? 'bold' : '',
-                color: isActive ? '#FA4A0C' : 'black',
-                textDecoration: 'none',
-              };
-            }}
-          >
-            Incoming
-          </NavLink>
-          <NavLink
             to="/cook/inprogress"
             style={({ isActive }) => {
               return {
