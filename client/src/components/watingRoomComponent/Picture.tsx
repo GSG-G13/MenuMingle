@@ -1,7 +1,6 @@
 import inProgress from '../../assets/Group 17388.png';
 
 const Picture = (status: any) => {
-const Picture = () => {
   return (
     <img
       src={inProgress}

@@ -37,17 +37,16 @@ const router = createBrowserRouter([
     element: <CartPage />,
   },
   {
-<<<<<<< HEAD
     path: '/payment',
     element: <Payment />,
   },
   {
     path: '/payment/completion',
     element: <Completion />,
-=======
+  },
+  {
     path: '/Admin',
     element: <AdminDash />,
->>>>>>> 7e2e4d00d5835b1ad85b2c58fddccdcaed0266ec
   },
   {
     path: '/cook',
