@@ -8,6 +8,7 @@ import serverError from './middleware/serverError';
 import clientError from './middleware/clientError';
 import { router, PaymentRouter } from './routes';
 
+import Stripe from 'stripe';
 import dotenv from 'dotenv';
 dotenv.config();
 import { ServerCors } from './utils';
