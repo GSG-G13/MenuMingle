@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { Cart } from '../../models';
+import { CustomError, StatusCodes } from '../../utils';
 
 const getOrderStatus = async (
   req: Request,
@@ -7,7 +8,10 @@ const getOrderStatus = async (
   next: NextFunction,
 ) => {
   try {
-    const { cartId } = req.params;
+    const { cartId } = req.query as { cartId: string };
+    if (!cartId) {
+      throw new CustomError(StatusCodes.BadRequest, 'no cart id was provided');
+    }
     const orderStatus = await Cart.findByPk(cartId, {
       attributes: ['status'],
     });
@@ -17,7 +21,7 @@ const getOrderStatus = async (
         data: 'you do not have any orders',
       });
     }
-    res.json({
+    return res.json({
       error: false,
       data: orderStatus,
     });
