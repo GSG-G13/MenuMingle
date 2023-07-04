@@ -9,7 +9,11 @@ const ErrorPage = ({ status, imgUrl }) => {
       alignItems="center"
       height="100vh"
     >
-      <img src={imgUrl} alt="Error" style={{ width: '200px', marginBottom: '20px' }} />
+      <img
+        src={imgUrl}
+        alt="Error"
+        style={{ width: '90%', marginBottom: '20px', borderRadius: '20%' }}
+      />
       <Typography variant="h4" align="center" gutterBottom>
         Error {status}
       </Typography>
