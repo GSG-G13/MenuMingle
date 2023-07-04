@@ -9,10 +9,7 @@ import CookDash from './pages/Cook';
 import IncomingOrders from './components/Cook/Incoming';
 import InProgressOrders from './components/Cook/InProgress';
 import Done from './components/Cook/Done';
-<<<<<<< HEAD
 import { Payment, Completion } from './components';
-=======
->>>>>>> 7e2e4d00d5835b1ad85b2c58fddccdcaed0266ec
 
 const router = createBrowserRouter([
   {
