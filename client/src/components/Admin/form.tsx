@@ -13,7 +13,7 @@ const DishForm: FC<DishFormProps> = ({ onSubmit, dishToUpdate }) => {
     });
   };
 
-  const handleSubmit = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
     const { price, name, image, ingredients, availability } = dish;
     const dishWithoutId = { price, name, availability, image, ingredients };

@@ -25,7 +25,14 @@ const createDishRequest = async (DishInfo: DishType) => {
 
 const CreateDish = () => {
   const [open, setOpen] = useState<boolean>(false);
-  const [dishToCreate, setDishToCreate] = useState<object>();
+  const [dishToCreate, setDishToCreate] = useState<DishType>({
+    name: 'test',
+    price: 22,
+    image: 'test',
+    availability: true,
+    ingredients: 'string',
+    category_id: 2,
+  });
 
   const { mutate } = useMutation(createDishRequest);
 
@@ -42,10 +49,22 @@ const CreateDish = () => {
       | SelectChangeEvent<string>
       | ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    setDishToCreate({
-      ...dishToCreate,
-      [event.target.name]: event.target.value,
-    });
+    if ('target' in event) {
+      setDishToCreate({
+        ...dishToCreate,
+        [event.target.name]: event.target.value,
+      });
+    }
+  };
+  const handleInputChangeTextFiled: ChangeEventHandler<
+    HTMLInputElement | HTMLTextAreaElement
+  > = event => {
+    if ('target' in event) {
+      setDishToCreate({
+        ...dishToCreate,
+        [event.target.name]: event.target.value,
+      });
+    }
   };
 
   return (
@@ -80,7 +99,7 @@ const CreateDish = () => {
                       input={<OutlinedInput label="Name" />}
                     >
                       {availabilities.map(category => (
-                        <MenuItem key={category} value={category.value}>
+                        <MenuItem value={category.value.toString()}>
                           {category.status}
                         </MenuItem>
                       ))}
@@ -101,8 +120,8 @@ const CreateDish = () => {
                       onChange={handleChangeInput}
                       input={<OutlinedInput label="Name" />}
                     >
-                      {categories.map((category, index) => (
-                        <MenuItem key={category} value={category.id}>
+                      {categories.map(category => (
+                        <MenuItem key={category.id} value={category.id}>
                           {category.value}
                         </MenuItem>
                       ))}
@@ -114,7 +133,7 @@ const CreateDish = () => {
                 <TextField
                   label={input}
                   name={input}
-                  onChange={handleChangeInput}
+                  onChange={handleInputChangeTextFiled}
                   fullWidth
                   margin="normal"
                   sx={{ mt: 2, borderRadius: '20%' }}

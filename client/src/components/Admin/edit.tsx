@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import axios from 'axios';
 import { Alert } from '@mui/material';
 import DishForm from './form';
@@ -16,11 +16,13 @@ const updateDish = async (id: number, updatedDish: DishType) => {
 };
 
 const EditDish: FC<EditDishProps> = ({ dishToUpdate, setOpen }) => {
+  const [success, setSuccess] = useState(false);
+
   const { mutate, isError, isLoading } = useMutation(
-    updatedDish => updateDish(3, updatedDish),
+    (updatedDish: DishType) => updateDish(3, updatedDish),
     {
       onSuccess: () => {
-        <Alert severity="success">This is a success alert — check it out!</Alert>;
+        setSuccess(true);
       },
     },
   );
@@ -29,6 +31,9 @@ const EditDish: FC<EditDishProps> = ({ dishToUpdate, setOpen }) => {
     mutate(updatedDish);
     setOpen(false);
   };
+  if (success) {
+    return <Alert severity="success">This is a success alert — check it out!</Alert>;
+  }
 
   return (
     <div>

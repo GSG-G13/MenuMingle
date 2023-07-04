@@ -42,7 +42,7 @@ const DishesTable: FC = () => {
     }
   };
 
-  const deleteDish = async (id: number): Promise<void> => {
+  const deleteDish = async (id: number | undefined): Promise<void> => {
     try {
       await axios.delete(`${serverUrl}/api/v1/dishes/delete/${id}`);
     } catch (error) {
