@@ -24,13 +24,13 @@ const CheckoutForm = () => {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: `${window.location.origin}/payment/completion`,
+        return_url: `${window.location.origin}/waiting-room`,
       },
     });
 
     if (error) {
       setMessage(`Payment failed: ${error.message}`);
-      console.log('errrrrrrrrr', error.message);
+      console.log('Error', error.message);
     }
     setIsProcessing(false);
   };

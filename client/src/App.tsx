@@ -1,7 +1,5 @@
 import './index.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { io } from 'socket.io-client';
-import { useEffect } from 'react';
 import { Login, SignUp } from './pages';
 import SplashPage from './pages/SplashPage/Splash';
 import WaitingRoom from './pages/WatingRoom';
@@ -12,18 +10,6 @@ import IncomingOrders from './components/Cook/Incoming';
 import InProgressOrders from './components/Cook/InProgress';
 import Done from './components/Cook/Done';
 import { Payment, Completion } from './components';
-
-// const socket = io('http://localhost:8080');
-
-// const TestComponent = () => {
-//   const sendMessage = () => {
-//     console.log('hi');
-//   };
-
-//   useEffect(() => {
-//     socket.emit('send_message', { message: 'hello' });
-//   });
-// };
 
 const router = createBrowserRouter([
   {
