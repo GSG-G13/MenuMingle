@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, Typography, IconButton, Button } from '@mui/material';
+import { AppBar, Toolbar, Typography, IconButton } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate, NavLink } from 'react-router-dom';
 import logo from '../../assets/logo.png';

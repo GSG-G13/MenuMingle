@@ -13,7 +13,7 @@ const WaitingRoom = () => {
         justifyContent: 'center',
       }}
     >
-      <Picture status="true" />
+      <Picture />
       <VerticalLinearStepper />
       <Typography
         align="center"
