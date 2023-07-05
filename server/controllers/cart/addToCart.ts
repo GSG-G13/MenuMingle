@@ -43,6 +43,7 @@ const addToCart = async (req: Request, res: Response, next: NextFunction) => {
       error: false,
       msg: 'the order has been saved successfully',
       data: allDishesPrices,
+      cartId,
     });
   } catch (error) {
     return next(error);

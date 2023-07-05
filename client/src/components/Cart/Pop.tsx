@@ -8,12 +8,15 @@ import {
   Typography,
 } from '@mui/material';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import InsertCommentIcon from '@mui/icons-material/InsertComment';
 import { ButtonSectionProps } from '../../utils';
 
-const ButtonSection = ({ setNotes }: ButtonSectionProps) => {
+const ButtonSection = ({ setNotes, notes }: ButtonSectionProps) => {
   const [open, setOpen] = useState(false);
+  useEffect(() => {
+    localStorage.setItem('note', notes);
+  }, [open]);
 
   return (
     <>
@@ -28,7 +31,6 @@ const ButtonSection = ({ setNotes }: ButtonSectionProps) => {
           }}
         >
           <Typography sx={{ color: 'blueviolet', margin: 'auto' }}>
-            {' '}
             Any preferences for your order?
           </Typography>
           <Button
