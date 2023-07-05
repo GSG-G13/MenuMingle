@@ -7,7 +7,6 @@ import CartPage from './pages/Cart';
 import Menu from './pages/Menu';
 import AdminDash from './pages/Admin';
 import CookDash from './pages/Cook';
-import IncomingOrders from './components/Cook/Incoming';
 import InProgressOrders from './components/Cook/InProgress';
 import Done from './components/Cook/Done';
 import { Payment, Completion } from './components';
@@ -52,20 +51,6 @@ const router = createBrowserRouter([
   {
     path: '/cook',
     element: <CookDash />,
-    children: [
-      {
-        path: '/cook/incoming',
-        element: <IncomingOrders />,
-      },
-      {
-        path: '/cook/inprogress',
-        element: <InProgressOrders />,
-      },
-      {
-        path: '/cook/done',
-        element: <Done />,
-      },
-    ],
   },
 ]);
 

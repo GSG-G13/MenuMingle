@@ -1,6 +1,7 @@
 import { Typography } from '@mui/material';
 import Picture from '../components/watingRoomComponent/Picture';
 import VerticalLinearStepper from '../components/watingRoomComponent/Status';
+import Navbar from '../components/watingRoomComponent/NavBar';
 
 const WaitingRoom = () => {
   return (
@@ -13,6 +14,7 @@ const WaitingRoom = () => {
         justifyContent: 'center',
       }}
     >
+      <Navbar />
       <Picture />
       <VerticalLinearStepper />
       <Typography
