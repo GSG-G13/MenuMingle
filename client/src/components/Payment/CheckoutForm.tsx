@@ -12,12 +12,12 @@ const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
 type BodyType = {
   orders: [] | null;
   note: string;
-  customerId: number;
+  customerId: string;
 };
-
 const CheckoutForm = () => {
   const [orders, setOrders] = useState<[] | null>([]);
   const [notes, setNotes] = useState('');
+  const [customerId, setCustomerId] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,6 +33,8 @@ const CheckoutForm = () => {
     setOrders(dataFromLocalStorage);
     const noteFromLocalStorage = localStorage.getItem('note') as string;
     setNotes(noteFromLocalStorage);
+    const customerIdFromLocalStorage = localStorage.getItem('customerId') as string;
+    setCustomerId(customerIdFromLocalStorage);
   }, []);
 
   const addToCart = async (reqBody: BodyType) => {
@@ -69,7 +71,7 @@ const CheckoutForm = () => {
       const body = {
         orders,
         note: notes,
-        customerId: 123456,
+        customerId,
       };
       mutate(body);
     }

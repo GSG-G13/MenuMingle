@@ -85,7 +85,7 @@ export interface ordersTable {
 export interface BodyType {
   orders: [] | null;
   note: string;
-  customerId: number;
+  customerId: string;
 }
 
 export interface OrderType {
