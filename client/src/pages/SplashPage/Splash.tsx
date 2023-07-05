@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Box } from '@mui/material';
+import { v4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo.png';
 import './SplashPage.css';
@@ -9,6 +10,13 @@ import './SplashPage.css';
 const SplashPage = () => {
   const navigate = useNavigate();
   const [isAnimating, setIsAnimating] = useState(false);
+
+  useEffect(() => {
+    const customerId = localStorage.getItem('customerId') as string;
+    if (!customerId) {
+      localStorage.setItem('customerId', v4());
+    }
+  });
 
   const handleClick = () => {
     setIsAnimating(true);

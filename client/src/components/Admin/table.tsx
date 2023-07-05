@@ -22,6 +22,7 @@ import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
 import { DishType } from '../../utils';
 import EditDish from './edit';
 import CreateDish from './CreateDish';
+import Loader from '../loader';
 
 const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
 
@@ -61,7 +62,7 @@ const DishesTable: FC = () => {
     queryFn: fetchDishes,
   });
 
-  if (isLoading) return <div>loading</div>;
+  if (isLoading) return <Loader />;
   if (isError) return <div>Error</div>;
   if (isMutationError)
     return <Alert severity="error">This is an error alert — check it out!</Alert>;

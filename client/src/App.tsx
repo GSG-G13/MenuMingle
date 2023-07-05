@@ -1,5 +1,4 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { createContext, useContext } from 'react';
 import { Login, SignUp } from './pages';
 import SplashPage from './pages/SplashPage/Splash';
 import WaitingRoom from './pages/WatingRoom';

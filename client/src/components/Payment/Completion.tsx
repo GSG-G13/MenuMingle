@@ -1,4 +1,4 @@
-const Completion = (props: any) => {
+const Completion = () => {
   return (
     <div className="container">
       <div className="row">

@@ -85,7 +85,7 @@ export interface ordersTable {
 export interface BodyType {
   orders: [] | null;
   note: string;
-  customerId: number;
+  customerId: string;
 }
 
 export interface OrderType {
@@ -95,4 +95,9 @@ export interface OrderType {
   count: number;
   cartId: number;
   note: string;
+}
+
+export interface ErrorPageInterface {
+  status: number;
+  imgUrl: string;
 }

@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Alert } from '@mui/material';
 import DishForm from './form';
 import { EditDishProps, DishType } from '../../utils';
+import Loader from '../loader';
 
 const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
 
@@ -37,7 +38,7 @@ const EditDish: FC<EditDishProps> = ({ dishToUpdate, setOpen }) => {
 
   return (
     <div>
-      {isLoading && <span>there is Error in life</span>}
+      {isLoading && <Loader />}
       {isError && <span>there is Error in life</span>}
       <DishForm onSubmit={handleSubmit} dishToUpdate={dishToUpdate} />
     </div>
