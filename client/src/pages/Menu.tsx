@@ -7,6 +7,8 @@ import FilterComponent from '../components/Menu/filter';
 import Navbar from '../components/Menu/Nav';
 
 import { Category, Dish } from '../utils/interfaces';
+import Loader from '../components/loader';
+import ErrorPage from '../components/Error';
 
 const categories: Category[] = [
   {
@@ -54,8 +56,8 @@ const Menu = () => {
     queryFn: fetchDishes,
   });
 
-  if (isLoading) return <div>is loading</div>;
-  if (isError) return <div>Error</div>;
+  if (isLoading) return <Loader />;
+  if (isError) return <ErrorPage />;
 
   return (
     <div style={{ width: '100%' }}>

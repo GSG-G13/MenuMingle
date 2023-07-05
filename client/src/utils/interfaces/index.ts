@@ -96,8 +96,3 @@ export interface OrderType {
   cartId: number;
   note: string;
 }
-
-export interface ErrorPageInterface {
-  status: number;
-  imgUrl: string;
-}

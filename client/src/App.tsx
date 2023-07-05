@@ -7,11 +7,13 @@ import Menu from './pages/Menu';
 import AdminDash from './pages/Admin';
 import CookDash from './pages/CookDash';
 import { Payment } from './components';
+import ErrorPage from './components/Error';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <SplashPage />,
+    errorElement: <ErrorPage />,
   },
   {
     path: '/login',
@@ -28,6 +30,7 @@ const router = createBrowserRouter([
   {
     path: '/menu',
     element: <Menu />,
+    errorElement: <ErrorPage />,
   },
   {
     path: '/cart',

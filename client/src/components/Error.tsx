@@ -1,17 +1,11 @@
 import { Box, Typography, Button } from '@mui/material';
-import { ErrorPageInterface } from '../utils';
-import unAuthorized from '../assets/unautherized.webp';
-import notFound from '../assets/notFound.webp';
-import serverError from '../assets/serverError.webp';
+import { useNavigate } from 'react-router-dom';
+import ArrowBackIosOutlinedIcon from '@mui/icons-material/ArrowBackIosOutlined';
+import notFound from '../assets/notFound1.webp';
 
-const ErrorPage = ({ status }: ErrorPageInterface): JSX.Element => {
-  let imgUrl = notFound;
-  if (status === 404) {
-    imgUrl = notFound;
-  } else if (status === 401) {
-    imgUrl = unAuthorized;
-  } else if (status === 500) imgUrl = serverError;
-
+const ErrorPage = (): JSX.Element => {
+  const navigate = useNavigate();
+  const imgUrl = notFound;
   return (
     <Box
       display="flex"
@@ -23,21 +17,17 @@ const ErrorPage = ({ status }: ErrorPageInterface): JSX.Element => {
       <img
         src={imgUrl}
         alt="Error"
-        style={{ width: '90%', marginBottom: '20px', borderRadius: '20%' }}
+        style={{
+          width: '90%',
+          marginBottom: '20px',
+          borderRadius: '50%',
+          height: '300px',
+        }}
       />
-      <Typography variant="h4" align="center" gutterBottom>
-        Error {status}
-      </Typography>
       <Typography variant="body1" align="center" gutterBottom>
         Oops! Something went wrong.
       </Typography>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={() => window.location.reload()}
-      >
-        Refresh Page
-      </Button>
+      <ArrowBackIosOutlinedIcon onClick={() => navigate(-1)} sx={{ marginTop: '20px' }} />
     </Box>
   );
 };
