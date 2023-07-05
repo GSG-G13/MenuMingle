@@ -19,22 +19,17 @@ import Loader from '../loader';
 import Popup from './Popup';
 import Done from './Done';
 
+import { OrderType } from '../../utils';
+import NoOrders from './NoOrders';
+
 const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
 
-interface Order {
-  id: number;
-  name: string;
-  status: boolean;
-  count: number;
-  cartId: number;
-  note: string;
-}
-
-const InProgressOrders: React.FC = () => {
+const InProgressOrders = () => {
+  const [orders, setOrders] = useState<OrderType[]>([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [open, setOpen] = useState(false);
-  const [orderId, setOrderId] = useState();
+  const [orderId, setOrderId] = useState(0);
 
   const handleOpen = (id: number) => {
     setOpen(true);
@@ -44,13 +39,12 @@ const InProgressOrders: React.FC = () => {
   const handleClose = () => {
     setOpen(false);
   };
-  const [orders, setOrders] = useState<Order[]>([]);
 
   const fetchOrders = async () => {
     try {
       const response = await axios.get(`${serverUrl}/api/v1/cart/inprogress`);
       setOrders(response.data);
-      return response.data as Order[];
+      return response.data as OrderType[];
     } catch (error) {
       throw new Error('Error fetching orders');
     }
@@ -60,13 +54,12 @@ const InProgressOrders: React.FC = () => {
     queryKey: ['orders'],
     queryFn: fetchOrders,
     refetchInterval: 120000,
-    refetchIntervalInBackground: true,
   });
   if (isLoading) return <Loader />;
   if (isError) return <div>Error</div>;
 
   const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
+    _event: React.MouseEvent<HTMLButtonElement> | null,
     newPage: number,
   ) => {
     setPage(newPage);
@@ -81,7 +74,6 @@ const InProgressOrders: React.FC = () => {
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, orders.length - page * rowsPerPage);
-
   return (
     <TableContainer component={Paper} style={{ background: 'transparent' }}>
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
@@ -99,30 +91,39 @@ const InProgressOrders: React.FC = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {(rowsPerPage > 0
-            ? orders.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            : orders
-          ).map(row => {
-            return (
-              <TableRow
-                key={row.id}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {row.id}
-                </TableCell>
-                <TableCell>{row.note}</TableCell>
-                <TableCell>
-                  <div>
-                    <FormatListBulletedIcon onClick={() => handleOpen(row.id)} />
-                  </div>
-                </TableCell>
-                <TableCell>
-                  <Done id={row.id} />
-                </TableCell>
-              </TableRow>
-            );
-          })}
+          {orders.length ? (
+            (rowsPerPage > 0
+              ? orders.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              : orders
+            ).map(row => {
+              return (
+                <TableRow
+                  key={row.id}
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {row.id}
+                  </TableCell>
+                  <TableCell>{row.note}</TableCell>
+                  <TableCell>
+                    <div>
+                      <FormatListBulletedIcon onClick={() => handleOpen(row.id)} />
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <Done id={row.id} />
+                  </TableCell>
+                </TableRow>
+              );
+            })
+          ) : (
+            <TableRow>
+              <TableCell align="right"> </TableCell>
+              <TableCell align="center">
+                <NoOrders />
+              </TableCell>
+            </TableRow>
+          )}
           <Popup open={open} onClose={handleClose} id={orderId} />
 
           {emptyRows > 0 && (

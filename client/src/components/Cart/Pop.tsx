@@ -1,20 +1,22 @@
-/* eslint-disable jsx-a11y/alt-text */
-import * as core from '@mui/material';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import { useState, FC } from 'react';
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  TextField,
+  Button,
+  Typography,
+} from '@mui/material';
+
+import { useState } from 'react';
 import InsertCommentIcon from '@mui/icons-material/InsertComment';
 import { ButtonSectionProps } from '../../utils';
 
-const { TextField, Button, Typography } = core;
-const ButtonSection: FC<ButtonSectionProps> = ({ setNotes }) => {
+const ButtonSection = ({ setNotes }: ButtonSectionProps) => {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <core.CssBaseline />
       <Dialog open={open} onClose={() => setOpen(!open)}>
         <DialogTitle
           sx={{

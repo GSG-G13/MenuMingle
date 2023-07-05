@@ -81,3 +81,18 @@ export interface ordersTable {
   open: boolean;
   onClose: () => void;
 }
+
+export interface BodyType {
+  orders: [] | null;
+  note: string;
+  customerId: number;
+}
+
+export interface OrderType {
+  id: number;
+  name: string;
+  status: string;
+  count: number;
+  cartId: number;
+  note: string;
+}

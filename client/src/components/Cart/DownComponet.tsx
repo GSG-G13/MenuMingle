@@ -1,21 +1,13 @@
-import * as core from '@mui/material';
+import { Button, Alert } from '@mui/material';
 import axios from 'axios';
-import { FC, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { ButtonSectionProps } from '../../utils';
-
-const { Button, Alert } = core;
-
-type BodyType = {
-  orders: [] | null;
-  note: string;
-  customerId: number;
-};
+import { ButtonSectionProps, BodyType } from '../../utils';
 
 const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
 
-const DownComponent: FC<ButtonSectionProps> = ({ notes }) => {
+const DownComponent = ({ notes }: ButtonSectionProps) => {
   const goToWaitingRoom = useNavigate();
 
   const [orders, setOrders] = useState<[] | null>([]);

@@ -1,20 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useState, FormEvent } from 'react';
 import { PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import './form.css';
+import { Alert } from '@mui/material';
 
 const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
 
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState<string>('');
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     if (!stripe || !elements) {
-      // Stripe.js has not yet loaded.
-      // Make sure to disable form submission until Stripe.js has loaded.
       return;
     }
 
@@ -23,14 +22,12 @@ const CheckoutForm = () => {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        // Make sure to change this to your payment completion page
         return_url: `${window.location.origin}/waiting-room`,
       },
     });
 
     if (error) {
       setMessage(`Payment failed: ${error.message}`);
-      console.log('Error', error.message);
     }
     setIsProcessing(false);
   };
@@ -40,6 +37,7 @@ const CheckoutForm = () => {
       <PaymentElement />
       <button type="submit" disabled={isProcessing} id="submit">
         <span id="button-text">{isProcessing ? 'Processing...' : 'Pay Now'}</span>
+        {message && <Alert severity="error">{message}</Alert>}
       </button>
     </form>
   );
