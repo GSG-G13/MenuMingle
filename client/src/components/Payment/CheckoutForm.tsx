@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { Alert } from '@mui/material';
 
 import { useMutation } from '@tanstack/react-query';
 
@@ -17,6 +18,7 @@ type BodyType = {
 const CheckoutForm = () => {
   const [orders, setOrders] = useState<[] | null>([]);
   const [notes, setNotes] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     let dataFromLocalStorage = JSON.parse(localStorage.getItem('items') as string);
@@ -32,27 +34,26 @@ const CheckoutForm = () => {
     const noteFromLocalStorage = localStorage.getItem('note') as string;
     setNotes(noteFromLocalStorage);
   }, []);
+
+  const addToCart = async (reqBody: BodyType) => {
+    const data = await axios.post(`${serverUrl}/api/v1/cart/add-to-cart`, reqBody);
+    navigate('/waiting-room', { state: data.data.cartId });
+  };
   const { mutate } = useMutation({
     mutationKey: ['post'],
-    mutationFn: (reqBody: BodyType) =>
-      axios.post(`${serverUrl}/api/v1/cart/add-to-cart`, reqBody),
+    mutationFn: addToCart,
   });
-  const navigate = useNavigate();
 
   const stripe = useStripe();
   const elements = useElements();
 
-  const [message, setMessage] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     if (!stripe || !elements) {
-      // Stripe.js has not yet loaded.
-      // Make sure to disable form submission until Stripe.js has loaded.
       return;
-      // 4242 4242 4242 4242
     }
 
     setIsProcessing(true);
@@ -63,8 +64,7 @@ const CheckoutForm = () => {
     });
 
     if (error) {
-      setMessage(`Payment failed: ${error.message}`);
-      console.log('Error', error.message);
+      <Alert severity="error">This is an error alert — check it out!</Alert>;
     } else if (paymentIntent.status === 'succeeded') {
       const body = {
         orders,
@@ -72,11 +72,9 @@ const CheckoutForm = () => {
         customerId: 123456,
       };
       mutate(body);
-      navigate('/waiting-room');
     }
     setIsProcessing(false);
   };
-
   return (
     <form onSubmit={handleSubmit}>
       <PaymentElement />
