@@ -12,7 +12,7 @@ interface CartAttributes
     InferCreationAttributes<CartAttributes>
   > {
   id: CreationOptional<number>;
-  note: string;
+  note?: string;
   status: CartStatus;
   customerId: string;
 }
