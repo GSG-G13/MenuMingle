@@ -9,6 +9,7 @@ const getOrderStatus = async (
 ) => {
   try {
     const { cartId } = req.query as { cartId: string };
+
     if (!cartId) {
       throw new CustomError(StatusCodes.BadRequest, 'no cart id was provided');
     }

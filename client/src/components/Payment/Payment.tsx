@@ -2,6 +2,8 @@
 import { useEffect, useState } from 'react';
 import { loadStripe, Stripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
+import { useLocation } from 'react-router-dom';
+import axios from 'axios';
 import CheckoutForm from './CheckoutForm';
 
 const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
@@ -9,29 +11,31 @@ const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
 const Payment = () => {
   const [stripePromise, setStripePromise] = useState<Stripe | null>(null);
   const [clientSecret, setClientSecret] = useState<string | ''>('');
+  const location = useLocation();
+  const { state } = location;
+
+  const sendConfig = async () => {
+    const response = await axios.get(`${serverUrl}/config`);
+    const { publishableKey } = response.data;
+    setStripePromise(await loadStripe(publishableKey));
+  };
+  const createPaymentIntent = async () => {
+    const response = await axios.post(`${serverUrl}/create-payment-intent`, {
+      amount: state.totalPrice,
+    });
+    const { clientSecret } = await response.data;
+    setClientSecret(clientSecret);
+  };
 
   useEffect(() => {
-    fetch(`${serverUrl}/config`).then(async res => {
-      const { publishableKey } = await res.json();
-      setStripePromise(await loadStripe(publishableKey));
-    });
-  }, []);
-
-  useEffect(() => {
-    fetch(`${serverUrl}/create-payment-intent`, {
-      method: 'POST',
-      body: JSON.stringify({}),
-    }).then(async res => {
-      // eslint-disable-next-line no-shadow
-      const { clientSecret } = await res.json();
-      setClientSecret(clientSecret);
-    });
+    sendConfig();
+    createPaymentIntent();
   }, []);
 
   return (
     <div>
       <h1>Payment</h1>
-      {stripePromise && clientSecret && (
+      {clientSecret && clientSecret && (
         <Elements stripe={stripePromise} options={{ clientSecret }}>
           <CheckoutForm />
         </Elements>

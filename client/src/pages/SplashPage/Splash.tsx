@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { Box } from '@mui/material';
 import { v4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
-import { v4 } from 'uuid';
 import logo from '../../assets/logo.png';
 
 import './SplashPage.css';

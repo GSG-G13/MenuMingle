@@ -11,10 +11,10 @@ const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
 
 const Status = () => {
   const location = useLocation();
-  const { state } = location;
-  console.log(state, 'cartId');
+  const {
+    state: { cartId },
+  } = location;
 
-  // const [cartId, setCartId] = useState<number>();
   const getOrderStatus = async (cartInput: number) => {
     const getCartStatus = await axios.get(
       `${serverUrl}/api/v1/cart/get-cart-status?cartId=${cartInput}`,
@@ -22,16 +22,10 @@ const Status = () => {
     return getCartStatus.data.data.status;
   };
 
-  // useEffect(() => {
-  //   const cartIdFromLocalStorage = localStorage.getItem('cartId') as string;
-  //   setCartId(+cartIdFromLocalStorage);
-  //   // console.log(cartId);
-  //   console.log(cartIdFromLocalStorage);
-  // }, []);
   const steps = ['Order is received', 'Order is being prepared', 'Order is Ready'];
   const [timer, setTimer] = useState(0);
   const { data } = useQuery({
-    queryFn: () => getOrderStatus(state),
+    queryFn: () => getOrderStatus(cartId),
     queryKey: ['orders status'],
     refetchInterval: 60000,
   });
