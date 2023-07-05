@@ -17,6 +17,8 @@ type BodyType = {
 const CheckoutForm = () => {
   const [orders, setOrders] = useState<[] | null>([]);
   const [notes, setNotes] = useState('');
+  const [cartId, setCartId] = useState<number>(10);
+  const navigate = useNavigate();
 
   useEffect(() => {
     let dataFromLocalStorage = JSON.parse(localStorage.getItem('items') as string);
@@ -32,12 +34,21 @@ const CheckoutForm = () => {
     const noteFromLocalStorage = localStorage.getItem('note') as string;
     setNotes(noteFromLocalStorage);
   }, []);
+  // useEffect(() => {
+  //   localStorage.setItem('cartId', cartId?.toString());
+  // }, [cartId]);
+
+  const addToCart = async (reqBody: BodyType) => {
+    const data = await axios.post(`${serverUrl}/api/v1/cart/add-to-cart`, reqBody);
+    console.log(data.data.cartId);
+    setCartId(data.data.cartId);
+    navigate('/waiting-room', { state: cartId });
+    console.log(data.data.cartId, 'aaaaa');
+  };
   const { mutate } = useMutation({
     mutationKey: ['post'],
-    mutationFn: (reqBody: BodyType) =>
-      axios.post(`${serverUrl}/api/v1/cart/add-to-cart`, reqBody),
+    mutationFn: addToCart,
   });
-  const navigate = useNavigate();
 
   const stripe = useStripe();
   const elements = useElements();
@@ -49,10 +60,7 @@ const CheckoutForm = () => {
     e.preventDefault();
 
     if (!stripe || !elements) {
-      // Stripe.js has not yet loaded.
-      // Make sure to disable form submission until Stripe.js has loaded.
       return;
-      // 4242 4242 4242 4242
     }
 
     setIsProcessing(true);
@@ -64,7 +72,7 @@ const CheckoutForm = () => {
 
     if (error) {
       setMessage(`Payment failed: ${error.message}`);
-      console.log('Error', error.message);
+      console.log('Error', message);
     } else if (paymentIntent.status === 'succeeded') {
       const body = {
         orders,
@@ -72,11 +80,9 @@ const CheckoutForm = () => {
         customerId: 123456,
       };
       mutate(body);
-      navigate('/waiting-room');
     }
     setIsProcessing(false);
   };
-
   return (
     <form onSubmit={handleSubmit}>
       <PaymentElement />
