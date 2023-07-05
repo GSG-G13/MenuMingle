@@ -1,15 +1,18 @@
-/* eslint-disable jsx-a11y/alt-text */
-import * as core from '@mui/material';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import { useState, FC, useEffect } from 'react';
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  TextField,
+  Button,
+  Typography,
+} from '@mui/material';
+
+import { useState, useEffect } from 'react';
 import InsertCommentIcon from '@mui/icons-material/InsertComment';
 import { ButtonSectionProps } from '../../utils';
 
-const { TextField, Button, Typography } = core;
-const ButtonSection: FC<ButtonSectionProps> = ({ notes, setNotes }) => {
+const ButtonSection = ({ setNotes, notes }: ButtonSectionProps) => {
   const [open, setOpen] = useState(false);
   useEffect(() => {
     localStorage.setItem('note', notes);
@@ -17,7 +20,6 @@ const ButtonSection: FC<ButtonSectionProps> = ({ notes, setNotes }) => {
 
   return (
     <>
-      <core.CssBaseline />
       <Dialog open={open} onClose={() => setOpen(!open)}>
         <DialogTitle
           sx={{
@@ -29,7 +31,6 @@ const ButtonSection: FC<ButtonSectionProps> = ({ notes, setNotes }) => {
           }}
         >
           <Typography sx={{ color: 'blueviolet', margin: 'auto' }}>
-            {' '}
             Any preferences for your order?
           </Typography>
           <Button

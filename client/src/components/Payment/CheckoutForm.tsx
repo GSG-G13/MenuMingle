@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FormEvent } from 'react';
 import { PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -49,7 +49,7 @@ const CheckoutForm = () => {
 
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     if (!stripe || !elements) {

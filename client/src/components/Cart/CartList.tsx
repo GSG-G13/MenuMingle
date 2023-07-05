@@ -1,11 +1,11 @@
-import { useEffect, useState, FC } from 'react';
+import { useEffect, useState } from 'react';
 import { Grid, Typography, Button } from '@mui/material';
 import CartItem from './CartItem';
 import EmptyCart from './Empty';
 import { Item, ButtonSectionProps } from '../../utils';
 import ButtonSection from './Pop';
 
-const CartList: FC<ButtonSectionProps> = ({ notes, setNotes }): JSX.Element => {
+const CartList = ({ notes, setNotes }: ButtonSectionProps): JSX.Element => {
   const [cartItems, setCartItems] = useState<Item[]>([]);
   const handleDelete = (itemId: number): void => {
     const itemsString = localStorage.getItem('items');

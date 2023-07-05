@@ -27,16 +27,16 @@ const Popup = ({ open, onClose, id }: ordersTable): JSX.Element => {
     if (!id) return;
     const response = await axios.get(`${serverUrl}/api/v1/cart/${id}/dishes`);
     setDishes(response.data);
+    // eslint-disable-next-line consistent-return
     return response;
   };
 
-  const { isLoading, isError } = useQuery({
+  const { isLoading } = useQuery({
     queryKey: ['dishes', id],
     queryFn: fetchDishes,
     refetchOnReconnect: true,
   });
   if (isLoading) return <Loader />;
-  // if (isError) return <div>Error</div>;
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>Dishes</DialogTitle>
