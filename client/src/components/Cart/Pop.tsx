@@ -4,13 +4,16 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { useState, FC } from 'react';
+import { useState, FC, useEffect } from 'react';
 import InsertCommentIcon from '@mui/icons-material/InsertComment';
 import { ButtonSectionProps } from '../../utils';
 
 const { TextField, Button, Typography } = core;
-const ButtonSection: FC<ButtonSectionProps> = ({ setNotes }) => {
+const ButtonSection: FC<ButtonSectionProps> = ({ notes, setNotes }) => {
   const [open, setOpen] = useState(false);
+  useEffect(() => {
+    localStorage.setItem('note', notes);
+  }, [open]);
 
   return (
     <>
