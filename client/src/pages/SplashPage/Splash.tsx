@@ -1,5 +1,6 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo.png';
@@ -15,7 +16,11 @@ const SplashPage = () => {
       navigate('/menu');
     }, 1000);
   };
-
+  useEffect(() => {
+    setTimeout(() => {
+      handleClick();
+    }, 1000);
+  }, []);
   return (
     <div>
       <Box
@@ -27,7 +32,7 @@ const SplashPage = () => {
           height: '100vh',
         }}
       >
-        <img src={logo} alt="Splash" onClick={handleClick} />
+        <img src={logo} alt="Splash" onClick={() => handleClick()} />
       </Box>
     </div>
   );
