@@ -26,17 +26,14 @@ const Status = () => {
   const [timer, setTimer] = useState(0);
   const { data } = useQuery({
     queryFn: () => getOrderStatus(cartId),
-    queryKey: ['orders status'],
-    refetchInterval: 60000,
+    queryKey: ['ordersStatus'],
+    refetchInterval: false,
+    refetchIntervalInBackground: false,
   });
   useEffect(() => {
-    const interval = setInterval(() => {
+    setInterval(() => {
       setTimer(prevTimer => prevTimer + 1);
     }, 1000);
-
-    return () => {
-      clearInterval(interval);
-    };
   }, []);
   const formatTime = (time: number) => {
     const minutes = Math.floor(time / 60);

@@ -4,14 +4,14 @@ import {
   getInProgress,
   updateCartStatus,
   getDishesByCartId,
+  getCartStatus,
 } from '../controllers';
-import { getOrderStatus } from '../controllers';
 
 const cartRouter = Router();
 
 cartRouter.get('/inprogress', getInProgress);
 cartRouter.post('/add-to-cart', addToCart);
-cartRouter.get('/get-cart-status', getOrderStatus);
+cartRouter.get('/get-cart-status', getCartStatus);
 cartRouter.put('/update-cart', updateCartStatus);
 cartRouter.get('/:cartId/dishes', getDishesByCartId);
 
