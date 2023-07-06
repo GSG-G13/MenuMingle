@@ -23,7 +23,7 @@ const createDishRequest = async (DishInfo: DishType) => {
   return response.data;
 };
 
-const CreateDish = () => {
+const CreateDish = ({ refetch }) => {
   const [open, setOpen] = useState<boolean>(false);
   const [dishToCreate, setDishToCreate] = useState<DishType>({
     name: 'test',
@@ -43,6 +43,8 @@ const CreateDish = () => {
   const handleCreateDish = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     mutate(dishToCreate);
+    refetch();
+    setOpen(false);
   };
   const handleChangeInput = (
     event:

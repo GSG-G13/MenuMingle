@@ -30,6 +30,7 @@ const InProgressOrders = () => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [open, setOpen] = useState(false);
   const [orderId, setOrderId] = useState(0);
+  const [cart, setCart] = useState(orders.length);
 
   const handleOpen = (id: number) => {
     setOpen(true);
@@ -43,14 +44,15 @@ const InProgressOrders = () => {
   const fetchOrders = async () => {
     try {
       const response = await axios.get(`${serverUrl}/api/v1/cart/inprogress`);
-      setOrders(response.data);
-      return response.data as OrderType[];
+      setOrders(response.data.data);
+      setCart(response.data.data.length);
+      return response.data.data as OrderType[];
     } catch (error) {
       throw new Error('Error fetching orders');
     }
   };
 
-  const { isLoading, isError } = useQuery({
+  const { isLoading, isError, refetch } = useQuery({
     queryKey: ['orders'],
     queryFn: fetchOrders,
     refetchInterval: 120000,
@@ -91,7 +93,7 @@ const InProgressOrders = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {orders.length ? (
+          {cart ? (
             (rowsPerPage > 0
               ? orders.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               : orders
@@ -111,7 +113,7 @@ const InProgressOrders = () => {
                     </div>
                   </TableCell>
                   <TableCell>
-                    <Done id={row.id} />
+                    <Done id={row.id} refetch={refetch} />
                   </TableCell>
                 </TableRow>
               );

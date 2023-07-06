@@ -1,8 +1,7 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useState, useEffect } from 'react';
 import { Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { v4 } from 'uuid';
 import logo from '../../assets/logo.png';
 
 import './SplashPage.css';

@@ -19,12 +19,13 @@ const Status = () => {
     const getCartStatus = await axios.get(
       `${serverUrl}/api/v1/cart/get-cart-status?cartId=${cartInput}`,
     );
+
     return getCartStatus.data.data.status;
   };
 
   const steps = ['Order is received', 'Order is being prepared', 'Order is Ready'];
   const [timer, setTimer] = useState(0);
-  const { data } = useQuery({
+  const { data, refetch } = useQuery({
     queryFn: () => getOrderStatus(cartId),
     queryKey: ['ordersStatus'],
     refetchInterval: false,

@@ -6,7 +6,6 @@ import { StatusCodes } from '../../utils/enum';
 
 const createDish = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    console.log(req.body);
     const dish = await dishSchema.validateAsync(req.body);
 
     const newDish = await Dish.create(dish);
