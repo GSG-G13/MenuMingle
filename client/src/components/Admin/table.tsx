@@ -35,7 +35,9 @@ const DishesTable: FC = () => {
 
   const fetchDishes = async () => {
     try {
-      const response = await axios.get(`${serverUrl}/api/v1/dishes`);
+      const response = await axios.get(`${serverUrl}/api/v1/dishes`, {
+        withCredentials: true,
+      });
       setDishes(response.data.data);
       return response.data.data as DishType[];
     } catch (error) {
@@ -45,7 +47,9 @@ const DishesTable: FC = () => {
 
   const deleteDish = async (id: number | undefined): Promise<void> => {
     try {
-      await axios.delete(`${serverUrl}/api/v1/dishes/delete/${id}`);
+      await axios.delete(`${serverUrl}/api/v1/dishes/delete/${id}`, {
+        withCredentials: true,
+      });
     } catch (error) {
       throw new Error('Can not delete the dish');
     }

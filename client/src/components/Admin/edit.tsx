@@ -12,6 +12,9 @@ const updateDish = async (id: number, updatedDish: DishType) => {
   const response = await axios.put(
     `${serverUrl}/api/v1/dishes/update/${id}`,
     updatedDish,
+    {
+      withCredentials: true,
+    },
   );
   return response.data;
 };

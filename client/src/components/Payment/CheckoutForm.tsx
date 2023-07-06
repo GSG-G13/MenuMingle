@@ -38,7 +38,9 @@ const CheckoutForm = () => {
   }, []);
 
   const addToCart = async (reqBody: BodyType) => {
-    const data = await axios.post(`${serverUrl}/api/v1/cart/add-to-cart`, reqBody);
+    const data = await axios.post(`${serverUrl}/api/v1/cart/add-to-cart`, reqBody, {
+      withCredentials: true,
+    });
     navigate('/waiting-room', { state: data.data.cartId });
   };
   const { mutate } = useMutation({

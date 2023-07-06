@@ -6,7 +6,9 @@ const Done = ({ id }: { id: number }): JSX.Element => {
 
   const updateStatus = async () => {
     if (id) {
-      axios.put(`${serverUrl}/api/v1/cart/${id}/update`);
+      axios.put(`${serverUrl}/api/v1/cart/${id}/update`, {
+        withCredentials: true,
+      });
     }
   };
   return (

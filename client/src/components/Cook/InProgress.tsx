@@ -42,7 +42,9 @@ const InProgressOrders = () => {
 
   const fetchOrders = async () => {
     try {
-      const response = await axios.get(`${serverUrl}/api/v1/cart/inprogress`);
+      const response = await axios.get(`${serverUrl}/api/v1/cart/inprogress`, {
+        withCredentials: true,
+      });
       setOrders(response.data);
       return response.data as OrderType[];
     } catch (error) {
