@@ -1,7 +1,10 @@
 import { AppBar, Toolbar, Typography, IconButton } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import logo from '../../assets/logo.png';
+
+const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -45,7 +48,14 @@ const Navbar = () => {
           color="inherit"
           aria-label="Orders"
           sx={{ color: 'black' }}
-          onClick={() => {
+          onClick={async () => {
+            await axios.post(
+              `${serverUrl}/api/v1/auth/logout`,
+              {},
+              {
+                withCredentials: true,
+              },
+            );
             navigate('/login');
           }}
         >

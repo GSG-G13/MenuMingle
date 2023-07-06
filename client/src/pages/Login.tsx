@@ -45,12 +45,33 @@ const Login = () => {
       setErrorToThrow(error.details[0]);
     } else {
       try {
-        await axios.post(`${serverUrl}/api/v1/auth/login`, {
-          username: data.get('username'),
-          password: data.get('password'),
-        });
+        await axios.post(
+          `${serverUrl}/api/v1/auth/login`,
+          {
+            username: data.get('username'),
+            password: data.get('password'),
+          },
+          {
+            withCredentials: true,
+          },
+        );
 
-        navigate('/dashboard'); // Change this URL to the desired destination
+        const user = await axios.get(
+          `${serverUrl}/api/v1/auth/getUserByUsername/${data.get('username')}`,
+          {
+            withCredentials: true,
+          },
+        );
+
+        // console.log(user.data.data.role_id);
+
+        if (user.data.data.role_id === 1) {
+          navigate('/admin');
+        } else if (user.data.data.role_id === 2) {
+          navigate('/cook');
+        }
+
+        // navigate('/dashboard'); // Change this URL to the desired destination
       } catch (err: any) {
         throw new Error(err);
       }

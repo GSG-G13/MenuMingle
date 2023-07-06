@@ -18,6 +18,9 @@ const Status = () => {
   const getOrderStatus = async (cartInput: number) => {
     const getCartStatus = await axios.get(
       `${serverUrl}/api/v1/cart/get-cart-status?cartId=${cartInput}`,
+      {
+        withCredentials: true,
+      },
     );
 
     return getCartStatus.data.data.status;

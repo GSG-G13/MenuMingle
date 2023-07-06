@@ -18,8 +18,8 @@ const app = express();
 app.use([
   cors({
     origin: ServerCors.Origin as string,
-    methods: ServerCors.Methods as string,
-    credentials: Boolean(ServerCors.Credentials),
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true,
   }),
   json(),
   urlencoded({ extended: false }),

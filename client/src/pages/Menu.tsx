@@ -43,7 +43,9 @@ const Menu = () => {
 
   const fetchDishes = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/v1/dishes');
+      const response = await axios.get('http://localhost:8080/api/v1/dishes', {
+        withCredentials: true,
+      });
       setDishes(response.data.data);
       return response.data.data as Dish[];
     } catch (error) {

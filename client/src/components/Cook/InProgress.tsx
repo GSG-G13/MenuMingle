@@ -43,7 +43,9 @@ const InProgressOrders = () => {
 
   const fetchOrders = async () => {
     try {
-      const response = await axios.get(`${serverUrl}/api/v1/cart/inprogress`);
+      const response = await axios.get(`${serverUrl}/api/v1/cart/inprogress`, {
+        withCredentials: true,
+      });
       setOrders(response.data.data);
       setCart(response.data.data.length);
       return response.data.data as OrderType[];

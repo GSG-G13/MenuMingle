@@ -19,7 +19,9 @@ import { useCategories, useAvailabilities, useInputs } from '../../hocks';
 const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
 
 const createDishRequest = async (DishInfo: DishType) => {
-  const response = await axios.post(`${serverUrl}/api/v1/dishes/create`, DishInfo);
+  const response = await axios.post(`${serverUrl}/api/v1/dishes/create`, DishInfo, {
+    withCredentials: true,
+  });
   return response.data;
 };
 
