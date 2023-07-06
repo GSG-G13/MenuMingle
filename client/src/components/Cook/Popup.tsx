@@ -25,7 +25,9 @@ const Popup = ({ open, onClose, id }: ordersTable): JSX.Element => {
   const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
   const fetchDishes = async () => {
     if (!id) return;
-    const response = await axios.get(`${serverUrl}/api/v1/cart/${id}/dishes`);
+    const response = await axios.get(`${serverUrl}/api/v1/cart/${id}/dishes`, {
+      withCredentials: true,
+    });
     setDishes(response.data);
     // eslint-disable-next-line consistent-return
     return response;
