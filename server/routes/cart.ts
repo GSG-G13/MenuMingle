@@ -12,8 +12,8 @@ import verifyAccessToken from '../middleware/authMiddileware';
 const cartRouter = Router();
 
 cartRouter.post('/add-to-cart', addToCart);
-cartRouter.put('/update-cart', verifyAccessToken('cooker'), updateCartStatus);
-cartRouter.get('/inprogress', verifyAccessToken('cooker'), getInProgress);
+cartRouter.put('/update-cart', updateCartStatus);
+cartRouter.get('/inprogress', getInProgress);
 cartRouter.get('/get-cart-status', getCartStatus);
 
 cartRouter.get(

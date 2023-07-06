@@ -7,7 +7,7 @@ const Done: FC<{ id: number }> = ({ id, refetch }) => {
 
   const updateStatus = async () => {
     if (id) {
-      axios.put(`${serverUrl}/api/v1/cart/${id}/update`, {
+      axios.put(`${serverUrl}/api/v1/cart/update-cart?cartId=${id}&cartStatus=done`, {
         withCredentials: true,
       });
       refetch();

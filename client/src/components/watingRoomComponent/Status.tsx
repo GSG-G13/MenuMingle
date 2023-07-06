@@ -4,13 +4,14 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
 
 const Status = () => {
   const location = useLocation();
+  const goToCompletion = useNavigate();
   const {
     state: { cartId },
   } = location;
@@ -28,10 +29,10 @@ const Status = () => {
 
   const steps = ['Order is received', 'Order is being prepared', 'Order is Ready'];
   const [timer, setTimer] = useState(0);
-  const { data, refetch } = useQuery({
+  const { data } = useQuery({
     queryFn: () => getOrderStatus(cartId),
     queryKey: ['ordersStatus'],
-    refetchInterval: false,
+    refetchInterval: 12000,
     refetchIntervalInBackground: false,
   });
   useEffect(() => {
@@ -46,17 +47,23 @@ const Status = () => {
       .toString()
       .padStart(2, '0')}`;
   };
+  if (data === 'done') {
+    goToCompletion('/go-to-completion');
+  }
+
   return (
-    <Box sx={{ width: 'calc(100% - 20px);', marginLeft: '20px' }}>
-      <p>Time elapsed: {formatTime(timer)}</p>
-      <p>order status {data}</p>
-      <Stepper activeStep={1} orientation="vertical">
-        {steps.map(label => (
-          <Step key={label}>
-            <StepLabel>{label}</StepLabel>
-          </Step>
-        ))}
-      </Stepper>
+    <Box sx={{ width: 'calc(100% - 20px)', marginLeft: '20px' }}>
+      <>
+        <p>Time elapsed: {formatTime(timer)}</p>
+        <p>Order status: {data}</p>
+        <Stepper activeStep={1} orientation="vertical">
+          {steps.map(label => (
+            <Step key={label}>
+              <StepLabel>{label}</StepLabel>
+            </Step>
+          ))}
+        </Stepper>
+      </>
     </Box>
   );
 };
