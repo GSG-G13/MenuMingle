@@ -83,7 +83,7 @@ const ButtonSection = ({ setNotes, notes }: ButtonSectionProps) => {
           </Button>
         </DialogActions>
       </Dialog>
-      <div
+      <span
         style={{
           display: 'flex',
           justifyContent: 'center',
@@ -99,7 +99,7 @@ const ButtonSection = ({ setNotes, notes }: ButtonSectionProps) => {
           }}
           onClick={() => setOpen(true)}
         />
-      </div>
+      </span>
     </>
   );
 };

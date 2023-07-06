@@ -4,9 +4,9 @@ import empty from '../../assets/emptycart2.png';
 const EmptyCart = () => {
   return (
     <Grid
-      direction="column"
       style={{
         display: 'flex',
+        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: '10%',
