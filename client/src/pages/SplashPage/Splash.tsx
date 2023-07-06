@@ -2,7 +2,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useState, useEffect } from 'react';
 import { Box } from '@mui/material';
-import { v4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo.png';
 

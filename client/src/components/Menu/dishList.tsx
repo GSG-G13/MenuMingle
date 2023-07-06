@@ -6,7 +6,7 @@ import { DishListProps } from '../../utils/interfaces';
 
 const DishList: React.FC<DishListProps> = ({ dishes, cat }) => {
   return (
-    <Grid container spacing={2} style={{ marginTop: '20px' }}>
+    <Grid container style={{ marginTop: '20px' }}>
       {dishes
         // eslint-disable-next-line array-callback-return, consistent-return
         .filter(el => {

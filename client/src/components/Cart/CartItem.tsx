@@ -11,7 +11,13 @@ const CartItem = ({
   onDelete,
 }: cartItemInterface): JSX.Element => {
   return (
-    <Grid item xs={12} sm={6} md={4} style={{ width: '100%', marginLeft: '20px' }}>
+    <Grid
+      item
+      xs={12}
+      sm={6}
+      md={4}
+      style={{ width: '100%', marginLeft: '20px', marginTop: '5px' }}
+    >
       <Box
         display="flex"
         alignItems="center"

@@ -62,7 +62,7 @@ const CartList = ({ notes, setNotes }: ButtonSectionProps): JSX.Element => {
   };
 
   return (
-    <Grid container spacing={2} style={{ width: '100%', marginTop: '5%' }}>
+    <Grid container style={{ width: '100%', marginTop: '5%' }}>
       {cartItems?.map(item => (
         <CartItem
           key={item.id}
@@ -82,8 +82,9 @@ const CartList = ({ notes, setNotes }: ButtonSectionProps): JSX.Element => {
               textTransform: 'none',
               textDecoration: 'underline',
               position: 'fixed',
-              top: '6%',
+              top: '5%',
               right: '5px',
+              marginBottom: '20px',
             }}
           >
             ClearCart
