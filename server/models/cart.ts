@@ -13,7 +13,6 @@ const Cart = sequelize.define<CartAttributes>(
     },
     note: {
       type: DataTypes.STRING,
-      allowNull: true,
     },
     customerId: {
       type: DataTypes.STRING,

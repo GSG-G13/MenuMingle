@@ -4,16 +4,17 @@ import {
   getInProgress,
   updateCartStatus,
   getDishesByCartId,
+  getCartStatus,
 } from '../controllers';
-import { getOrderStatus } from '../controllers';
+
 import verifyAccessToken from '../middleware/authMiddileware';
 
 const cartRouter = Router();
 
-cartRouter.get('/inprogress', verifyAccessToken('cooker'), getInProgress);
 cartRouter.post('/add-to-cart', addToCart);
-cartRouter.get('/get-cart-status', verifyAccessToken('cooker'), getOrderStatus);
-cartRouter.put('/:id/update', verifyAccessToken('cooker'), updateCartStatus);
+cartRouter.put('/update-cart', updateCartStatus);
+cartRouter.get('/inprogress', getInProgress);
+cartRouter.get('/get-cart-status', getCartStatus);
 
 cartRouter.get(
   '/:cartId/dishes',

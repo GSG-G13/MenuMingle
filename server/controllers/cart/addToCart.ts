@@ -39,10 +39,14 @@ const addToCart = async (req: Request, res: Response, next: NextFunction) => {
       group: ['Order.id', 'Dish.id', 'Cart.id'],
     });
 
+    const totalPrice = allDishesPrices.reduce((accumulator, current) => {
+      return current.dataValues.totalPrice + accumulator;
+    }, 0);
+
     return res.json({
       error: false,
       msg: 'the order has been saved successfully',
-      data: allDishesPrices,
+      price: totalPrice,
       cartId,
     });
   } catch (error) {

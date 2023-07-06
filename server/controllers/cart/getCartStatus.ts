@@ -2,13 +2,15 @@ import { Request, Response, NextFunction } from 'express';
 import { Cart } from '../../models';
 import { CustomError, StatusCodes } from '../../utils';
 
-const getOrderStatus = async (
+const getCartStatus = async (
   req: Request,
   res: Response,
   next: NextFunction,
 ) => {
   try {
+    console.log('hhhhhhhhhhhhh', 'cartId');
     const { cartId } = req.query as { cartId: string };
+
     if (!cartId) {
       throw new CustomError(StatusCodes.BadRequest, 'no cart id was provided');
     }
@@ -21,7 +23,10 @@ const getOrderStatus = async (
         data: 'you do not have any orders',
       });
     }
+
+    console.log(orderStatus, 'oorder status');
     return res.json({
+      test: 'test',
       error: false,
       data: orderStatus,
     });
@@ -30,4 +35,4 @@ const getOrderStatus = async (
   }
 };
 
-export default getOrderStatus;
+export default getCartStatus;

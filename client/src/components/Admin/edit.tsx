@@ -19,7 +19,7 @@ const updateDish = async (id: number, updatedDish: DishType) => {
   return response.data;
 };
 
-const EditDish: FC<EditDishProps> = ({ dishToUpdate, setOpen }) => {
+const EditDish: FC<EditDishProps> = ({ dishToUpdate, setOpen, refetch }) => {
   const [success, setSuccess] = useState(false);
 
   const { mutate, isError, isLoading } = useMutation(
@@ -34,6 +34,7 @@ const EditDish: FC<EditDishProps> = ({ dishToUpdate, setOpen }) => {
   const handleSubmit = (updatedDish: DishType) => {
     mutate(updatedDish);
     setOpen(false);
+    refetch();
   };
   if (success) {
     return <Alert severity="success">This is a success alert — check it out!</Alert>;

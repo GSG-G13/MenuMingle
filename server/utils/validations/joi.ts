@@ -30,7 +30,7 @@ const loginSchema = Joi.object({
 const cartSchema = Joi.object({
   orders: Joi.array().required(),
   customerId: Joi.string().required(),
-  note: Joi.string(),
+  note: Joi.string().optional(),
 });
 
 export { signupSchema, dishSchema, loginSchema, cartSchema };

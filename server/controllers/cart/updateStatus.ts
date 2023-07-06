@@ -1,28 +1,33 @@
 import { Request, Response, NextFunction } from 'express';
 import { Cart } from '../../models';
-import { CartStatus } from '../../utils';
+import { CartStatus, CustomError, StatusCodes } from '../../utils';
 
 const updateCartStatus = async (
   req: Request,
   res: Response,
   next: NextFunction,
 ) => {
-  const { id } = req.params;
+  const { cartId, cartStatus } = req.query as {
+    cartId: string;
+    cartStatus: string;
+  };
 
   try {
-    const cart = await Cart.findByPk(id);
+    const cart = await Cart.findByPk(cartId);
 
     if (!cart) {
-      return res.status(404).json({ error: 'Cart not found' });
+      throw new CustomError(StatusCodes.BadRequest, 'cart not found');
     }
-
-    cart.status = CartStatus.Value3;
+    if (cartStatus === 'done') {
+      cart.status = CartStatus.Value3;
+    } else {
+      cart.status = CartStatus.Value2;
+    }
     await cart.save();
 
     return res.json(cart);
   } catch (error) {
-    console.error('Error updating cart status:', error);
-    return res.status(500).json({ error: 'Internal server error' });
+    next(error);
   }
 };
 

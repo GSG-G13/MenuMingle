@@ -4,17 +4,18 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
 
 const Status = () => {
   const location = useLocation();
-  const { state } = location;
-  console.log(state, 'cartId');
+  const goToCompletion = useNavigate();
+  const {
+    state: { cartId },
+  } = location;
 
-  // const [cartId, setCartId] = useState<number>();
   const getOrderStatus = async (cartInput: number) => {
     const getCartStatus = await axios.get(
       `${serverUrl}/api/v1/cart/get-cart-status?cartId=${cartInput}`,
@@ -22,30 +23,22 @@ const Status = () => {
         withCredentials: true,
       },
     );
+
     return getCartStatus.data.data.status;
   };
 
-  // useEffect(() => {
-  //   const cartIdFromLocalStorage = localStorage.getItem('cartId') as string;
-  //   setCartId(+cartIdFromLocalStorage);
-  //   // console.log(cartId);
-  //   console.log(cartIdFromLocalStorage);
-  // }, []);
   const steps = ['Order is received', 'Order is being prepared', 'Order is Ready'];
   const [timer, setTimer] = useState(0);
   const { data } = useQuery({
-    queryFn: () => getOrderStatus(state),
-    queryKey: ['orders status'],
-    refetchInterval: 60000,
+    queryFn: () => getOrderStatus(cartId),
+    queryKey: ['ordersStatus'],
+    refetchInterval: 12000,
+    refetchIntervalInBackground: false,
   });
   useEffect(() => {
-    const interval = setInterval(() => {
+    setInterval(() => {
       setTimer(prevTimer => prevTimer + 1);
     }, 1000);
-
-    return () => {
-      clearInterval(interval);
-    };
   }, []);
   const formatTime = (time: number) => {
     const minutes = Math.floor(time / 60);
@@ -54,17 +47,23 @@ const Status = () => {
       .toString()
       .padStart(2, '0')}`;
   };
+  if (data === 'done') {
+    goToCompletion('/go-to-completion');
+  }
+
   return (
-    <Box sx={{ width: 'calc(100% - 20px);', marginLeft: '20px' }}>
-      <p>Time elapsed: {formatTime(timer)}</p>
-      <p>order status {data}</p>
-      <Stepper activeStep={1} orientation="vertical">
-        {steps.map(label => (
-          <Step key={label}>
-            <StepLabel>{label}</StepLabel>
-          </Step>
-        ))}
-      </Stepper>
+    <Box sx={{ width: 'calc(100% - 20px)', marginLeft: '20px' }}>
+      <>
+        <p>Time elapsed: {formatTime(timer)}</p>
+        <p>Order status: {data}</p>
+        <Stepper activeStep={1} orientation="vertical">
+          {steps.map(label => (
+            <Step key={label}>
+              <StepLabel>{label}</StepLabel>
+            </Step>
+          ))}
+        </Stepper>
+      </>
     </Box>
   );
 };

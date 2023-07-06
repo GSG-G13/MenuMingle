@@ -1,6 +1,6 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { Login, SignUp } from './pages';
-import SplashPage from './pages/SplashPage/Splash';
+import SplashPage from './pages/Splash';
 import WaitingRoom from './pages/WatingRoom';
 import CartPage from './pages/Cart';
 import Menu from './pages/Menu';
@@ -8,6 +8,7 @@ import AdminDash from './pages/Admin';
 import CookDash from './pages/CookDash';
 import { Payment } from './components';
 import ErrorPage from './components/Error';
+import Completion from './components/watingRoomComponent/Completion';
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
   {
     path: '/cook',
     element: <CookDash />,
+  },
+  {
+    path: '/go-to-completion',
+    element: <Completion />,
   },
 ]);
 

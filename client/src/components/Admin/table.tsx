@@ -55,13 +55,9 @@ const DishesTable: FC = () => {
     }
   };
 
-  const {
-    mutate,
-    isError: isMutationError,
-    isSuccess: isMutationSuccess,
-  } = useMutation(deleteDish);
+  const { mutate, isError: isMutationError } = useMutation(deleteDish);
 
-  const { isLoading, isError } = useQuery({
+  const { isLoading, isError, refetch } = useQuery({
     queryKey: ['dishes'],
     queryFn: fetchDishes,
   });
@@ -70,8 +66,6 @@ const DishesTable: FC = () => {
   if (isError) return <div>Error</div>;
   if (isMutationError)
     return <Alert severity="error">This is an error alert — check it out!</Alert>;
-  if (isMutationSuccess)
-    return <Alert severity="success">This is an error alert — check it out!</Alert>;
 
   const handleChangePage = (
     _event: React.MouseEvent<HTMLButtonElement> | null,
@@ -108,7 +102,7 @@ const DishesTable: FC = () => {
             <Typography
               sx={{ margin: '20px 20px 20px 20px', fontWeight: 'bold', fontSize: '18px' }}
             >
-              <CreateDish />
+              <CreateDish refetch={refetch} />
             </Typography>
           </Stack>
           <TableRow sx={{ height: '40px', fontSize: '18px' }}>
@@ -165,7 +159,12 @@ const DishesTable: FC = () => {
                       }}
                     />
                   </>
-                  <DeleteOutlineRoundedIcon onClick={() => mutate(row.id)} />
+                  <DeleteOutlineRoundedIcon
+                    onClick={() => {
+                      mutate(row.id);
+                      refetch();
+                    }}
+                  />
                 </TableCell>
               </TableRow>
             );
@@ -180,7 +179,7 @@ const DishesTable: FC = () => {
             }}
           >
             <DialogContent>
-              <EditDish dishToUpdate={dishToUpdate} setOpen={setOpen} />
+              <EditDish dishToUpdate={dishToUpdate} setOpen={setOpen} refetch={refetch} />
             </DialogContent>
           </Dialog>
           {emptyRows > 0 && (
