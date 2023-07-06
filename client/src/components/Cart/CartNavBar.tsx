@@ -13,7 +13,7 @@ const CartNavBar = () => {
           <IconButton onClick={() => navigate('/menu')}>
             <MenuOpenIcon />
           </IconButton>
-          <Typography variant="h6" color="#000" component="div">
+          <Typography variant="h6" color="#000" component="span">
             Orders
           </Typography>
         </Toolbar>

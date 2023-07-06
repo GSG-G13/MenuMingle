@@ -49,7 +49,7 @@ const FilterComponent: React.FC<FilterComponentProps> = ({
       }}
     >
       {categories.map(category => (
-        <Grid item key={category.id} spacing={5}>
+        <Grid item key={category.id}>
           <StyledButton onClick={() => handleCategorySelect(category.id)}>
             {category.name}
           </StyledButton>
