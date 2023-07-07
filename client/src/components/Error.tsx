@@ -1,4 +1,4 @@
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import ArrowBackIosOutlinedIcon from '@mui/icons-material/ArrowBackIosOutlined';
 import notFound from '../assets/notFound1.webp';

@@ -10,7 +10,7 @@ import {
   MenuItem,
   SelectChangeEvent,
 } from '@mui/material';
-import { useState, FormEvent, ChangeEventHandler } from 'react';
+import { useState, FormEvent, ChangeEventHandler, FC } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { DishType } from '../../utils';
@@ -24,8 +24,11 @@ const createDishRequest = async (DishInfo: DishType) => {
   });
   return response.data;
 };
+interface CreateDishProps {
+  refetch: () => void;
+}
 
-const CreateDish = ({ refetch }) => {
+const CreateDish: FC<CreateDishProps> = ({ refetch }) => {
   const [open, setOpen] = useState<boolean>(false);
   const [dishToCreate, setDishToCreate] = useState<DishType>({
     name: 'test',

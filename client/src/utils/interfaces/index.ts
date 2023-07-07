@@ -67,6 +67,7 @@ export interface cartItemInterface {
 export interface EditDishProps {
   dishToUpdate: DishType;
   setOpen: Dispatch<SetStateAction<boolean>>;
+  refetch: () => void;
 }
 export interface DishFormProps {
   onSubmit: (updatedDish: DishType) => void;

@@ -2,7 +2,12 @@ import axios from 'axios';
 import { Button } from '@mui/material';
 import { FC } from 'react';
 
-const Done: FC<{ id: number }> = ({ id, refetch }) => {
+interface DoneProps {
+  id: number;
+  refetch: () => void;
+}
+
+const Done: FC<DoneProps> = ({ id, refetch }) => {
   const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
 
   const updateStatus = async () => {

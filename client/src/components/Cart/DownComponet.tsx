@@ -38,8 +38,9 @@ const DownComponent: FC<ButtonSectionProps> = ({ notes }) => {
       cartId: data.data.cartId,
       totalPrice: data.data.price,
     };
-    navigate('/payment', { state: neededDataInPayment });
-    // navigate('/waiting-room', { state: data.data.cartId });
+    if (neededDataInPayment) {
+      navigate('/payment', { state: neededDataInPayment });
+    }
   };
   const { mutate } = useMutation({
     mutationKey: ['post'],

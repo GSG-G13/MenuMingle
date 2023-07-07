@@ -8,6 +8,7 @@ import axios from 'axios';
 import './form.css';
 
 const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
+
 type updateCartStatusParma = {
   cartId: string;
   status: string;
@@ -26,7 +27,6 @@ const CheckoutForm = () => {
   const { state } = location;
   const { mutate } = useMutation(updateCartStatus);
   const gotWittingRoom = useNavigate();
-
   const [isProcessing, setIsProcessing] = useState(false);
 
   const handleSubmit = async (e: FormEvent) => {
