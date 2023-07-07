@@ -8,7 +8,6 @@ import serverError from './middleware/serverError';
 import clientError from './middleware/clientError';
 import { router, PaymentRouter } from './routes';
 
-import Stripe from 'stripe';
 import dotenv from 'dotenv';
 dotenv.config();
 import { ServerCors } from './utils';
@@ -27,6 +26,10 @@ app.use([
   cookieParser(),
   express.static(join(__dirname, '..', 'client', 'dist')),
 ]);
+
+app.get('*', (req, res) => {
+  res.sendFile(join(__dirname, '..', 'client', 'dist', 'index.html'));
+});
 
 app.use('/', PaymentRouter);
 app.use('/api/v1', router);

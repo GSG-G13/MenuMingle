@@ -4,7 +4,7 @@ import QRCodeStyling from 'qr-code-styling';
 import logo from '../../assets/logo.png';
 
 const QRCodeComponent = () => {
-  const qrCodeRef = useRef();
+  const qrCodeRef = useRef<HTMLDivElement | null>(null);
   const customerId = localStorage.getItem('customerId');
   useEffect(() => {
     const qrCode = new QRCodeStyling({
@@ -27,8 +27,10 @@ const QRCodeComponent = () => {
       },
     });
 
-    qrCode.append(qrCodeRef.current);
-    qrCode.update();
+    if (qrCodeRef.current) {
+      qrCode.append(qrCodeRef.current);
+      qrCode.update();
+    }
   }, []);
 
   return <div ref={qrCodeRef} />;
