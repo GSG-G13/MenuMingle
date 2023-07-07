@@ -10,29 +10,33 @@ import { router, PaymentRouter } from './routes';
 
 import dotenv from 'dotenv';
 dotenv.config();
-import { ServerCors } from './utils';
+// import { ServerCors } from './utils';
 
 const app = express();
 
-app.use([
-  cors({
-    origin: ServerCors.Origin as string,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true,
-  }),
-  json(),
-  urlencoded({ extended: false }),
-  compression(),
-  cookieParser(),
-  express.static(join(__dirname, '..', 'client', 'dist')),
-]);
+// app.use([
+//   json(),
+//   urlencoded({ extended: false }),
+//   compression(),
+//   cookieParser(),
+// ]);
+app.use(json());
+app.use(cors());
+app.use(urlencoded({ extended: false }));
+app.use(compression());
+app.use(cookieParser());
+
+// app.get(/^(?!\/api).*/, (req, res) => {
+//   res.sendFile(join(__dirname, '..', 'client', 'dist', 'index.html'));
+// });
+app.use('/', PaymentRouter);
+app.use('/api/v1', router);
+app.use(express.static(join(__dirname, '..', 'client', 'dist')));
 
 app.get(/^(?!\/api).*/, (req, res) => {
   res.sendFile(join(__dirname, '..', 'client', 'dist', 'index.html'));
 });
 
-app.use('/', PaymentRouter);
-app.use('/api/v1', router);
 app.use(serverError);
 app.use(clientError);
 
