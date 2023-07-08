@@ -20,8 +20,8 @@ const configs = {
     testUrl: TEST_DB_URL,
     productionUrl: PRODUCTION_DB_URL,
     developmentUrl: DEV_DB_URL,
-    publishableKey: PUBLISHABLE_KEY,
-    stripeSecretKey: STRIPE_SECRET_KEY,
+    publishableKey: `${PUBLISHABLE_KEY}`,
+    stripeSecretKey: `${STRIPE_SECRET_KEY}`,
   },
 };
 

@@ -10,13 +10,11 @@ import { router, PaymentRouter } from './routes';
 
 import dotenv from 'dotenv';
 dotenv.config();
-import { ServerCors } from './utils';
-
 const app = express();
 
 app.use([
   cors({
-    origin: ServerCors.Origin as string,
+    origin: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
   }),
@@ -27,12 +25,13 @@ app.use([
   express.static(join(__dirname, '..', 'client', 'dist')),
 ]);
 
-app.get(/^(?!\/api).*/, (req, res) => {
+app.use('/', PaymentRouter);
+app.use('/api/v1', router);
+
+app.get('*', (req, res) => {
   res.sendFile(join(__dirname, '..', 'client', 'dist', 'index.html'));
 });
 
-app.use('/', PaymentRouter);
-app.use('/api/v1', router);
 app.use(serverError);
 app.use(clientError);
 

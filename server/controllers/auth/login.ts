@@ -51,6 +51,7 @@ const loginController = async (
       data: {
         id: existStaff.id,
         username: existStaff.username,
+        role: existStaff.Role.role,
       },
     });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
