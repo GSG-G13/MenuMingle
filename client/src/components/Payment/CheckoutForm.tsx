@@ -15,8 +15,6 @@ type updateCartStatusParma = {
 };
 
 const updateCartStatus = async ({ cartId, status }: updateCartStatusParma) => {
-  console.log(cartId);
-
   await axios.put(
     `${serverUrl}/api/v1/cart/update-cart?cartId=${cartId}&cartStatus=${status}`,
   );

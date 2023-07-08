@@ -8,9 +8,13 @@ import {
   Typography,
 } from '@mui/material';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import InsertCommentIcon from '@mui/icons-material/InsertComment';
-import { ButtonSectionProps } from '../../utils';
+
+interface ButtonSectionProps {
+  notes: string;
+  setNotes: Dispatch<SetStateAction<string>>;
+}
 
 const ButtonSection = ({ setNotes, notes }: ButtonSectionProps) => {
   const [open, setOpen] = useState(false);

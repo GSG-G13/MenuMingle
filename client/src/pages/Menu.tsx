@@ -10,6 +10,8 @@ import { Category, Dish } from '../utils/interfaces';
 import Loader from '../components/loader';
 import ErrorPage from '../components/Error';
 
+const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
+
 const categories: Category[] = [
   {
     id: 0,
@@ -43,7 +45,7 @@ const Menu = () => {
 
   const fetchDishes = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/v1/dishes', {
+      const response = await axios.get(`${serverUrl}/api/v1/dishes`, {
         withCredentials: true,
       });
       setDishes(response.data.data);

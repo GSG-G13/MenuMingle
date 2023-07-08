@@ -13,8 +13,6 @@ const updateDish = async (req: Request, res: Response, next: NextFunction) => {
       where: { id },
       returning: true,
     });
-    console.log(updatedDishes);
-    console.log(updatedCount);
 
     if (updatedCount === 0) {
       throw new CustomError(

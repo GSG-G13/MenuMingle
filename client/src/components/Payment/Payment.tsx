@@ -12,7 +12,7 @@ const Payment = () => {
   const { state } = location;
   const [stripePromise, setStripePromise] = useState<Stripe | null>(null);
   const [clientSecret, setClientSecret] = useState<string | ''>('');
-  // const [amount, setAmount] = useState<number>(state.totalPrice);
+  const [isLoading, setIsloading] = useState(true);
 
   const sendConfig = async () => {
     const response = await axios.get(`${serverUrl}/config`);
@@ -31,15 +31,22 @@ const Payment = () => {
   useEffect(() => {
     sendConfig();
     createPaymentIntent();
-  }, []);
+    if (state) {
+      setIsloading(false);
+    }
+  }, [state]);
 
   return (
     <div>
       <h1>Payment</h1>
-      {clientSecret && clientSecret && (
-        <Elements stripe={stripePromise} options={{ clientSecret }}>
-          <CheckoutForm />
-        </Elements>
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        clientSecret && (
+          <Elements stripe={stripePromise} options={{ clientSecret }}>
+            <CheckoutForm />
+          </Elements>
+        )
       )}
     </div>
   );
