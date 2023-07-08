@@ -8,7 +8,6 @@ const getCartStatus = async (
   next: NextFunction,
 ) => {
   try {
-    console.log('hhhhhhhhhhhhh', 'cartId');
     const { cartId } = req.query as { cartId: string };
 
     if (!cartId) {

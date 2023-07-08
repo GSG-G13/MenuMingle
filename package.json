@@ -6,7 +6,7 @@
   "scripts": {
     "init": "npm i && npm run prepare && cd client && npm i",
     "test": "cross-env NODE_ENV=test jest --forceExit --testTimeout=30000 --detectOpenHandles --runInBand",
-    "build": "npx tsc",
+    "build": "tsc",
     "start": "cross-env NODE_ENV=production node ./dist/index.js",
     "lint": "cross-env eslint . --ext .ts",
     "lint-fix": "cross-env eslint . --ext .ts --fix",
@@ -19,11 +19,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@emotion/react": "^11.11.1",
-    "@emotion/styled": "^11.11.0",
-    "@fontsource/roboto": "^5.0.3",
-    "@mui/icons-material": "^5.11.16",
-    "@mui/material": "^5.13.5",
     "@types/bcrypt": "^5.0.0",
     "@types/compression": "^1.7.2",
     "@types/cookie-parser": "^1.4.3",
@@ -45,7 +40,6 @@
     "pg-hstore": "^2.3.4",
     "react-router-dom": "^6.12.1",
     "sequelize": "^6.32.0",
-    "socket.io": "^4.6.2",
     "stripe": "^12.11.0",
     "supertest": "^6.3.3",
     "ts-jest": "^29.1.0",

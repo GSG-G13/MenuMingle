@@ -22,8 +22,6 @@ const verifyAccessToken = (role: string) => {
 
       req.user = user as Payload;
 
-      console.log(user.role);
-
       if (user.role === role) {
         return next();
       }

@@ -19,7 +19,6 @@ if (nodeEnv === 'development') {
 } else {
   connectionString = developmentUrl as string;
 }
-console.log(connectionString);
 
 const sequelize = new Sequelize(connectionString, {
   dialectOptions: {
