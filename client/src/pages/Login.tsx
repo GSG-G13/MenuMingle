@@ -63,15 +63,11 @@ const Login = () => {
           },
         );
 
-        // console.log(user.data.data.role_id);
-
         if (user.data.data.role_id === 1) {
           navigate('/admin');
         } else if (user.data.data.role_id === 2) {
           navigate('/cook');
         }
-
-        // navigate('/dashboard'); // Change this URL to the desired destination
       } catch (err: any) {
         throw new Error(err);
       }

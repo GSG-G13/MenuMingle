@@ -14,8 +14,6 @@ const verifyAccessToken = (role: string) => {
 
       const user = (await verifyToken(token)) as Payload;
 
-      console.log(user);
-
       if (!user) {
         throw new CustomError(StatusCodes.Unauthenticated, 'unauthenticated');
       }

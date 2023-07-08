@@ -3,7 +3,6 @@ import { FC, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
-import { ButtonSectionProps } from '../../utils';
 
 const { Button } = core;
 const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
@@ -13,10 +12,16 @@ type BodyType = {
   customerId: string;
 };
 
-const DownComponent: FC<ButtonSectionProps> = ({ notes }) => {
+interface DownComponentProps {
+  notes: string;
+  handleClearCart: () => void;
+}
+
+const DownComponent: FC<DownComponentProps> = ({ notes, handleClearCart }) => {
   const navigate = useNavigate();
   const [orders, setOrders] = useState<[] | null>([]);
   const [customerId, setCustomerId] = useState('');
+
   useEffect(() => {
     let dataFromLocalStorage = JSON.parse(localStorage.getItem('items') as string);
     dataFromLocalStorage = dataFromLocalStorage?.map(
@@ -64,6 +69,7 @@ const DownComponent: FC<ButtonSectionProps> = ({ notes }) => {
           customerId,
         };
         mutate(body);
+        handleClearCart();
         navigate('/payment');
       }}
     >

@@ -23,7 +23,6 @@ const getCartStatus = async (
       });
     }
 
-    console.log(orderStatus, 'oorder status');
     return res.json({
       test: 'test',
       error: false,

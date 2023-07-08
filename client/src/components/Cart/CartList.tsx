@@ -1,12 +1,16 @@
-import { useEffect, useState } from 'react';
 import { Grid, Typography, Button } from '@mui/material';
 import CartItem from './CartItem';
 import EmptyCart from './Empty';
 import { Item, ButtonSectionProps } from '../../utils';
 import ButtonSection from './Pop';
 
-const CartList = ({ notes, setNotes }: ButtonSectionProps): JSX.Element => {
-  const [cartItems, setCartItems] = useState<Item[]>([]);
+const CartList = ({
+  notes,
+  setNotes,
+  handleClearCart,
+  setCartItems,
+  cartItems,
+}: ButtonSectionProps): JSX.Element => {
   const handleDelete = (itemId: number): void => {
     const itemsString = localStorage.getItem('items');
     const items: Item[] = itemsString ? JSON.parse(itemsString) : [];
@@ -17,20 +21,8 @@ const CartList = ({ notes, setNotes }: ButtonSectionProps): JSX.Element => {
     setCartItems(prevCartItems => prevCartItems.filter(item => item.id !== itemId));
   };
 
-  useEffect(() => {
-    const storedItems = localStorage.getItem('items');
-    if (storedItems) {
-      setCartItems(JSON.parse(storedItems) as Item[]);
-    }
-  }, []);
-
-  const handleClearCart = (): void => {
-    localStorage.removeItem('items');
-    setCartItems([]);
-  };
-
   const handleIncrement = (itemId: number): void => {
-    const updatedItems: Item[] = cartItems.map(item => {
+    const updatedItems: Item[] | undefined = cartItems.map(item => {
       if (item.id === itemId) {
         return { ...item, count: item.count + 1 };
       }
@@ -41,13 +33,14 @@ const CartList = ({ notes, setNotes }: ButtonSectionProps): JSX.Element => {
   };
 
   const handleDecrement = (itemId: number): void => {
-    const updatedItems: Item[] = cartItems.map(item => {
+    const updatedItems: Item[] | undefined = cartItems?.map(item => {
       if (item.id === itemId && item.count > 1) {
         return { ...item, count: item.count - 1 };
       }
       return item;
     });
     setCartItems(updatedItems);
+
     localStorage.setItem('items', JSON.stringify(updatedItems));
   };
 
