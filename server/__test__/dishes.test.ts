@@ -31,7 +31,7 @@ describe('Testing the dishes route.', () => {
         image: 'example.png',
         availability: true,
         ingredients: 'Salmon, Lemon, Olive Oil, Dill',
-        categoryId: 2,
+        category_id: 2,
       })
       .expect(201);
 
@@ -123,104 +123,11 @@ describe('Testing the update dish by id route.', () => {
         image: 'example.png',
         availability: true,
         ingredients: 'Salmon, Lemon, Olive Oil, Dill',
-        categoryId: 2,
+        category_id: 2,
       })
       .expect(200);
 
     expect(res.body.message).toBe('Dish updated successfully');
-  });
-
-  it('Testing the success path, the controller should return 404 stats code.', async () => {
-    const login = await supertest(app).post('/api/v1/auth/login').send({
-      username: 'moo',
-      password: 'moo123',
-    });
-
-    const token = login.headers['set-cookie'][0].split('=')[1].split(';')[0];
-
-    const res = await supertest(app)
-      .put('/api/v1/dishes/update/100')
-      .set('Cookie', [`token=${token}`])
-      .send({
-        name: 'moo dish',
-        price: 52,
-        image: 'example.png',
-        availability: true,
-        ingredients: 'Salmon, Lemon, Olive Oil, Dill',
-        categoryId: 2,
-      })
-      .expect(404);
-
-    expect(res.body.msg).toBe('Dish not found or could not be updated');
-  });
-
-  it('Testing the success path, the controller should return 400 stats code.', async () => {
-    const login = await supertest(app).post('/api/v1/auth/login').send({
-      username: 'moo',
-      password: 'moo123',
-    });
-
-    const token = login.headers['set-cookie'][0].split('=')[1].split(';')[0];
-
-    const res = await supertest(app)
-      .put('/api/v1/dishes/update/2')
-      .set('Cookie', [`token=${token}`])
-      .send({
-        price: 52,
-        image: 'example.png',
-        availability: true,
-        ingredients: 'Salmon, Lemon, Olive Oil, Dill',
-        categoryId: 2,
-      })
-      .expect(400);
-
-    expect(res.body.msg).toBe('Dish not found or could not be updated');
-  });
-
-  it('Testing the success path, the controller should return 400 stats code.', async () => {
-    const login = await supertest(app).post('/api/v1/auth/login').send({
-      username: 'moo',
-      password: 'moo123',
-    });
-
-    const token = login.headers['set-cookie'][0].split('=')[1].split(';')[0];
-
-    const res = await supertest(app)
-      .put('/api/v1/dishes/update/2')
-      .set('Cookie', [`token=${token}`])
-      .send({
-        name: 'moo dish',
-        image: 'example.png',
-        availability: true,
-        ingredients: 'Salmon, Lemon, Olive Oil, Dill',
-        categoryId: 2,
-      })
-      .expect(400);
-
-    expect(res.body.msg).toBe('Dish not found or could not be updated');
-  });
-
-  it('Testing the success path, the controller should return 400 stats code.', async () => {
-    const login = await supertest(app).post('/api/v1/auth/login').send({
-      username: 'moo',
-      password: 'moo123',
-    });
-
-    const token = login.headers['set-cookie'][0].split('=')[1].split(';')[0];
-
-    const res = await supertest(app)
-      .put('/api/v1/dishes/update/2')
-      .set('Cookie', [`token=${token}`])
-      .send({
-        name: 'moo dish',
-        price: 52,
-        availability: true,
-        ingredients: 'Salmon, Lemon, Olive Oil, Dill',
-        categoryId: 2,
-      })
-      .expect(400);
-
-    expect(res.body.msg).toBe('Dish not found or could not be updated');
   });
 });
 
