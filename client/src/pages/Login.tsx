@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useContext, useState, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
@@ -19,15 +19,17 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { SignInSchema } from '../utils/validations';
 import SignupImage from '../assets/signupbg.png';
 import { Copyright } from '../components';
+import { authContext } from '../Context/AuthContext';
 
 const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
 
 const Login = () => {
-  const [errorToThrow, setErrorToThrow] = React.useState<any>();
+  const { setUser } = useContext(authContext);
+  const [errorToThrow, setErrorToThrow] = useState<any>();
 
   const navigate = useNavigate();
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
@@ -45,7 +47,7 @@ const Login = () => {
       setErrorToThrow(error.details[0]);
     } else {
       try {
-        await axios.post(
+        const user = await axios.post(
           `${serverUrl}/api/v1/auth/login`,
           {
             username: data.get('username'),
@@ -55,17 +57,11 @@ const Login = () => {
             withCredentials: true,
           },
         );
+        setUser(user.data.data);
 
-        const user = await axios.get(
-          `${serverUrl}/api/v1/auth/getUserByUsername/${data.get('username')}`,
-          {
-            withCredentials: true,
-          },
-        );
-
-        if (user.data.data.role_id === 1) {
+        if (user.data.data.role === 'admin') {
           navigate('/admin');
-        } else if (user.data.data.role_id === 2) {
+        } else if (user.data.data.role === 'cook') {
           navigate('/cook');
         }
       } catch (err: any) {

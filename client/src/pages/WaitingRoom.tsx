@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material';
-import Picture from '../components/watingRoomComponent/Picture';
-import VerticalLinearStepper from '../components/watingRoomComponent/Status';
-import Navbar from '../components/watingRoomComponent/NavBar';
+import Picture from '../components/WaitingRoomComponent/Picture';
+import VerticalLinearStepper from '../components/WaitingRoomComponent/Status';
+import Navbar from '../components/WaitingRoomComponent/NavBar';
 
 const WaitingRoom = () => {
   return (

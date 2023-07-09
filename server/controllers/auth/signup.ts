@@ -53,10 +53,9 @@ const signupController = async (
       });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
-    if (error.name === 'ValidationError') {
-      throw new CustomError(StatusCodes.BadRequest, 'Wrong login credentials');
-    }
-    return next(error);
+    console.log(error);
+
+    next(error);
   }
 };
 
