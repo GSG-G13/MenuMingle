@@ -8,7 +8,7 @@ const { Button } = core;
 const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
 type BodyType = {
   orders: [] | null;
-  note: string;
+  note?: string;
   customerId: string;
 };
 
@@ -65,8 +65,8 @@ const DownComponent: FC<DownComponentProps> = ({ notes, handleClearCart }) => {
       onClick={() => {
         const body = {
           orders,
-          note: notes,
           customerId,
+          ...(notes !== '' && { note: notes }),
         };
         mutate(body);
         handleClearCart();
