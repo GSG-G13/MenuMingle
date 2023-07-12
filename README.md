@@ -81,13 +81,13 @@ Contributions are welcome! If you find any issues or have suggestions for improv
 
 # coders 💻
 #### team:
-- @Farah202324
-- @momenmarwan
-- @momenqudaih
+- [@momenqudaih](https://github.com/momenqudaih)
+- [@momenmarwan](https://github.com/momenmarwan)
+- [@Farah202324](https://github.com/Farah202324)
 
 
 #### team leader
-- @moustf
+- [@moustf](https://github.com/moustf)
 ##### If you have any questions or need further assistance, please feel free to contact us.
 
 # Acknowledgements
