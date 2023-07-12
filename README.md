@@ -51,12 +51,10 @@ After successfully completing the payment process, I will receive a confirmation
 - HTML, CSS, JavaScript
 - React.js 
 - Material UI
-- WebSockets (for real-time updates)
 #### Back-end:  
 - Node.js
 - Express.js 
 - PostgresSQL with sequelize
-- Socket.io (for real-time updates)
 - JWT (JSON Web Tokens) for authentication
 #### Deployment:
 - RDS
